@@ -1,6 +1,29 @@
 .test {
-    &__content {
-        height: 370px;
-        background-color: var(--color-primary);
-    }
+	&__content {
+		height: 370px;
+		background-color: var(--color-primary);
+	}
+	&__box {
+		width: 768px;
+		height: 763px;
+		box-shadow: 0px 0px 10 pxvar(--color-gray-dark-3);
+		border-radius: 10px;
+		margin: 0 auto;
+		background-color: var(--color-white);
+		position: absolute;
+    left: 0;
+    right: 0;
+	}
+	&__info {
+		width: 768px;
+		margin: 0 auto;
+		padding-top: 1rem;
+		position: relative;
+	}
+	&__person {
+		position: absolute;
+    top: 0;
+		right: 0;
+		width: 315px;
+	}
 }
