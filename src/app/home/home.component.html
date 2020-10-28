@@ -1,3 +1,23 @@
+<!--Navbar-->
+<mat-toolbar>
+	<button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+		<mat-icon (click)="drawer.toggle()">menu</mat-icon>
+	</button>
+	<span>Logo Apprevenir</span>
+	<span class="example-spacer"></span>
+	<mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon><label>Nombre Usuario</label>
+	
+</mat-toolbar>
+
+<mat-drawer-container class="example-container" autosize>
+	<mat-drawer #drawer class="example-sidenav" mode="side">
+		<p>Inicio</p>
+		<p>Más sobre Apprevenir</p>
+		<p>Contáctanos</p>
+	</mat-drawer>
+</mat-drawer-container>
+
+<!--HOME-->
 <div class="home">
 	<h1 class="home__title">Por favor elije un test</h1>
 	<div class="home__search">
@@ -18,7 +38,7 @@
 			<div class="card__risk">RIESGO, CAMBIO Y COADICIÓN</div>
 			<div class="card__text">Dependencia emocional</div>
 			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="">
-			<button class="btn btn-primary">Hacer test</button>
+			<button class="btn btn-primary" routerLink="/test">Hacer test</button>
 		</div>
 		<div class="card__item">
 			<div class="card__img">

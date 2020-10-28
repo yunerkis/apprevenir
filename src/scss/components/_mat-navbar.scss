@@ -1,6 +1,8 @@
 .mat-drawer.mat-drawer-side {
     box-shadow: 10px 2px 20px var(--color-gray-dark-3);
     background-color: var(--color-white);
+    width: 250px;
+    height: 900px;
 }
 
 .mat-toolbar-row, .mat-toolbar-single-row {
@@ -11,4 +13,28 @@
 
 .mat-icon-button {
     background: transparent;
+}
+
+.example-container {
+    width: 250px;
+    height: 900px;
+}
+  
+.example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.example-sidenav {
+    padding: 20px;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.mat-drawer-container {
+    display: inherit !important;
 }
