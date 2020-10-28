@@ -8,13 +8,17 @@ import { MaterialModule } from './material.module';
 import { LoginComponent } from './auth/login/login.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { HomeComponent } from './home/home.component';
+import { ModalComponent } from './auth/modal/modal.component';
+import { NavbarComponent } from './core/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    HomeComponent
+    HomeComponent,
+    ModalComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

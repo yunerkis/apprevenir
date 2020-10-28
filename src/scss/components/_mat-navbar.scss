@@ -1,0 +1,14 @@
+.mat-drawer.mat-drawer-side {
+    box-shadow: 10px 2px 20px var(--color-gray-dark-3);
+    background-color: var(--color-white);
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+    box-shadow: 0px 2px 10px var(--color-gray-dark-3);
+    height: 70px;
+    background-color: var(--color-white);
+}
+
+.mat-icon-button {
+    background: transparent;
+}
