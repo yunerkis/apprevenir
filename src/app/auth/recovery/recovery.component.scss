@@ -45,25 +45,6 @@
         line-height: 22px;
         margin-bottom: 3rem;
     }
-    &__forgot-box {
-        text-align: right;
-        margin: 10px 0;
-    }
-    &__forgot {
-        text-align: right;
-        color: var(--color-primary);
-        font-size: 14px;
-        margin: 5px 0;
-        font-family: "FiratRegular";
-    }
-    &__divider {
-        margin: 2rem 0;
-        position: relative;
-    }
-    &__empty {
-        height: 1px;
-        background: var(--color-grey-dark-1);
-    }
     &__label {
         color: var(--color-normal-grey);
         position: absolute;
@@ -75,16 +56,6 @@
         text-align: center;
         font-size: 14px;
         font-family: "FiratRegular";
-    }
-    &__termns {
-        font-size: 14px;
-        color: var(--color-normal-grey);
-        margin: 2rem 0;
-        font-family: "FiratRegular";
-
-        a {
-            color: var(--color-primary);
-        }
     }
 }
 

@@ -1,11 +1,24 @@
 <!--Navbar-->
 <mat-toolbar>
-	<button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-		<mat-icon (click)="drawer.toggle()">menu</mat-icon>
-	</button>
+	<mat-icon (click)="drawer.toggle()">menu</mat-icon>
 	<span>Logo Apprevenir</span>
 	<span class="example-spacer"></span>
-	<mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon><label>Nombre Usuario</label>
+	<mat-icon>account_circle</mat-icon> <label> Nombre de usuario</label>
+	<mat-icon [matMenuTriggerFor]="menu">keyboard_arrow_down</mat-icon>
+	  <mat-menu #menu="matMenu">
+			<button mat-menu-item>
+				<mat-icon>dialpad</mat-icon>
+				<span>Redial</span>
+			</button>
+			<button mat-menu-item disabled>
+				<mat-icon>voicemail</mat-icon>
+				<span>Check voice mail</span>
+			</button>
+			<button mat-menu-item>
+				<mat-icon>notifications_off</mat-icon>
+				<span>Disable alerts</span>
+			</button>
+	  </mat-menu>
 	
 </mat-toolbar>
 

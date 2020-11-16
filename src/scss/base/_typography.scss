@@ -1,63 +1,48 @@
-/* BEGIN Bold */
-@font-face {
-	font-family: 'Roboto700';
-  src: url('../../assets/fonts/Roboto-Bold.woff2') format("woff2"),/* Super Modern Browsers */
-  url('../../assets/fonts/Roboto-Bold.woff') format("woff");/* Modern Browsers */
-	font-weight: 700;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'RobotoBold';
-  src: url('../../assets/fonts/Roboto-Bold.woff2') format("woff2"),/* Super Modern Browsers */
-  url('../../assets/fonts/Roboto-Bold.woff') format("woff");/* Modern Browsers */
-	font-weight: bold;
-	font-style: normal;
-}
-/* END Bold */
+/* KANIT*/
 
-/* BEGIN Light */
+/* kanit Regular */
 @font-face {
-	font-family: 'RobotoLight';
-  src: url('../../assets/fonts/Roboto-Light.woff2') format("woff2"),/* Super Modern Browsers */
-  url('../../assets/fonts/Roboto-Light.woff') format("woff");/* Modern Browsers */
-	font-weight: 300;
-	font-style: normal;
-}
-/* END Light */
-
-/* BEGIN Medium */
-@font-face {
-	font-family: 'RobotoMedium';
-  src: url('../../assets/fonts/Roboto-Medium.woff2') format("woff2"),/* Super Modern Browsers */
-  url('../../assets/fonts/Roboto-Medium.woff') format("woff");/* Modern Browsers */
-	font-weight: 500;
-	font-style: normal;
-}
-/* END Medium */
-
-/* BEGIN Regular */
-@font-face {
-	font-family: 'RobotoRegular';
-  src: url('../../assets/fonts/Roboto-Regular.woff2') format("woff2"),/* Super Modern Browsers */
-  url('../../assets/fonts/Roboto-Regular.woff') format("woff");/* Modern Browsers */
+	font-family: 'kanitRegular';
+  src: url('../../assets/fonts/kanit-v7-latin-regular.woff2') format("woff2"),/* Super Modern Browsers */
+  url('../../assets/fonts/kanit-v7-latin-regular.woff') format("woff");/* Modern Browsers */
 	font-weight: 400;
 	font-style: normal;
 }
 @font-face {
-	font-family: 'RobotoNormal';
-  src: url('../../assets/fonts/Roboto-Regular.woff2') format("woff2"),/* Super Modern Browsers */
-  url('../../assets/fonts/Roboto-Regular.woff') format("woff");/* Modern Browsers */
+	font-family: 'KanitNormal';
+  src: url('../../assets/fonts/kanit-v7-latin-300.woff2') format("woff2"),/* Super Modern Browsers */
+  url('../../assets/fonts/kanit-v7-latin-300.woff') format("woff");/* Modern Browsers */
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
-	font-family: 'PoppinsMedium';
-  src: url('../../assets/fonts/poppins-medium-webfont.woff2') format("woff2"),/* Super Modern Browsers */
-  url('../../assets/fonts/poppins-medium-webfont.woff') format("woff");/* Modern Browsers */
+	font-family: 'KanitMedium';
+  src: url('../../assets/fonts/kanit-v7-latin-500.woff2') format("woff2"),/* Super Modern Browsers */
+  url('../../assets/fonts/kanit-v7-latin-500.woff') format("woff");/* Modern Browsers */
 	font-weight: normal;
 	font-style: normal;
 }
 /* END Regular */
 
+
+/* KANIT*/
+
+/* kanit Regular */
+@font-face {
+	font-family: 'FiratRegular';
+  src: url('../../assets/fonts/AnyConv.com__FiraSans-Regular.woff2') format("woff2"),/* Super Modern Browsers */
+  url('../../assets/fonts/FiraSans-Regular.woff') format("woff");/* Modern Browsers */
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'FiratLight';
+  src: url('../../assets/fonts/AnyConv.com__FiraSans-ExtraLight.woff2') format("woff2"),/* Super Modern Browsers */
+  url('../../assets/fonts/FiraSans-Light.woff') format("woff");/* Modern Browsers */
+	font-weight: normal;
+	font-style: normal;
+}
+/* END Regular */
 

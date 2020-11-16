@@ -16,6 +16,7 @@
     cursor: pointer;
     font-size: 14px;
     color: var(--color-normal-grey);
+    font-family: "FiratRegular";
   }
   
   /* checkbox aspect */
@@ -42,7 +43,7 @@
     line-height: 0.8;
     color: #09ad7e;
     transition: all .2s;
-    font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
+    font-family: "FiratRegular";
   }
   /* checked mark aspect changes */
   [type="checkbox"]:not(:checked) + label:after {
@@ -70,4 +71,38 @@
   /* hover style just for information */
   label:hover:before {
     border: 2px solid #4778d9!important;
+  }
+
+
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+    display: none;
+  }
+
+  .mat-form-field-flex {
+    border: 1px solid var(--color-gray-dark-2);
+    border-radius: 8px;
+    opacity: 1;
+    padding: 0 10px;
+    padding: 5px 10px;
+    align-items: center !important;
+  }
+
+  .mat-form-field-infix {
+    border-top: none;
+  }
+
+  .mat-input-element {
+    color: var(--color-gray-dark-2) !important;
+    font-size: 16px !important;
+  }
+
+  .mat-input-element {
+    color: var(--color-gray-dark-2) !important;
+  }
+
+  .mat-form-field-label  {
+    color: var(--color-primary) !important;
+    background-color: var(--color-white) !important;
+    width: auto !important;
+    padding: 0 6px;
   }

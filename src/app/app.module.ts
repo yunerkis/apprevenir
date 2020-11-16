@@ -10,6 +10,7 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { HomeComponent } from './home/home.component';
 import { ModalComponent } from './auth/modal/modal.component';
 import { TestComponent } from './test/test.component';
+import { RecoveryComponent } from './auth/recovery/recovery.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TestComponent } from './test/test.component';
     RegistrationComponent,
     HomeComponent,
     ModalComponent,
-    TestComponent
+    TestComponent,
+    RecoveryComponent
   ],
   imports: [
     BrowserModule,

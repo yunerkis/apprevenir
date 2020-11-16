@@ -1,45 +1,54 @@
 <div class="login">
 	<div class="login__section-one">
 		<div class="section-one">
-			<img alt="PersonIcon" src="../../../assets/logo/LOGO-COLOR-BLANCO.svg" class="" />
+			<img alt="PersonIcon" src="../../../assets/logo/LOGO-COLOR-BLANCO.svg" class="logo-login" />
 		</div>
+		<img alt="PersonIcon" src="../../../assets/bg/APREVENIR-LOGIN.svg" class="logo-bg" />
 	</div>
 	<div class="login__section-two">
 		<div class="section-two">
 			<div class="section-two__title">Acceder</div>
 			<div class="section-two__text"> Ingresa tu usuario y contraseña para obtener acceso a todas las funcionalidades</div>
-			<div class="inputContainer">
-					<input
-					class="inputContainer__box"
-					type="text"
-					placeholder="Email"
-					/>
-					<img alt="PersonIcon" src="../../../assets/icons/email_outline.svg" class="inputContainer__icon" />
-			</div>
-			<div class="error-field">Error</div>
-			<div class="section-two__forgot">¿Olvídaste tu contraseña?</div>
-			<div class="inputContainer">
-				<input
-				class="inputContainer__box"
-				type="text"
-				placeholder="Contraseña"
-				/>
-				<img alt="PersonIcon" src="../../../assets/icons/lock_outline.svg" class="inputContainer__icon" />
-			</div>
-			<div class="error-field">Error</div>
-			<div class="box-checkbox">
-				<input type="checkbox" id="test1" />
-				<label for="test1">Recuérdame en este dispositivo</label>
-			</div>
-			<button class="btn btn-primary" routerLink="home">Acceder</button>
-			<div class="section-two__divider">
-				<div class="section-two__empty"></div>
-				<div class="section-two__label">¿No tienes una cuenta?</div>
-			</div>
-			<button class="btn btn-secondary">Crear una cuenta</button>
-			<div class="section-two__termns">
-				Al continuar, estás confirmando que has leído nuestros <a href="">Términos y condiciones</a>  y <a href="">Política de privacidad</a>
-			</div>
+			<form class="example-form">
+				<mat-form-field class="example-full-width">
+					<mat-label>Email</mat-label>
+					<input type="email" matInput>
+					<mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+						Please enter a valid email address
+					</mat-error>
+					<mat-error *ngIf="emailFormControl.hasError('required')">
+						Email is <strong>required</strong>
+					</mat-error>
+					<img src="./../../../assets/icons/email_outline.svg" alt="" matSuffix>
+				</mat-form-field>
+				<div class="section-two__forgot-box">
+					<a routerLink="/recovery" class="section-two__forgot">¿Olvídaste tu contraseña?</a>
+				</div>
+				<mat-form-field class="example-full-width">
+					<mat-label>Contraseña</mat-label>
+					<input type="password" matInput>
+					<mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+						Please enter a valid email address
+					</mat-error>
+					<mat-error *ngIf="emailFormControl.hasError('required')">
+						Email is <strong>required</strong>
+					</mat-error>
+					<img src="./../../../assets/icons/lock_outline.svg" alt="" matSuffix>
+				</mat-form-field>
+				<div class="box-checkbox">
+					<input type="checkbox" id="test1" />
+					<label for="test1">Recuérdame en este dispositivo</label>
+				</div>
+				<button class="btn btn-primary" routerLink="home">Acceder</button>
+				<div class="section-two__divider">
+					<div class="section-two__empty"></div>
+					<div class="section-two__label">¿No tienes una cuenta?</div>
+				</div>
+				<button class="btn btn-secondary" routerLink="/registry">Crear una cuenta</button>
+				<div class="section-two__termns">
+					Al continuar, estás confirmando que has leído nuestros <a href="">Términos y condiciones</a>  y <a href="">Política de privacidad</a>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

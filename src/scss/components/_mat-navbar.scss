@@ -1,8 +1,9 @@
 .mat-drawer.mat-drawer-side {
-    box-shadow: 10px 2px 20px var(--color-gray-dark-3);
+    box-shadow: 3px 0px 20px var(--color-gray-dark-3);
+    border-radius: 0px 10px 10px 0px;
     background-color: var(--color-white);
     width: 250px;
-    height: 900px;
+    height: 100vh;
 }
 
 .mat-toolbar-row, .mat-toolbar-single-row {
