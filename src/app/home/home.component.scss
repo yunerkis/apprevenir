@@ -8,11 +8,15 @@
   }
 
 .home {
-    margin: 4rem 100px;
+    margin: 4rem 0;
+    height: 100vh;
+    overflow: auto;
     &__title {
-        font-size: 31px;
-        color: var(--color-normal-grey);
         text-align: center;
+        color: var(--color-normal-grey);
+        font-family: "KanitMedium";
+        font-size: 32px;
+        font-weight: 500;
     }
     &__search {
         width: 608px;

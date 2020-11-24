@@ -1,22 +1,22 @@
 <!--Navbar-->
 <mat-toolbar>
-	<mat-icon (click)="drawer.toggle()">menu</mat-icon>
-	<span>Logo Apprevenir</span>
+	<mat-icon (click)="drawer.toggle()" class="burger app-cursor">menu</mat-icon>
+	<img alt="Logo" src="../../../assets/bg/COLOR.svg" class="logo-app" />
 	<span class="example-spacer"></span>
-	<mat-icon>account_circle</mat-icon> <label> Nombre de usuario</label>
-	<mat-icon [matMenuTriggerFor]="menu">keyboard_arrow_down</mat-icon>
+	<img src="../../../assets/icons/accountcircle_outline.svg" alt=""> <label class="user-text app-m-name"> Nombre de usuario</label>
+	<mat-icon [matMenuTriggerFor]="menu" class="burger app-cursor">keyboard_arrow_down</mat-icon>
 	  <mat-menu #menu="matMenu">
 			<button mat-menu-item>
-				<mat-icon>dialpad</mat-icon>
-				<span>Redial</span>
-			</button>
-			<button mat-menu-item disabled>
-				<mat-icon>voicemail</mat-icon>
-				<span>Check voice mail</span>
+				<img src="../../../assets/icons/settings_outline.svg" alt="">
+				<span class="user-text app-m-left-15">Administrar</span>
 			</button>
 			<button mat-menu-item>
-				<mat-icon>notifications_off</mat-icon>
-				<span>Disable alerts</span>
+				<img src="../../../assets/icons/accountcircle_outline.svg" alt="">
+				<span class="user-text app-m-left-15">Mi perfil</span>
+			</button>
+			<button mat-menu-item>
+				<img src="../../../assets/icons/logout_baseline.svg" alt="" class="app-m-left">
+				<span class="user-text app-m-left-15">Cerrar sesión</span>
 			</button>
 	  </mat-menu>
 	
@@ -24,9 +24,10 @@
 
 <mat-drawer-container class="example-container" autosize>
 	<mat-drawer #drawer class="example-sidenav" mode="side">
-		<p>Inicio</p>
-		<p>Más sobre Apprevenir</p>
-		<p>Contáctanos</p>
+		<p class="user-text">Inicio</p>
+		<p class="user-text">Más sobre Apprevenir</p>
+		<p class="user-text">Contáctanos</p>
+		<p class="user-bottom">© 2020. Universidad Católica Luis Amigó</p>
 	</mat-drawer>
 </mat-drawer-container>
 
@@ -50,7 +51,7 @@
 			</div>
 			<div class="card__risk">RIESGO, CAMBIO Y COADICIÓN</div>
 			<div class="card__text">Dependencia emocional</div>
-			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="">
+			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="man" class="card__img-man">
 			<button class="btn btn-primary" routerLink="/test">Hacer test</button>
 		</div>
 		<div class="card__item">
@@ -59,7 +60,7 @@
 			</div>
 			<div class="card__risk">RIESGO, CAMBIO Y COADICIÓN</div>
 			<div class="card__text">Dependencia emocional</div>
-			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="">
+			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="man" class="card__img-man">
 			<button class="btn btn-primary">Hacer test</button>
 		</div>
 		<div class="card__item">
@@ -68,7 +69,7 @@
 			</div>
 			<div class="card__risk">RIESGO, CAMBIO Y COADICIÓN</div>
 			<div class="card__text">Dependencia emocional</div>
-			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="">
+			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="man" class="card__img-man">
 			<button class="btn btn-primary">Hacer test</button>
 		</div>
 		<div class="card__item">
@@ -77,7 +78,7 @@
 			</div>
 			<div class="card__risk">RIESGO, CAMBIO Y COADICIÓN</div>
 			<div class="card__text">Dependencia emocional</div>
-			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="">
+			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="man" class="card__img-man">
 			<button class="btn btn-primary">Hacer test</button>
 		</div>
 		<div class="card__item">
@@ -86,7 +87,7 @@
 			</div>
 			<div class="card__risk">RIESGO, CAMBIO Y COADICIÓN</div>
 			<div class="card__text">Dependencia emocional</div>
-			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="">
+			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="man" class="card__img-man">
 			<button class="btn btn-primary">Hacer test</button>
 		</div>
 	</div>

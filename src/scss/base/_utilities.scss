@@ -12,6 +12,11 @@
   left: -7rem;
 }
 
+//cursor
+.app-cursor {
+  cursor: pointer;
+}
+
 //Margins
 
 .app-m-top {
@@ -19,6 +24,18 @@
 }
 .app-m-right {
   margin-right: 1rem;
+}
+
+.app-m-name {
+  margin: 0 .7rem;
+}
+
+.app-m-left {
+  margin-left: 5px;
+}
+
+.app-m-left-15 {
+  margin-left: 15px;
 }
 
 //width

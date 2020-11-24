@@ -6,6 +6,11 @@ body {
     background-color: var(--color-grey-light);
 }
 
+::placeholder {
+  color: var(--color-gray-dark-2);
+}
+
+
 .inputContainer {
     display: inline-flex;
     flex: 1 1 300px;
@@ -35,6 +40,29 @@ body {
     }
   }
   
-  .error-field {
-    visibility: hidden;
-  }
+.error-field {
+  visibility: hidden;
+}
+
+.logo-app {
+  width: 10rem;
+  margin-left: 1.5rem;
+}
+
+.burger {
+  color: var(--color-normal-grey);
+}
+
+.user-text {
+  color: var(--color-normal-grey);
+  font-family: 'KanitNormal';
+  font-size: 15px;
+}
+
+.user-bottom {
+  color: var(--color-normal-grey);
+  font-family: 'KanitNormal';
+  font-size: 11px;
+  position: absolute;
+  bottom: 6rem;
+}

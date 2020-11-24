@@ -1,6 +1,7 @@
 .mat-drawer.mat-drawer-side {
     box-shadow: 3px 0px 20px var(--color-gray-dark-3);
     border-radius: 0px 10px 10px 0px;
+    margin-top: 1px;
     background-color: var(--color-white);
     width: 250px;
     height: 100vh;
@@ -38,4 +39,28 @@
 
 .mat-drawer-container {
     display: inherit !important;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+    padding: 0 2rem !important;
+}
+
+.mat-drawer-inner-container {
+    position: relative;
+}
+
+.mat-menu-content:not(:empty) {
+    width: 216px;
+    height: 150px;
+}
+
+.mat-menu-panel {
+    margin-top: 1.5rem;
+    box-shadow: 0px 3px 20px #26A79E29;
+    border-radius: 10px !important;
+}
+
+button.mat-menu-item {
+    display: flex;
+    align-items: center;
 }
