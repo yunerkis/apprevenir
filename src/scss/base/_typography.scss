@@ -20,7 +20,7 @@
 	font-family: 'KanitMedium';
   src: url('../../assets/fonts/kanit-v7-latin-500.woff2') format("woff2"),/* Super Modern Browsers */
   url('../../assets/fonts/kanit-v7-latin-500.woff') format("woff");/* Modern Browsers */
-	font-weight: normal;
+	font-weight: 500;
 	font-style: normal;
 }
 /* END Regular */
@@ -33,7 +33,7 @@
 	font-family: 'FiratRegular';
   src: url('../../assets/fonts/AnyConv.com__FiraSans-Regular.woff2') format("woff2"),/* Super Modern Browsers */
   url('../../assets/fonts/FiraSans-Regular.woff') format("woff");/* Modern Browsers */
-	font-weight: 400;
+	font-weight: 500;
 	font-style: normal;
 }
 
@@ -42,6 +42,22 @@
   src: url('../../assets/fonts/AnyConv.com__FiraSans-ExtraLight.woff2') format("woff2"),/* Super Modern Browsers */
   url('../../assets/fonts/FiraSans-Light.woff') format("woff");/* Modern Browsers */
 	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'FiratMedium';
+  src: url('../../assets/fonts/AnyConv.com__FiraSans-Medium.woff2') format("woff2"),/* Super Modern Browsers */
+  url('../../assets/fonts/FiraSans-Medium.woff') format("woff");/* Modern Browsers */
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'FiratBold';
+  src: url('../../assets/fonts/AnyConv.com__FiraSans-Bold.woff2') format("woff2"),/* Super Modern Browsers */
+  url('../../assets/fonts/FiraSans-Bold.woff') format("woff");/* Modern Browsers */
+	font-weight: bold;
 	font-style: normal;
 }
 /* END Regular */

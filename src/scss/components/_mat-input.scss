@@ -100,9 +100,21 @@
     color: var(--color-gray-dark-2) !important;
   }
 
-  .mat-form-field-label  {
-    color: var(--color-primary) !important;
-    background-color: var(--color-white) !important;
-    width: auto !important;
-    padding: 0 6px;
-  }
+.mat-form-field-label  {
+  color: var(--color-primary) !important;
+  background-color: var(--color-white) !important;
+  width: auto !important;
+  padding: 0 6px;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: transparent;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  border-radius: 8px !important;
+}
+
+.mat-form-field-underline {
+  display: none;
+}

@@ -39,14 +39,14 @@
 					<input type="checkbox" id="test1" />
 					<label for="test1">Recuérdame en este dispositivo</label>
 				</div>
-				<button class="btn btn-primary" routerLink="home">Acceder</button>
+				<button class="btn btn-primary width-100" routerLink="home">Acceder</button>
 				<div class="section-two__divider">
 					<div class="section-two__empty"></div>
 					<div class="section-two__label">¿No tienes una cuenta?</div>
 				</div>
-				<button class="btn btn-secondary" routerLink="/registry">Crear una cuenta</button>
+				<button class="btn btn-secondary width-100" routerLink="/registry">Crear una cuenta</button>
 				<div class="section-two__termns">
-					Al continuar, estás confirmando que has leído nuestros <a href="">Términos y condiciones</a>  y <a href="">Política de privacidad</a>
+					Al continuar, estás confirmando que has leído nuestros <a (click)="openDialog()">Términos y condiciones</a>  y <a href="">Política de privacidad</a>
 				</div>
 			</form>
 		</div>

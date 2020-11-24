@@ -30,6 +30,7 @@
 
 .section-two {
     width: 330px;
+    height: 700px;
     &__title {
         color: var(--color-normal-grey);
         font-size: 32px;
@@ -79,7 +80,7 @@
     &__termns {
         font-size: 14px;
         color: var(--color-normal-grey);
-        margin: 2rem 0;
+        margin-top: 2rem;
         font-family: "FiratRegular";
 
         a {
