@@ -43,13 +43,23 @@
 	<h1 class="admin__title app-m-top">Crear cliente</h1>
 	<div class="admin__card">
 		<div class="admin__box">
+			<div class="admin__title app-m-top-2">Enlace del cliente</div>
+			<div class="admin__cliente">
+				<div>https://apprevenir.com/municipiodesabaneta</div>
+				<span class="material-icons">
+					content_copy
+					</span>
+			</div>
 			<div class="admin__title app-m-top">Información General</div>
 			<mat-form-field class="width-100">
 				<mat-label>Tipo de cliente</mat-label>
 				<mat-select>
-					<mat-option>
-						empty
-					</mat-option>
+					<mat-option>Persona Natural</mat-option>
+					<mat-option>Entidades Territoriales</mat-option>
+					<mat-option>Secretarías de Educación</mat-option>
+					<mat-option>Instituciones Educativas</mat-option>
+					<mat-option>Universidades</mat-option>
+					<mat-option>Empresas</mat-option>
 				</mat-select>
 			</mat-form-field>
 			<mat-form-field class="width-100">
@@ -90,11 +100,17 @@
 			</mat-form-field>
 			<mat-form-field class="width-100">
 				<mat-label>Logo (200 x 55px)</mat-label>
-				<input type="email" matInput>
+				<input type="text" matInput>
+				<span class="material-icons color-grey " matSuffix>
+					cloud_upload
+					</span>
 			</mat-form-field>
 			<mat-form-field class="width-100">
 				<mat-label>Color principal</mat-label>
-				<input type="email" matInput>
+				<input type="text" matInput>
+				<span class="material-icons color-grey " matSuffix>
+					color_lens
+					</span>
 			</mat-form-field>
 			<div class="admin__title">Información Específica</div>
 			<div class="admin__text">Comunas y Barrios</div>
@@ -263,7 +279,7 @@
 			</section>
 
 			<div>
-				<button class="btn btn-primary app-m-top">Gurdar</button>
+				<button class="btn btn-primary app-m-top">Guardar</button>
 			</div>
 		</div>
 	</div>

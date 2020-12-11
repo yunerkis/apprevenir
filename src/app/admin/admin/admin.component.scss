@@ -136,6 +136,20 @@
         font-family: 'FiratRegular';
         font-size: 13px;
     }
+
+    &__cliente {
+        display: flex;
+        justify-content: space-between;
+        background: #26A79E12;
+        border-radius: 8px;
+        color: #3E6472;
+        height: 50px;
+        font-family: 'FiratRegular';
+        align-items: center;
+         padding: 0 10px;
+         cursor: pointer;
+         margin: 1rem 0;
+    }
 }
 
 .test-table {
