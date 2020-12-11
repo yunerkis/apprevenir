@@ -1,0 +1,270 @@
+<!--Navbar-->
+<mat-toolbar>
+	<mat-icon (click)="drawer.toggle()" class="burger app-cursor">menu</mat-icon>
+	<img alt="Logo" src="../../../assets/bg/COLOR-BORDE.svg" class="logo-app" />
+	<span class="example-spacer"></span>
+	<img src="../../../assets/icons/accountcircle_outline.svg" alt=""> <label class="user-text app-m-name"> Nombre de usuario</label>
+	<mat-icon [matMenuTriggerFor]="menu" class="burger app-cursor">keyboard_arrow_down</mat-icon>
+	  <mat-menu #menu="matMenu">
+			<button mat-menu-item routerLink="/admin">
+				<img src="../../../assets/icons/settings_outline.svg" alt="">
+				<span class="user-text app-m-left-15">Administrar</span>
+			</button>
+			<button mat-menu-item>
+				<img src="../../../assets/icons/accountcircle_outline.svg" alt="">
+				<span class="user-text app-m-left-15">Mi perfil</span>
+			</button>
+			<button mat-menu-item>
+				<img src="../../../assets/icons/logout_baseline.svg" alt="" class="app-m-left">
+				<span class="user-text app-m-left-15">Cerrar sesión</span>
+			</button>
+	  </mat-menu>
+	
+</mat-toolbar>
+
+<mat-drawer-container class="example-container" autosize>
+	<mat-drawer #drawer class="example-sidenav" mode="side">
+		<p class="user-text user-link"><span class="material-icons">tv</span>Escritorio</p>
+		<p class="user-text user-link"><span class="material-icons">person_pin</span>Usuarios finales</p>
+		<p class="user-text user-link"><span class="material-icons">help_center</span>Test</p>
+		<p class="user-text user-link"><span class="material-icons">content_paste</span>Informes</p>
+		<p class="user-text user-link"><span class="material-icons">people_outline</span>Usuarios del sistema</p>
+		<p class="user-text user-link"><span class="material-icons">person</span>Clientes</p>
+		<p class="user-text user-link__left">Crear cliente</p>
+		<p class="user-text user-link__left">Edición de clientes</p>
+		<p class="user-text user-link"><span class="material-icons">refresh</span>Apprevenir.com</p>
+		<p class="user-bottom">© 2020. Universidad Católica Luis Amigó</p>
+	</mat-drawer>
+</mat-drawer-container>
+
+
+<!--HOME-->
+<div class="admin">
+	<h1 class="admin__title app-m-top">Crear cliente</h1>
+	<div class="admin__card">
+		<div class="admin__box">
+			<div class="admin__title app-m-top">Información General</div>
+			<mat-form-field class="width-100">
+				<mat-label>Tipo de cliente</mat-label>
+				<mat-select>
+					<mat-option>
+						empty
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<mat-form-field class="width-100">
+				<mat-label>Pais</mat-label>
+				<mat-select>
+					<mat-option>
+						empty
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<mat-form-field class="width-100">
+				<mat-label>Departamento</mat-label>
+				<mat-select>
+					<mat-option>
+						empty
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<mat-form-field class="width-100">
+				<mat-label>Ciudad</mat-label>
+				<mat-select>
+					<mat-option>
+						empty
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<mat-form-field class="width-100">
+				<mat-label>Nombre</mat-label>
+				<input type="email" matInput>
+			</mat-form-field>
+			<mat-form-field class="width-100">
+				<mat-label>Nit. o C.C.</mat-label>
+				<input type="email" matInput>
+			</mat-form-field>
+			<mat-form-field class="width-100">
+				<mat-label>Número de Contacto</mat-label>
+				<input type="email" matInput>
+			</mat-form-field>
+			<mat-form-field class="width-100">
+				<mat-label>Logo (200 x 55px)</mat-label>
+				<input type="email" matInput>
+			</mat-form-field>
+			<mat-form-field class="width-100">
+				<mat-label>Color principal</mat-label>
+				<input type="email" matInput>
+			</mat-form-field>
+			<div class="admin__title">Información Específica</div>
+			<div class="admin__text">Comunas y Barrios</div>
+			<table class="test-table">
+				<tr class="test-table__header">
+				  <th>Comunas</th>
+				  <th>Barrios</th>
+				  <th>Edición</th>
+				</tr>
+				<tr>
+				  <td>Comuna 1</td>
+				  <td>Guayabal</td>
+				  <td><span class="material-icons">
+					restore_from_trash
+					</span>
+					<span class="material-icons">
+						edit
+						</span></td>
+				</tr>
+				<tr>
+				  <td>Comuna 2</td>
+				  <td>El Poblado</td>
+				  <td><span class="material-icons">
+					restore_from_trash
+					</span>
+					<span class="material-icons">
+						edit
+						</span></td>
+				</tr>
+				<tr>
+				  <td>Comuna 3</td>
+				  <td>Belén</td>
+				  <td><span class="material-icons">
+					restore_from_trash
+					</span>
+					<span class="material-icons">
+						edit
+						</span></td>
+				</tr>
+			  </table>
+			<div class="admin__text">Corregimientos y Veredas</div>
+			<table class="test-table">
+				<tr class="test-table__header">
+				  <th>Corregimiento</th>
+				  <th>Veredas</th>
+				</tr>
+				<tr>
+				  <td>San Cristobal</td>
+				  <td>Guayabal</td>
+				  <td><span class="material-icons">
+					restore_from_trash
+					</span>
+					<span class="material-icons">
+						edit
+						</span></td>
+				</tr>
+				<tr>
+				  <td>San Antonio de Prado</td>
+				  <td>El Poblado</td>
+				  <td><span class="material-icons">
+					restore_from_trash
+					</span>
+					<span class="material-icons">
+						edit
+						</span></td>
+				</tr>
+			</table>
+			<div class="admin__turno">Ingrese las sedes separadas por coma o presionando (Enter)</div>
+			<div class="admin__chips">
+				<div class="admin__sede">Sedes</div>
+				<mat-form-field class="width-100">
+					<mat-chip-list #chipList aria-label="User selection">
+						<mat-chip  [selectable]="selectable" [removable]="removable">
+							Medellín
+							<mat-icon matChipRemove>cancel</mat-icon>
+						</mat-chip>
+						<mat-chip  [selectable]="selectable" [removable]="removable">
+							Ríonegro
+							<mat-icon matChipRemove>cancel</mat-icon>
+						</mat-chip>
+					</mat-chip-list>
+				</mat-form-field>
+			</div>
+			<div class="admin__turno">Ingrese las áreas separadas por coma o presionando (Enter)</div>
+			<div class="admin__chips">
+				<div class="admin__sede">Áreas</div>
+				<mat-form-field class="width-100">
+					<mat-chip-list #chipList aria-label="User selection">
+						<mat-chip  [selectable]="selectable" [removable]="removable">
+							Producción
+							<mat-icon matChipRemove>cancel</mat-icon>
+						</mat-chip>
+						<mat-chip  [selectable]="selectable" [removable]="removable">
+							Administrativa
+							<mat-icon matChipRemove>cancel</mat-icon>
+						</mat-chip>
+						<mat-chip  [selectable]="selectable" [removable]="removable">
+							Puntos de Venta
+							<mat-icon matChipRemove>cancel</mat-icon>
+						</mat-chip>
+					</mat-chip-list>
+				</mat-form-field>
+			</div>
+			<div class="admin__turno">Ingrese los turnos separados por coma o presionando (Enter)</div>
+			<div class="admin__chips">
+				<div class="admin__sede">Turnos</div>
+				<mat-form-field class="width-100">
+					<mat-chip-list #chipList aria-label="User selection">
+						<mat-chip  [selectable]="selectable" [removable]="removable">
+							8 - 12
+							<mat-icon matChipRemove>cancel</mat-icon>
+						</mat-chip>
+						<mat-chip  [selectable]="selectable" [removable]="removable">
+							1 - 7
+							<mat-icon matChipRemove>cancel</mat-icon>
+						</mat-chip>
+						<mat-chip  [selectable]="selectable" [removable]="removable">
+							Nocturna
+							<mat-icon matChipRemove>cancel</mat-icon>
+						</mat-chip>
+					</mat-chip-list>
+				</mat-form-field>
+			</div>
+			<div class="admin__turno">Ingrese las instituciones educativas separadas por coma o presionando (Enter)</div>
+			<div class="admin__chips">
+				<div class="admin__sede">Instituciones educativas</div>
+				<mat-form-field class="width-100">
+					<mat-chip-list #chipList aria-label="User selection">
+						<mat-chip  [selectable]="selectable" [removable]="removable">
+							I.E. CEFA
+							<mat-icon matChipRemove>cancel</mat-icon>
+						</mat-chip>
+						<mat-chip  [selectable]="selectable" [removable]="removable">
+							Ferrini
+							<mat-icon matChipRemove>cancel</mat-icon>
+						</mat-chip>
+						<mat-chip  [selectable]="selectable" [removable]="removable">
+							I.E. INEM
+							<mat-icon matChipRemove>cancel</mat-icon>
+						</mat-chip>
+						<mat-chip  [selectable]="selectable" [removable]="removable">
+							I.E Manuela Restrepo
+							<mat-icon matChipRemove>cancel</mat-icon>
+						</mat-chip>
+					</mat-chip-list>
+				</mat-form-field>
+			</div>
+
+			<div class="admin__title app-m-bottom">Tests habilitados</div>
+			<section class="example-section">
+				<div><mat-checkbox class="example-margin">Alcohol</mat-checkbox></div>
+				<div><mat-checkbox class="example-margin">Ludopatía</mat-checkbox></div>
+				<div><mat-checkbox class="example-margin">Sexo</mat-checkbox></div>
+				<div><mat-checkbox class="example-margin">Depresión</mat-checkbox></div>
+				<div><mat-checkbox class="example-margin">Drogas</mat-checkbox></div>
+				<div><mat-checkbox class="example-margin">Redes sociales</mat-checkbox></div>
+				<div><mat-checkbox class="example-margin">Trabajo</mat-checkbox></div>
+				<div><mat-checkbox class="example-margin">Riesgo</mat-checkbox></div>
+				<div><mat-checkbox class="example-margin">Tabaco</mat-checkbox></div>
+				<div><mat-checkbox class="example-margin">Tecnologías</mat-checkbox></div>
+				<div><mat-checkbox class="example-margin">Compras</mat-checkbox></div>
+				<div><mat-checkbox class="example-margin">Etapas de Cambio</mat-checkbox></div>
+				<div><mat-checkbox class="example-margin">Inhalables</mat-checkbox></div>
+				<div><mat-checkbox class="example-margin">Dependencia</mat-checkbox></div>
+				<div><mat-checkbox class="example-margin">Ansiedad</mat-checkbox></div>
+			</section>
+
+			<div>
+				<button class="btn btn-primary app-m-top">Gurdar</button>
+			</div>
+		</div>
+	</div>
+</div>
