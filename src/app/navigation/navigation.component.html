@@ -24,15 +24,30 @@
 
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
-        <div *ngIf="userIsAdmin">
-            <p class="user-text user-link"><span class="material-icons">tv</span>Escritorio</p>
-            <p class="user-text user-link"><span class="material-icons">person_pin</span>Usuarios finales</p>
-            <p class="user-text user-link"><span class="material-icons">help_center</span>Test</p>
-            <p class="user-text user-link"><span class="material-icons">content_paste</span>Informes</p>
-            <p class="user-text user-link"><span class="material-icons">people_outline</span>Usuarios del sistema</p>
-            <p class="user-text user-link"><span class="material-icons">person</span>Clientes</p>
-            <p class="user-text user-link__left">Crear cliente</p>
-            <p class="user-text user-link__left">Edición de clientes</p>
+        <div *ngIf="userIsAdmin" class="navigation-list">
+            <button color="primary" mat-button><mat-icon aria-hidden="false">tv</mat-icon> Escritorio</button>
+            <button color="primary" mat-button><mat-icon aria-hidden="false">person_pin</mat-icon> Usuarios finales</button>
+            <button color="primary" mat-button><mat-icon aria-hidden="false">help_center</mat-icon> Test</button>
+            <button color="primary" mat-button><mat-icon aria-hidden="false">content_paste</mat-icon> Informes</button>
+            
+            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                <!-- This is the tree node template for leaf nodes -->
+                <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+                  <!-- use a disabled button to provide padding for tree leaf -->
+                  <button mat-icon-button disabled></button>
+                  {{node.name}}
+                </mat-tree-node>
+                <!-- This is the tree node template for expandable nodes -->
+                <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+                  <button mat-icon-button matTreeNodeToggle
+                          [attr.aria-label]="'Toggle ' + node.name">
+                    <mat-icon class="mat-icon-rtl-mirror">
+                        {{node.icon}}
+                    </mat-icon>
+                  </button>
+                  {{node.name}}
+                </mat-tree-node>
+              </mat-tree>
             <p class="user-text user-link"><span class="material-icons">refresh</span>Apprevenir.com</p>
             <p class="user-bottom">© 2020. Universidad Católica Luis Amigó</p>
         </div>
@@ -40,6 +55,7 @@
             <a href="" target="_blank" class="user-text">Inicio</a>
             <a href="https://apprevenir.com/conocenos/" target="_blank" class="user-text">Más sobre Apprevenir</a>
             <a href="https://apprevenir.com/contactanos/" target="_blank" class="user-text">Contáctanos</a>
+            <p class="user-bottom">© 2020. Universidad Católica Luis Amigó</p>
         </div>
     </mat-drawer>
     <mat-drawer-content>
