@@ -6,6 +6,7 @@ interface MenuElement {
   name: string;
   children?: MenuElement[];
   icon?: string;
+  route?: string
 }
 interface MenuNode {
   expandable: boolean;
@@ -15,6 +16,10 @@ interface MenuNode {
 }
 
 const MENU_ELEMENTS : MenuElement[] = [{
+  name:"Usuarios finales",
+  icon: "person_pin",
+  route: "/admin"
+},{
   name: "Usuarios del sistema",
   icon: "help_center",
   children: [{
@@ -66,10 +71,10 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userIsAdmin = this.router.url == "/app/admin";
+    this.userIsAdmin = this.router.url.startsWith("/app/admin");
     this.router.events.subscribe((routerEvent:Event)=> {
       if (routerEvent instanceof NavigationStart){
-        this.userIsAdmin = routerEvent.url == "/app/admin"
+        this.userIsAdmin = routerEvent.url.startsWith("/app/admin");
       }
     })
   }

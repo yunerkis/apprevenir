@@ -6,6 +6,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RecoveryComponent } from './auth/recovery/recovery.component';
 import { HomeComponent } from './home/home.component';
 import { TestComponent } from './test/test.component';
+import { TestComponent as AdminTestComponent} from './admin/test/test.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -17,8 +18,12 @@ const appRoutes: Routes = [
   { path: 'registry', component: RegistrationComponent },
   { path: 'app', component: NavigationComponent,
     children:[
-      { path: 'admin', component: AdminComponent },
-      { path: 'home', component: HomeComponent },
+      { path: 'admin', component: AdminComponent,
+      children:[
+        { path: 'test', component: AdminTestComponent }
+      ],
+     },
+      { path: 'home', component: HomeComponent }
     ]
 },
 ];
