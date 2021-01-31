@@ -1,6 +1,5 @@
 .login {
     display: flex;
-    height: 900px;
     &__section-one {
         background-color: var(--color-primary);
         width: 609px;
@@ -79,7 +78,7 @@ width: 100%;
 
 .logo-bg {
     position: absolute;
-    bottom: -25px;
+    bottom: 0;
     right: 0;
     left: 0;
     width: 35rem;

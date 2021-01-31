@@ -11,19 +11,36 @@
 		margin: 0 auto;
 		background-color: var(--color-white);
 		position: absolute;
-    left: 0;
-    right: 0;
+		left: 0;
+		right: 0;
 	}
 	&__info {
 		width: 768px;
 		margin: 0 auto;
-		padding-top: 1rem;
+		padding-top: 2rem;
 		position: relative;
 	}
 	&__person {
 		position: absolute;
-    top: 0;
+    	top: 0;
 		right: 0;
 		width: 315px;
+	}
+	&__title {
+        color: var(--color-white);
+        font-size: 17px;
+        font-family: 'KanitMedium';
+    }
+    &__text {
+        color: var(--color-white);
+        font-size: 35px;
+        font-family: 'KanitMedium';
+	}
+	&__flex {
+		display: flex;
+		margin-bottom: 1rem;
+	}
+	&__icon {
+		cursor: pointer;
 	}
 }

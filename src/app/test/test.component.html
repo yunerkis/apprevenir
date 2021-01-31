@@ -1,14 +1,43 @@
 <div class="test">
 	<div class="test__content">
 		<div class="test__info">
-			<img alt="PersonIcon" src="../../../assets/icons/close_twotone.svg" class="inputContainer__icon" />
-			<div>Test</div>
-			<div>
-				<div>Dependencia Emocional</div>
+			<img alt="PersonIcon" src="../../../assets/icons/close_twotone.svg" class="test__icon" routerLink="/home" />
+			<div class="test__title">TEST</div>
+			<div class="test__flex">
+				<div class="test__text">Dependencia Emocional</div>
 				<img alt="PersonIcon" src="../../../assets/icons/email_outline.svg" class="inputContainer__icon" />
 			</div>
 			<img alt="PersonIcon" src="../../../assets/bg/apprevenir-ludopatia.png" class="test__person" />
 		</div>
-		<div class="test__box"></div>
+		<div class="test__box">
+			<div class="one-steps">
+				  <mat-horizontal-stepper>
+					<mat-step label="Step 1" state="phone">
+					  <p>Put down your phones.</p>
+					  <div>
+						<button mat-button matStepperNext>Next</button>
+					  </div>
+					</mat-step>
+					<mat-step label="Step 2" state="chat">
+					  <p>Socialize with each other.</p>
+					  <div>
+						<button mat-button matStepperPrevious>Back</button>
+						<button mat-button matStepperNext>Next</button>
+					  </div>
+					</mat-step>
+					<mat-step label="Step 3">
+					  <p>You're welcome.</p>
+					</mat-step>
+				  
+					<!-- Icon overrides. -->
+					<ng-template matStepperIcon="phone">
+					  <mat-icon>call_end</mat-icon>
+					</ng-template>
+					<ng-template matStepperIcon="chat">
+					  <mat-icon>forum</mat-icon>
+					</ng-template>
+				  </mat-horizontal-stepper>
+			</div>
+		</div>
 	</div>
 </div>

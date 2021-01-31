@@ -1,0 +1,41 @@
+<!--Navbar-->
+<mat-toolbar *ngIf="needsNavigationChrome">
+	<mat-icon (click)="drawer.toggle()" class="burger app-cursor">menu</mat-icon>
+	<img alt="Logo" src="../../../assets/bg/COLOR-BORDE.svg" class="logo-app" />
+	<span class="example-spacer"></span>
+	<img src="../../../assets/icons/accountcircle_outline.svg" alt=""> <label class="user-text app-m-name"> Nombre de usuario</label>
+	<mat-icon [matMenuTriggerFor]="menu" class="burger app-cursor">keyboard_arrow_down</mat-icon>
+	  <mat-menu #menu="matMenu">
+			<button mat-menu-item routerLink="/admin">
+				<img src="../../../assets/icons/settings_outline.svg" alt="">
+				<span class="user-text app-m-left-15">Administrar</span>
+			</button>
+			<button mat-menu-item>
+				<img src="../../../assets/icons/accountcircle_outline.svg" alt="">
+				<span class="user-text app-m-left-15">Mi perfil</span>
+			</button>
+			<button mat-menu-item>
+				<img src="../../../assets/icons/logout_baseline.svg" alt="" class="app-m-left">
+				<span class="user-text app-m-left-15">Cerrar sesión</span>
+			</button>
+	  </mat-menu>
+	
+</mat-toolbar>
+
+<mat-drawer-container class="example-container" autosize *ngIf="needsNavigationChrome">
+	<mat-drawer #drawer class="example-sidenav" mode="side">
+		<p class="user-text user-link"><span class="material-icons">tv</span>Escritorio</p>
+		<p class="user-text user-link"><span class="material-icons">person_pin</span>Usuarios finales</p>
+		<p class="user-text user-link"><span class="material-icons">help_center</span>Test</p>
+		<p class="user-text user-link"><span class="material-icons">content_paste</span>Informes</p>
+		<p class="user-text user-link"><span class="material-icons">people_outline</span>Usuarios del sistema</p>
+		<p class="user-text user-link"><span class="material-icons">person</span>Clientes</p>
+		<p class="user-text user-link__left">Crear cliente</p>
+		<p class="user-text user-link__left">Edición de clientes</p>
+		<p class="user-text user-link"><span class="material-icons">refresh</span>Apprevenir.com</p>
+		<p class="user-bottom">© 2020. Universidad Católica Luis Amigó</p>
+	</mat-drawer>
+</mat-drawer-container>
+
+<router-outlet></router-outlet>
+

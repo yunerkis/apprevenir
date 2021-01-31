@@ -24,9 +24,11 @@
 
 <mat-drawer-container class="example-container" autosize>
 	<mat-drawer #drawer class="example-sidenav" mode="side">
-		<p class="user-text">Inicio</p>
-		<p class="user-text">Más sobre Apprevenir</p>
-		<p class="user-text">Contáctanos</p>
+		<div>
+			<a href="" target="_blank" class="user-text">Inicio</a>
+			<a href="https://apprevenir.com/conocenos/" target="_blank" class="user-text">Más sobre Apprevenir</a>
+			<a href="https://apprevenir.com/contactanos/" target="_blank" class="user-text">Contáctanos</a>
+		</div>
 		<p class="user-bottom">© 2020. Universidad Católica Luis Amigó</p>
 	</mat-drawer>
 </mat-drawer-container>
@@ -52,7 +54,7 @@
 			<div class="card__risk">RIESGO, CAMBIO Y COADICIÓN</div>
 			<div class="card__text">Dependencia emocional</div>
 			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="man" class="card__img-man">
-			<button class="btn btn-primary">Hacer test</button>
+			<button class="btn btn-primary" routerLink="/test">Hacer test</button>
 		</div>
 		<div class="card__item">
 			<div class="card__img">

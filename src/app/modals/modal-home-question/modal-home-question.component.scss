@@ -1,0 +1,30 @@
+.modal-home {
+    .mat-dialog-container {
+        padding: 0 !important;
+    }
+    .mat-dialog-content {
+        padding: 0 !important;
+        margin: 0;
+    }
+    &__bg {
+        height: 168px;
+        background-color: var(--color-primary);
+    }
+    &__flex {
+        display: flex;
+    }
+    &__box {
+        display: flex;
+        align-items: center;
+    }
+    &__title {
+        color: var(--color-white);
+        font-size: 17px;
+        font-family: 'KanitMedium';
+    }
+    &__text {
+        color: var(--color-white);
+        font-size: 35px;
+        font-family: 'KanitMedium';
+    }
+}
