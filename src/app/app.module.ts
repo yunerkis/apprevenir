@@ -14,6 +14,7 @@ import { TestComponent } from './test/test.component';
 import { RecoveryComponent } from './auth/recovery/recovery.component';
 import { ModalHomeQuestionComponent } from './modals/modal-home-question/modal-home-question.component';
 import { AdminComponent } from './admin/admin/admin.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AdminComponent } from './admin/admin/admin.component';
     TestComponent,
     RecoveryComponent,
     ModalHomeQuestionComponent,
-    AdminComponent
+    AdminComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,

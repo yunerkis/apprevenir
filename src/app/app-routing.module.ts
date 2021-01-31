@@ -8,14 +8,19 @@ import { HomeComponent } from './home/home.component';
 import { TestComponent } from './test/test.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { AdminComponent } from './admin/admin/admin.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
   { path: 'test', component: TestComponent },
   { path: 'recovery', component: RecoveryComponent },
   { path: 'registry', component: RegistrationComponent },
-  { path: 'admin', component: AdminComponent }
+  { path: 'app', component: NavigationComponent,
+    children:[
+      { path: 'admin', component: AdminComponent },
+      { path: 'home', component: HomeComponent },
+    ]
+},
 ];
 
 @NgModule({

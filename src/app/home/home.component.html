@@ -1,38 +1,3 @@
-<!--Navbar-->
-<mat-toolbar>
-	<mat-icon (click)="drawer.toggle()" class="burger app-cursor">menu</mat-icon>
-	<img alt="Logo" src="../../../assets/bg/COLOR-BORDE.svg" class="logo-app" />
-	<span class="example-spacer"></span>
-	<img src="../../../assets/icons/accountcircle_outline.svg" alt=""> <label class="user-text app-m-name"> Nombre de usuario</label>
-	<mat-icon [matMenuTriggerFor]="menu" class="burger app-cursor">keyboard_arrow_down</mat-icon>
-	  <mat-menu #menu="matMenu">
-			<button mat-menu-item routerLink="/admin">
-				<img src="../../../assets/icons/settings_outline.svg" alt="">
-				<span class="user-text app-m-left-15">Administrar</span>
-			</button>
-			<button mat-menu-item>
-				<img src="../../../assets/icons/accountcircle_outline.svg" alt="">
-				<span class="user-text app-m-left-15">Mi perfil</span>
-			</button>
-			<button mat-menu-item>
-				<img src="../../../assets/icons/logout_baseline.svg" alt="" class="app-m-left">
-				<span class="user-text app-m-left-15">Cerrar sesión</span>
-			</button>
-	  </mat-menu>
-	
-</mat-toolbar>
-
-<mat-drawer-container class="example-container" autosize>
-	<mat-drawer #drawer class="example-sidenav" mode="side">
-		<div>
-			<a href="" target="_blank" class="user-text">Inicio</a>
-			<a href="https://apprevenir.com/conocenos/" target="_blank" class="user-text">Más sobre Apprevenir</a>
-			<a href="https://apprevenir.com/contactanos/" target="_blank" class="user-text">Contáctanos</a>
-		</div>
-		<p class="user-bottom">© 2020. Universidad Católica Luis Amigó</p>
-	</mat-drawer>
-</mat-drawer-container>
-
 <!--HOME-->
 <div class="home">
 	<h1 class="home__title">Por favor elije un test</h1>
