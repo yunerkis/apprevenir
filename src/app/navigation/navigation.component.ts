@@ -15,6 +15,7 @@ export class NavigationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.userIsAdmin = this.router.url == "/app/admin";
     this.router.events.subscribe((routerEvent:Event)=> {
       if (routerEvent instanceof NavigationStart){
         this.userIsAdmin = routerEvent.url == "/app/admin"
