@@ -151,6 +151,19 @@
          cursor: pointer;
          margin: 1rem 0;
     }
+    &__university {
+        color: var(--color-normal-grey);
+        font-family: 'FiratRegular';
+        font-size: 16px;
+    }
+    &__label-text {
+        color: var(--color-error);
+        font-style: italic;
+    }
+    &__span {
+        color: var(--color-error);
+        font-weight: bold;
+    }
 }
 
 .test-table {
