@@ -16,13 +16,20 @@ interface MenuNode {
 }
 
 const MENU_ELEMENTS : MenuElement[] = [{
-  name:"Usuarios finales",
+  name: "Usuarios finales",
   icon: "account_box",
-  route: "/admin"
+  children: [{
+    name: "Crear usuario final"
+  },
+  {
+    name: "Edición de usuario final",
+    route: "/edit-final-user"
+  }
+  ]
 },{
   name:"Test",
   icon: "help_center",
-  route: "/admin"
+  route: "/test"
 },{
   name:"Informes",
   icon: "assignment",
@@ -85,6 +92,7 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
     this.userIsAdmin = this.router.url.startsWith("/app/admin");
     this.router.events.subscribe((routerEvent:Event)=> {
+      console.log(routerEvent);
       if (routerEvent instanceof NavigationStart){
         this.userIsAdmin = routerEvent.url.startsWith("/app/admin");
       }

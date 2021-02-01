@@ -10,7 +10,11 @@
 		</div>
 		<div class="test__box">
 			<mat-tab-group>
-                <mat-tab label="Mis datos">
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                      <mat-icon class="example-tab-icon">account_circle</mat-icon>
+                      Mis datos
+                    </ng-template>
                     <mat-horizontal-stepper #stepper>
                         <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
                             <form [formGroup]="firstFormGroup">
@@ -190,7 +194,11 @@
                         </mat-step>
                     </mat-horizontal-stepper>
                 </mat-tab>
-                <mat-tab label="Mis test"> 
+                <mat-tab> 
+                    <ng-template mat-tab-label>
+                        <mat-icon class="example-tab-icon">help_center</mat-icon>
+                        Mis test
+                      </ng-template>
                     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
                         <!--- Note that these columns can be defined in any order.

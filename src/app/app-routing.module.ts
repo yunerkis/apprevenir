@@ -11,6 +11,8 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { AdminComponent } from './admin/admin/admin.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ProfileComponent } from './profile/profile.component';
+import { EditFinalUserComponent } from './admin/edit-final-user/edit-final-user.component';
+import { FinalUserComponent } from './admin/final-user/final-user.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -20,19 +22,17 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'app', component: NavigationComponent,
     children:[
-      { path: 'admin', component: AdminComponent,
-      children:[
-        { path: 'test', component: AdminTestComponent }
-      ],
-     },
+      { path: 'admin', component: AdminComponent, pathMatch: "full" },
+      { path: 'test', component: AdminTestComponent },
+      { path: 'final-user', component: FinalUserComponent },
+      { path: 'edit-final-user', component: EditFinalUserComponent },
       { path: 'home', component: HomeComponent },
     ]
-},
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
-
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

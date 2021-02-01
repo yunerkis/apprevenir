@@ -13,7 +13,7 @@
 		position: absolute;
 		left: 0;
 		right: 0;
-		padding: 30px;
+        padding: 30px;
 	}
 	&__info {
 		width: 768px;
@@ -91,8 +91,4 @@ width: 100%;
 
 table {
     width: 100%;
-  }
-
-  .mat-ripple:not(:empty) {
-      width: 50%;
   }

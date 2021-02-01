@@ -16,6 +16,8 @@ import { ModalHomeQuestionComponent } from './modals/modal-home-question/modal-h
 import { AdminComponent } from './admin/admin/admin.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ProfileComponent } from './profile/profile.component';
+import { FinalUserComponent } from './admin/final-user/final-user.component';
+import { EditFinalUserComponent } from './admin/edit-final-user/edit-final-user.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { ProfileComponent } from './profile/profile.component';
     ModalHomeQuestionComponent,
     AdminComponent,
     NavigationComponent,
-    ProfileComponent
+    ProfileComponent,
+    FinalUserComponent,
+    EditFinalUserComponent
   ],
   imports: [
     BrowserModule,
