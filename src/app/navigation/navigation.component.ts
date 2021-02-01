@@ -17,11 +17,19 @@ interface MenuNode {
 
 const MENU_ELEMENTS : MenuElement[] = [{
   name:"Usuarios finales",
-  icon: "person_pin",
+  icon: "account_box",
+  route: "/admin"
+},{
+  name:"Test",
+  icon: "help_center",
+  route: "/admin"
+},{
+  name:"Informes",
+  icon: "assignment",
   route: "/admin"
 },{
   name: "Usuarios del sistema",
-  icon: "help_center",
+  icon: "people",
   children: [{
     name: "Crear usuario"
   },
@@ -31,14 +39,18 @@ const MENU_ELEMENTS : MenuElement[] = [{
   ]
 },{
   name: "Clientes",
-  icon: "help_center",
+  icon: "person",
   children: [{
     name: "Crear cliente"
   },
   {
     name: "Edición de clientes"
   }]
-}]
+},{
+  name:"Apprevenir.com",
+  icon: "refresh",
+  route: "/admin"
+},]
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',

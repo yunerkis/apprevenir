@@ -25,14 +25,11 @@
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
         <div *ngIf="userIsAdmin" class="navigation-list">
-            <button color="primary" mat-button routerLink="/app/test"><mat-icon aria-hidden="false">help_center</mat-icon> Test</button>
-            <button color="primary" mat-button><mat-icon aria-hidden="false">content_paste</mat-icon> Informes</button>
-            
             <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
                 <!-- This is the tree node template for leaf nodes -->
                 <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
                   <!-- use a disabled button to provide padding for tree leaf -->
-                  <button color="primary" mat-button [routerLink]="node.route" routerLinkActive="router-link-active" >
+                  <button class="btn-list" mat-button [routerLink]="node.route" routerLinkActive="router-link-active" >
                     <mat-icon class="mat-icon-rtl-mirror">
                         {{node.icon}}
                     </mat-icon>
@@ -41,23 +38,23 @@
                 </mat-tree-node>
                 <!-- This is the tree node template for expandable nodes -->
                 <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
-                  <button mat-icon-button matTreeNodeToggle
+                  <button class="btn-list" mat-button  matTreeNodeToggle
                         [attr.aria-label]="'Toggle ' + node.name">
                     <mat-icon class="mat-icon-rtl-mirror">
                         {{node.icon}}
                     </mat-icon>
+                    {{node.name}}
                   </button>
-                  {{node.name}}
                 </mat-tree-node>
               </mat-tree>
-
-            <p class="user-text user-link"><span class="material-icons">refresh</span>Apprevenir.com</p>
+            <img src="./../../assets/bg/logo-luis-amigo.png" alt="" class="home-logo">
             <p class="user-bottom">© 2020. Universidad Católica Luis Amigó</p>
         </div>
-        <div *ngIf="!userIsAdmin">
+        <div *ngIf="!userIsAdmin" class="home-list">
             <a href="" target="_blank" class="user-text">Inicio</a>
             <a href="https://apprevenir.com/conocenos/" target="_blank" class="user-text">Más sobre Apprevenir</a>
             <a href="https://apprevenir.com/contactanos/" target="_blank" class="user-text">Contáctanos</a>
+            <img src="./../../assets/bg/logo-luis-amigo.png" alt="" class="home-logo">
             <p class="user-bottom">© 2020. Universidad Católica Luis Amigó</p>
         </div>
     </mat-drawer>

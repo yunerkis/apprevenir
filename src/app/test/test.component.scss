@@ -4,8 +4,8 @@
 		background-color: var(--color-primary);
 	}
 	&__box {
-		width: 768px;
-		height: 763px;
+		width: 710px;
+		height: auto;
 		box-shadow: 0px 0px 10 pxvar(--color-gray-dark-3);
 		border-radius: 10px;
 		margin: 0 auto;
@@ -13,6 +13,7 @@
 		position: absolute;
 		left: 0;
 		right: 0;
+		padding: 30px;
 	}
 	&__info {
 		width: 768px;
@@ -43,4 +44,38 @@
 	&__icon {
 		cursor: pointer;
 	}
+	&__ask{
+		display: flex;
+	}
+	&__number {
+		color: var(--color-gray-dark-2);
+        font-size: 48px;
+		font-family: 'KanitMedium';
+		margin-right: 20px;
+	}
+	&__question {
+		color: var(--color-normal-grey);
+        font-size: 24px;
+		font-family: 'FiratRegular';
+		margin-top: 18px;
+	}
+	&__radio {
+		display: flex;
+		flex-direction: column;
+		margin: 0px 35px;
+	}
+	&__label {
+		color: var(--color-primary);
+        font-size: 24px;
+		font-family: 'KanitMedium';
+		margin: 0 10px;
+	}
+	&__radio-flex {
+		display: flex;
+		align-items: baseline;
+		color: var(--color-normal-grey);
+	}
+}
+.app-flex {
+	margin-top: 3rem;
 }

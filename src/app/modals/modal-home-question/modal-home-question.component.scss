@@ -5,6 +5,7 @@
     .mat-dialog-content {
         padding: 0 !important;
         margin: 0;
+        overflow: hidden;
     }
     &__bg {
         height: 168px;
@@ -12,6 +13,7 @@
     }
     &__flex {
         display: flex;
+        justify-content: space-between;
     }
     &__box {
         display: flex;
@@ -26,5 +28,28 @@
         color: var(--color-white);
         font-size: 35px;
         font-family: 'KanitMedium';
+    }
+    &__site {
+        padding: 50px 0px 0 50px;
+    }
+    &__para {
+        padding: 50px;
+        height: 375px;
+        overflow: auto;
+    }
+    &__grey {
+        color: var(--color-normal-grey);
+        font-family: "KanitNormal";
+        font-size: 17px;
+        margin-bottom: 20px;
+    }
+
+    &__bold {
+        font-size: 35px;
+        font-family: 'KanitMedium';
+        color: var(--color-normal-grey);
+    }
+    .btn-cancel {
+        padding: 0px 50px;
     }
 }

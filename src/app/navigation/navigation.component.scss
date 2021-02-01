@@ -3,3 +3,29 @@
     flex-direction: column;
     align-items: flex-start;
 }
+.home-list {
+    display: flex;
+    flex-direction: column;
+    a {
+        text-decoration: none;
+        margin: 11px 0;
+    }
+}
+
+.home-logo {
+    position: absolute;
+    bottom: 9rem;
+    width: 150px;
+}
+
+.btn-list {
+    color: var(--color-normal-grey);
+    font-family: "KanitNormal";
+    font-size: 15px;
+    width: 100%;
+    text-align: left;
+}
+
+.mat-tree-node {
+    padding-left: 0 !important;
+}

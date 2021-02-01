@@ -1,7 +1,7 @@
 <div class="test">
 	<div class="test__content">
 		<div class="test__info">
-			<img alt="PersonIcon" src="../../../assets/icons/close_twotone.svg" class="test__icon" routerLink="/home" />
+			<img alt="PersonIcon" src="../../../assets/icons/close_twotone.svg" class="test__icon" routerLink="/app/home" />
 			<div class="test__title">TEST</div>
 			<div class="test__flex">
 				<div class="test__text">Dependencia Emocional</div>
@@ -13,10 +13,56 @@
 			<div class="one-steps">
 				  <mat-horizontal-stepper>
 					<mat-step label="Step 1" state="phone">
-					  <p>Put down your phones.</p>
-					  <div>
-						<button mat-button matStepperNext>Next</button>
-					  </div>
+					 <div class="test__ask">
+						 <div class="test__number">1</div>
+						 <div class="test__question">
+							 Imagina que estás en una situación que te recuerda tu consumo de Pinturas . 
+							 Si estuvieras en esa situación en este momento, ¿Cuál sería la posibilidad de que inhalaras Pinturas ?
+						</div>
+					 </div>
+					 <div class="test__radio">
+						<div class="test__radio-flex">
+							<mat-radio-button value="1"></mat-radio-button>
+							<label class="test__label">a</label>
+							<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
+						</div>
+						<div class="test__radio-flex">
+							<mat-radio-button value="1"></mat-radio-button>
+							<label class="test__label">b</label>
+							<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
+						</div>
+						<div class="test__radio-flex">
+							<mat-radio-button value="1"></mat-radio-button>
+							<label class="test__label">c</label>
+							<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
+						</div>
+						<div class="test__radio-flex">
+							<mat-radio-button value="1"></mat-radio-button>
+							<label class="test__label">d</label>
+							<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
+						</div>
+						<div class="test__radio-flex">
+							<mat-radio-button value="1"></mat-radio-button>
+							<label class="test__label">e</label>
+							<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
+						</div>
+						<div class="test__radio-flex">
+							<mat-radio-button value="1"></mat-radio-button>
+							<label class="test__label">f</label>
+							<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
+						</div>
+						<div class="test__radio-flex">
+							<mat-radio-button value="1"></mat-radio-button>
+							<label class="test__label">g</label>
+							<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
+						</div>
+						
+
+					 </div>
+					 <div class="app-flex">
+						<button class="btn btn-secondary app-m-right" matStepperPrevious>Anterior</button>
+						<button class="btn btn-primary" >Siguiente</button>
+						</div>
 					</mat-step>
 					<mat-step label="Step 2" state="chat">
 					  <p>Socialize with each other.</p>
