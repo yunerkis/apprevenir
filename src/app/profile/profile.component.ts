@@ -20,11 +20,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: "Tecnologías", name: '08/09/20', weight: "--", symbol: '--'},
   {position: "Tecnologías", name: '08/09/20', weight: "--", symbol: '--'},
 ];
-
-/**
- * @title Basic use of `<table mat-table>`
- */
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',

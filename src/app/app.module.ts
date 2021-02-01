@@ -18,7 +18,10 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FinalUserComponent } from './admin/final-user/final-user.component';
 import { EditFinalUserComponent } from './admin/edit-final-user/edit-final-user.component';
-
+import { ReportComponent } from './admin/report/report.component';
+import { SystemUserComponent } from './admin/system-user/system-user.component';
+import { EditSystemUserComponent } from './admin/edit-system-user/edit-system-user.component';
+import { EditClientComponent } from './admin/edit-client/edit-client.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +36,11 @@ import { EditFinalUserComponent } from './admin/edit-final-user/edit-final-user.
     NavigationComponent,
     ProfileComponent,
     FinalUserComponent,
-    EditFinalUserComponent
+    EditFinalUserComponent,
+    ReportComponent,
+    SystemUserComponent,
+    EditSystemUserComponent,
+    EditClientComponent
   ],
   imports: [
     BrowserModule,
