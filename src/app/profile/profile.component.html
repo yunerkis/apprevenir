@@ -1,0 +1,230 @@
+<div class="test">
+	<div class="test__content">
+		<div class="test__info">
+			<img alt="PersonIcon" src="../../../assets/icons/close_twotone.svg" class="test__icon" routerLink="/app/home" />
+			<div class="test__text">Nombres</div>
+			<div class="test__flex">
+				<div class="test__title">Apellidos</div>
+			</div>
+			<img alt="PersonIcon" src="../../../assets/bg/HOMBRE-PERFIL.svg" class="test__person" />
+		</div>
+		<div class="test__box">
+			<mat-tab-group>
+                <mat-tab label="Mis datos">
+                    <mat-horizontal-stepper #stepper>
+                        <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+                            <form [formGroup]="firstFormGroup">
+                                <ng-template matStepLabel>Información Personal</ng-template>
+                                <div>
+                                    <div class="registration__title">Información personal</div>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Nombre</mat-label>
+                                        <input type="text" matInput>
+                                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                            Please enter a valid email address
+                                        </mat-error>
+                                        <mat-error *ngIf="emailFormControl.hasError('required')">
+                                            Nombre es <strong>requerido</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class="registration__box">
+                                    <mat-form-field class="width-48">
+                                        <mat-label>Primer Apellido</mat-label>
+                                        <input type="email" matInput >
+                                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                            Please enter a valid email address
+                                        </mat-error>
+                                        <mat-error *ngIf="emailFormControl.hasError('required')">
+                                            Email is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field class="width-48">
+                                        <mat-label>Segundo Apellido</mat-label>
+                                        <input type="email" matInput>
+                                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                            Please enter a valid email address
+                                        </mat-error>
+                                        <mat-error *ngIf="emailFormControl.hasError('required')">
+                                            Email is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Fecha de Nacimiento</mat-label>
+                                    <input matInput [matDatepicker]="picker">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+        
+                                <div class="registration__gender">Género</div>
+                                <mat-radio-group aria-label="Select an option">
+                                    <mat-radio-button value="1" class="app-m-right">Femenino</mat-radio-button>
+                                    <mat-radio-button value="2">Masculino</mat-radio-button>
+                                </mat-radio-group>
+        
+                                <div>
+                                    <mat-form-field class="width-100">
+                                        <mat-label>Estado Civil</mat-label>
+                                        <mat-select>
+                                            <mat-option>
+                                                asdasdas
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                
+        
+                                <div>
+                                    <mat-form-field class="width-100">
+                                        <mat-label>Nivel de Estudios</mat-label>
+                                        <mat-select>
+                                            <mat-option>
+                                                asdasdas
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+        
+                                <div class="app-flex">
+                                    <button class="btn btn-secondary app-m-right" matStepperPrevious>Anterior</button>
+                                    <button class="btn btn-primary" matStepperNext>Siguiente</button>
+                                </div>
+                            </form>
+        
+                        </mat-step>
+                        <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+                            <form [formGroup]="secondFormGroup">
+                                <ng-template matStepLabel>Ubicación</ng-template>
+                                <div>
+                                    <mat-form-field class="width-100">
+                                        <mat-label>País</mat-label>
+                                        <mat-select>
+                                            <mat-option>
+                                                asdasdas
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                
+        
+                                <div>
+                                    <mat-form-field class="width-100">
+                                        <mat-label>Departamento</mat-label>
+                                        <mat-select>
+                                            <mat-option>
+                                                asdasdas
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+        
+                                <div>
+                                    <mat-form-field class="width-100">
+                                        <mat-label>Ciudad</mat-label>
+                                        <mat-select>
+                                            <mat-option>
+                                                asdasdas
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="app-flex">
+                                    <button class="btn btn-secondary app-m-right" matStepperPrevious>Anterior</button>
+                                    <button class="btn btn-primary" matStepperNext>Siguiente</button>
+                                </div>
+                            </form>
+                        </mat-step>
+        
+                        <mat-step>
+                            <ng-template matStepLabel>Contacto y Acceso</ng-template>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Número de Celular</mat-label>
+                                <input type="email" matInput>
+                                <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                    Please enter a valid email address
+                                </mat-error>
+                                <mat-error *ngIf="emailFormControl.hasError('required')">
+                                    Email is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+        
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Correo Electronico</mat-label>
+                                <input type="email" matInput>
+                                <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                    Please enter a valid email address
+                                </mat-error>
+                                <mat-error *ngIf="emailFormControl.hasError('required')">
+                                    Email is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+        
+                            <div class="registration__box">
+                                <mat-form-field class="width-48">
+                                    <mat-label>Contraseña</mat-label>
+                                    <input type="email" matInput >
+                                    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                        Please enter a valid email address
+                                    </mat-error>
+                                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                                        Email is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="width-48">
+                                    <mat-label>Repetir Contraseña</mat-label>
+                                    <input type="email" matInput>
+                                    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                        Please enter a valid email address
+                                    </mat-error>
+                                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                                        Email is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="app-flex">
+                                <button class="btn btn-secondary app-m-right" matStepperPrevious>Anterior</button>
+                            </div>
+                        </mat-step>
+                    </mat-horizontal-stepper>
+                </mat-tab>
+                <mat-tab label="Mis test"> 
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                        <!--- Note that these columns can be defined in any order.
+                              The actual rendered columns are set as a property on the row definition" -->
+                      
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="position">
+                          <th mat-header-cell *matHeaderCellDef>Test </th>
+                          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                        </ng-container>
+                      
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="name">
+                          <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        </ng-container>
+                      
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="weight">
+                          <th mat-header-cell *matHeaderCellDef> Nivel </th>
+                          <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                        </ng-container>
+                      
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="symbol">
+                          <th mat-header-cell *matHeaderCellDef> Respuesta </th>
+                          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                        </ng-container>
+                      
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      </table>
+                </mat-tab>
+              </mat-tab-group>
+		</div>
+	</div>
+</div>
