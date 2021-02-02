@@ -11,6 +11,7 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { HomeComponent } from './home/home.component';
 import { ModalComponent } from './auth/modal/modal.component';
 import { TestComponent } from './test/test.component';
+import { TestComponent as AdminTestComponent } from "./admin/test/test.component";
 import { RecoveryComponent } from './auth/recovery/recovery.component';
 import { ModalHomeQuestionComponent } from './modals/modal-home-question/modal-home-question.component';
 import { AdminComponent } from './admin/admin/admin.component';
@@ -40,7 +41,8 @@ import { EditClientComponent } from './admin/edit-client/edit-client.component';
     ReportComponent,
     SystemUserComponent,
     EditSystemUserComponent,
-    EditClientComponent
+    EditClientComponent,
+    AdminTestComponent
   ],
   imports: [
     BrowserModule,
