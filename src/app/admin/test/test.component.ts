@@ -7,7 +7,8 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./test.component.scss']
 })
 export class TestComponent implements AfterViewInit {
-  resultsLength = 0;
+  
+  public resultsLength = 0;
   public displayedColumns: string[] = [
     'idUser', 
     'id', 
