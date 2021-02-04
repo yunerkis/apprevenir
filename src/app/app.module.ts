@@ -25,6 +25,7 @@ import { EditSystemUserComponent } from './admin/edit-system-user/edit-system-us
 import { EditClientComponent } from './admin/edit-client/edit-client.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { ResultTestComponent } from './test/result-test/result-test.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
     SystemUserComponent,
     EditSystemUserComponent,
     EditClientComponent,
-    AdminTestComponent
+    AdminTestComponent,
+    ResultTestComponent
   ],
   imports: [
     BrowserModule,
