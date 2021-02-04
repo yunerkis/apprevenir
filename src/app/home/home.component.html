@@ -4,58 +4,26 @@
 	<div class="home__search">
 		<div class="inputContainer">
 			<img alt="PersonIcon" src="../../../assets/icons/search_baseline.svg" class="inputContainer__icon" />
-			<input
-			class="inputContainer__box"
-			type="text"
-			placeholder="Drogas, alcohol, depresión"
-			/>
+			<form [formGroup]="SearchForm">
+				<input
+				class="inputContainer__box"
+				type="text"
+				placeholder="Drogas, alcohol, depresión"
+				formControlName="search" (keyup)="arrayFilter()"
+				/>
+			</form>
 		</div>
 	</div>
 	<div class="card__content">
-		<div class="card__item">
+		<div class="card__item" *ngFor="let test of tests">
 			<div class="card__img">
-				<img src="../../../assets/icons/helpoutline_baseline.svg" alt="" (click)="openDialog()">
+				<img src="../../../assets/icons/helpoutline_baseline.svg" alt="" (click)="openDialog(test)">
 			</div>
-			<div class="card__risk">RIESGO, CAMBIO Y COADICIÓN</div>
-			<div class="card__text">Dependencia emocional</div>
-			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="man" class="card__img-man">
-			<button class="btn btn-primary" routerLink="/test">Hacer test</button>
-		</div>
-		<div class="card__item">
-			<div class="card__img">
-					<img src="../../../assets/icons/helpoutline_baseline.svg" alt="">
-			</div>
-			<div class="card__risk">RIESGO, CAMBIO Y COADICIÓN</div>
-			<div class="card__text">Dependencia emocional</div>
-			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="man" class="card__img-man">
-			<button class="btn btn-primary">Hacer test</button>
-		</div>
-		<div class="card__item">
-			<div class="card__img">
-					<img src="../../../assets/icons/helpoutline_baseline.svg" alt="">
-			</div>
-			<div class="card__risk">RIESGO, CAMBIO Y COADICIÓN</div>
-			<div class="card__text">Dependencia emocional</div>
-			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="man" class="card__img-man">
-			<button class="btn btn-primary">Hacer test</button>
-		</div>
-		<div class="card__item">
-			<div class="card__img">
-					<img src="../../../assets/icons/helpoutline_baseline.svg" alt="">
-			</div>
-			<div class="card__risk">RIESGO, CAMBIO Y COADICIÓN</div>
-			<div class="card__text">Dependencia emocional</div>
-			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="man" class="card__img-man">
-			<button class="btn btn-primary">Hacer test</button>
-		</div>
-		<div class="card__item">
-			<div class="card__img">
-					<img src="../../../assets/icons/helpoutline_baseline.svg" alt="">
-			</div>
-			<div class="card__risk">RIESGO, CAMBIO Y COADICIÓN</div>
-			<div class="card__text">Dependencia emocional</div>
-			<img src="../../../assets/bg/apprevenir-ludopatia.png" alt="man" class="card__img-man">
-			<button class="btn btn-primary">Hacer test</button>
+			<div class="card__risk" ><span *ngFor="let category of test.categories"> {{ category.name }} <br></span></div>
+			<div class="card__text">{{ test.name }}</div>
+			<img *ngIf="test.image == ''" src="../../../assets/bg/apprevenir-ludopatia.png" alt="test image" class="card__img-man">
+          	<img *ngIf="test.image != ''" src="{{url}}/image/{{test.image}}" alt="test image" class="card__img-man">
+			<button class="btn btn-primary" routerLink="/test/{{test.id}}">Hacer test</button>
 		</div>
 	</div>
 </div>

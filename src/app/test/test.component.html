@@ -4,85 +4,115 @@
 			<img alt="PersonIcon" src="../../../assets/icons/close_twotone.svg" class="test__icon" routerLink="/app/home" />
 			<div class="test__title">TEST</div>
 			<div class="test__flex">
-				<div class="test__text">Dependencia Emocional</div>
+				<div class="test__text">{{ test['name'] }}</div>
 				<img alt="PersonIcon" src="../../../assets/icons/email_outline.svg" class="inputContainer__icon" />
 			</div>
-			<img alt="PersonIcon" src="../../../assets/bg/apprevenir-ludopatia.png" class="test__person" />
+			<img alt="PersonIcon" src="{{url}}/image/{{test['image']}}" class="test__person" />
 		</div>
 		<div class="test__box">
 			<div class="one-steps">
-				  <mat-horizontal-stepper>
-					<mat-step label="Step 1" state="phone">
-					 <div class="test__ask">
-						 <div class="test__number">1</div>
-						 <div class="test__question">
-							 Imagina que estás en una situación que te recuerda tu consumo de Pinturas . 
-							 Si estuvieras en esa situación en este momento, ¿Cuál sería la posibilidad de que inhalaras Pinturas ?
-						</div>
-					 </div>
-					 <div class="test__radio">
-						<div class="test__radio-flex">
-							<mat-radio-button value="1"></mat-radio-button>
-							<label class="test__label">a</label>
-							<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
-						</div>
-						<div class="test__radio-flex">
-							<mat-radio-button value="1"></mat-radio-button>
-							<label class="test__label">b</label>
-							<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
-						</div>
-						<div class="test__radio-flex">
-							<mat-radio-button value="1"></mat-radio-button>
-							<label class="test__label">c</label>
-							<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
-						</div>
-						<div class="test__radio-flex">
-							<mat-radio-button value="1"></mat-radio-button>
-							<label class="test__label">d</label>
-							<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
-						</div>
-						<div class="test__radio-flex">
-							<mat-radio-button value="1"></mat-radio-button>
-							<label class="test__label">e</label>
-							<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
-						</div>
-						<div class="test__radio-flex">
-							<mat-radio-button value="1"></mat-radio-button>
-							<label class="test__label">f</label>
-							<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
-						</div>
-						<div class="test__radio-flex">
-							<mat-radio-button value="1"></mat-radio-button>
-							<label class="test__label">g</label>
-							<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
-						</div>
-						
+				<form class="test-form" [formGroup]="formGroup">
+					<mat-horizontal-stepper linear #stepper formArrayName="formArray">
+						<mat-step formGroupName="{{i}}" [stepControl]="formArray?.get([i])" *ngFor="let question of questions; let i = index">
+							<div class="test-form__label">
+								<div class="test-form__order">
+									{{ question.order }}
+								</div>
+								<div class="test-form__question">
+									{{ question.question }}
+								</div>
+							</div>
+							<div class="test-form__input">
+							<mat-radio-group formControlName="answer_{{i}}" required>
+								<mat-radio-button value="{{ answer.id }}" *ngFor="let answer of question.answers; let in = index">
+								<div class="test-form__options">
+									<span class="test-form__option-letter">{{ order[in] }}</span>
+									<div class="test-form__option-answer">{{ answer.answer }}</div>
+								</div>
+								</mat-radio-button>
+							</mat-radio-group>
+							</div>
+							<div class="test-form__content-btns">
+							<a *ngIf="i == 0" routerLink="/app/home"><button class="test-form__btn back" mat-button>Atras</button></a>
+							<button *ngIf="i != 0" class="test-form__btn back" mat-button matStepperPrevious>Atras</button>
+							<button *ngIf="i != questions.length - 1" class="test-form__btn next" mat-button matStepperNext> Siguiente</button>
+							<button *ngIf="i == questions.length - 1" class="test-form__btn next" mat-button matStepperNext (click)="onSubmit()">Enviar</button>
+							</div>
+						</mat-step>
+					</mat-horizontal-stepper>
+				</form>
+				<mat-horizontal-stepper>
+				<mat-step label="Step 1" state="phone">
+					<div class="test__ask">
+						<div class="test__number">1</div>
+						<div class="test__question">
+							Imagina que estás en una situación que te recuerda tu consumo de Pinturas . 
+							Si estuvieras en esa situación en este momento, ¿Cuál sería la posibilidad de que inhalaras Pinturas ?
+					</div>
+					</div>
+					<div class="test__radio">
+					<div class="test__radio-flex">
+						<mat-radio-button value="1"></mat-radio-button>
+						<label class="test__label">a</label>
+						<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
+					</div>
+					<div class="test__radio-flex">
+						<mat-radio-button value="1"></mat-radio-button>
+						<label class="test__label">b</label>
+						<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
+					</div>
+					<div class="test__radio-flex">
+						<mat-radio-button value="1"></mat-radio-button>
+						<label class="test__label">c</label>
+						<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
+					</div>
+					<div class="test__radio-flex">
+						<mat-radio-button value="1"></mat-radio-button>
+						<label class="test__label">d</label>
+						<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
+					</div>
+					<div class="test__radio-flex">
+						<mat-radio-button value="1"></mat-radio-button>
+						<label class="test__label">e</label>
+						<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
+					</div>
+					<div class="test__radio-flex">
+						<mat-radio-button value="1"></mat-radio-button>
+						<label class="test__label">f</label>
+						<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
+					</div>
+					<div class="test__radio-flex">
+						<mat-radio-button value="1"></mat-radio-button>
+						<label class="test__label">g</label>
+						<div>Tranquilizantes o pastillas para dormir (valium/diazepam, Trankimazin/Alprazolam/Xanax, Orfidal/Lorazepam, Rohipnol, etc.)</div>
+					</div>
+					
 
-					 </div>
-					 <div class="app-flex">
-						<button class="btn btn-secondary app-m-right" matStepperPrevious>Anterior</button>
-						<button class="btn btn-primary" >Siguiente</button>
-						</div>
-					</mat-step>
-					<mat-step label="Step 2" state="chat">
-					  <p>Socialize with each other.</p>
-					  <div>
-						<button mat-button matStepperPrevious>Back</button>
-						<button mat-button matStepperNext>Next</button>
-					  </div>
-					</mat-step>
-					<mat-step label="Step 3">
-					  <p>You're welcome.</p>
-					</mat-step>
-				  
-					<!-- Icon overrides. -->
-					<ng-template matStepperIcon="phone">
-					  <mat-icon>call_end</mat-icon>
-					</ng-template>
-					<ng-template matStepperIcon="chat">
-					  <mat-icon>forum</mat-icon>
-					</ng-template>
-				  </mat-horizontal-stepper>
+					</div>
+					<div class="app-flex">
+					<button class="btn btn-secondary app-m-right" matStepperPrevious>Anterior</button>
+					<button class="btn btn-primary" >Siguiente</button>
+					</div>
+				</mat-step>
+				<mat-step label="Step 2" state="chat">
+					<p>Socialize with each other.</p>
+					<div>
+					<button mat-button matStepperPrevious>Back</button>
+					<button mat-button matStepperNext>Next</button>
+					</div>
+				</mat-step>
+				<mat-step label="Step 3">
+					<p>You're welcome.</p>
+				</mat-step>
+				
+				<!-- Icon overrides. -->
+				<ng-template matStepperIcon="phone">
+					<mat-icon>call_end</mat-icon>
+				</ng-template>
+				<ng-template matStepperIcon="chat">
+					<mat-icon>forum</mat-icon>
+				</ng-template>
+				</mat-horizontal-stepper>
 			</div>
 		</div>
 	</div>

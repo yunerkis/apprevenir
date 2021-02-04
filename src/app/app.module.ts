@@ -23,6 +23,8 @@ import { ReportComponent } from './admin/report/report.component';
 import { SystemUserComponent } from './admin/system-user/system-user.component';
 import { EditSystemUserComponent } from './admin/edit-system-user/edit-system-user.component';
 import { EditClientComponent } from './admin/edit-client/edit-client.component';
+
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +52,8 @@ import { EditClientComponent } from './admin/edit-client/edit-client.component';
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule 
+    FormsModule,
+    HttpClientModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

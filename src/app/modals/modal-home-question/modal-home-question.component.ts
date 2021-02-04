@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Inject } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-modal-home-question',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalHomeQuestionComponent implements OnInit {
 
-  constructor() { }
+  url = environment.url;
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) { }
 
   ngOnInit(): void {
+    console.log(this.data)
   }
 
 }

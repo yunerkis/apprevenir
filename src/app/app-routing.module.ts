@@ -18,24 +18,27 @@ import { SystemUserComponent } from './admin/system-user/system-user.component';
 import { EditSystemUserComponent } from './admin/edit-system-user/edit-system-user.component';
 import { EditClientComponent } from './admin/edit-client/edit-client.component';
 
+import { AuthGuardService } from '../app/services/auth/auth-guard.service';
+
 const appRoutes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'test', component: TestComponent },
+  { path: '', component: LoginComponent},
+  { path: 'test/:id', component: TestComponent, canActivate: [AuthGuardService]},
   { path: 'recovery', component: RecoveryComponent },
   { path: 'registry', component: RegistrationComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'app', component: NavigationComponent,
     children:[
       { path: 'admin', component: FinalUserComponent, pathMatch: "full" },
       { path: 'test', component: AdminTestComponent },
-      { path: 'home', component: HomeComponent },
+      { path: 'home', component: HomeComponent},
       { path: 'report', component: ReportComponent },
       { path: 'edit-final-user', component: EditFinalUserComponent },
       { path: 'create-client', component: AdminComponent },
       { path: 'system-user', component: SystemUserComponent },
       { path: 'edit-system-user', component: EditSystemUserComponent },
       { path: 'edit-client', component: EditClientComponent },
-    ]
+    ],
+    canActivate: [AuthGuardService],
   },
 ];
 
