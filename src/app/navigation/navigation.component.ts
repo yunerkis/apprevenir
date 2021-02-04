@@ -26,27 +26,27 @@ const MENU_ELEMENTS : MenuElement[] = [{
   },
   {
     name: "Edición de usuario final",
-    route: "edit-final-user"
+    route: "admin-edit-final-user"
   }
   ]
 },{
   name:"Test",
   icon: "help_center",
-  route: "test"
+  route: "admin-test"
 },{
   name:"Informes",
   icon: "assignment",
-  route: "report"
+  route: "admin-report"
 },{
   name: "Usuarios del sistema",
   icon: "people",
   children: [{
     name: "Crear usuario",
-    route: "system-user"
+    route: "admin-system-user"
   },
   {
     name: "Edición de usuarios",
-    route: "edit-system-user"
+    route: "admin-edit-system-user"
   }
   ]
 },{
@@ -54,16 +54,15 @@ const MENU_ELEMENTS : MenuElement[] = [{
   icon: "person",
   children: [{
     name: "Crear cliente",
-    route: "create-client"
+    route: "admin-create-client"
   },
   {
     name: "Edición de clientes",
-    route: "edit-client"
+    route: "admin-edit-client"
   }]
 },{
   name:"Apprevenir.com",
-  icon: "refresh",
-  route: "/admin"
+  icon: "refresh"
 },]
 @Component({
   selector: 'app-navigation',
@@ -101,12 +100,12 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.userIsAdmin = this.router.url.startsWith("/app");
+    this.userIsAdmin = this.router.url.startsWith("/app/admin");
 
     this.router.events.subscribe((routerEvent:Event)=> {
       console.log(routerEvent);
       if (routerEvent instanceof NavigationStart){
-        this.userIsAdmin = routerEvent.url.startsWith("/app");
+        this.userIsAdmin = routerEvent.url.startsWith("/app/admin");
       }
     })
   }
