@@ -43,3 +43,13 @@
   border: 1px solid var(--color-grey-medium);
 }
 
+.btn-file {
+  @include button-bg(#ffffff);
+  color: var(--color-gray-dark-2);
+  border: 1px solid var(--color-grey-medium);
+  height: 36px;
+  width: 101px;
+  padding: 0;
+  font-size: 15px;
+}
+

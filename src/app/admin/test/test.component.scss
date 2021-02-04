@@ -4,7 +4,7 @@
     margin-top: 8rem;
     &__title {
         color: var(--color-normal-grey);
-        font-family: "KanitMedium";
+        font-family: "KanitNormal";
         font-size: 24px;
     }
     &__card {
@@ -17,5 +17,7 @@
     &__box {
         display: flex;
         justify-content: space-between;
+        margin: 20px 20px 10px 20px;
+        align-items: center;
     }
 }

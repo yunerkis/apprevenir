@@ -12,16 +12,10 @@ export class EditClientComponent implements AfterViewInit {
   public resultsLength = 0;
   public displayedColumns: string[] = [
     'idUser', 
-    'id', 
+    'name', 
     'type', 
     'test', 
-    'date', 
-    'time', 
-    'user', 
-    'city',
-    'type_user',
-    'level',
-    'answer',
+    'date'
   ];
   public dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
@@ -33,30 +27,18 @@ export class EditClientComponent implements AfterViewInit {
 }
 
 export interface PeriodicElement {
-  idUser: number;
-  id: number;
+  idUser: string;
+  name: string;
   type: string;
   test: string;
   date: string;
-  time: string;
-  user: string;
-  city: string;
-  type_user: string;
-  level: string;
-  answer: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { idUser: 1, 
-    id: 2, 
-    type: 'Normal', 
-    test: 'Tecnologías', 
-    date: '08/09/20', 
-    time: '10:44:15', 
-    user: 'Yunerkis Leal',
-    city: 'Medellin',
-    type_user: "Consumidor",
-    level: 'Moderado',
-    answer: 'icono'
+  { idUser: '001', 
+    name: 'Industrias Noel', 
+    type: 'Empresa', 
+    test: 'Activo', 
+    date: 'icon'
   }
 ];

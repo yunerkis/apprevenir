@@ -7,3 +7,15 @@ table {
     font-size: 14px;
     width: 100%;
   }
+
+  .mat-sort-header-content {
+    color: var(  --color-grey-light2) ;
+    font-size: 13px;
+		font-family: 'KanitMedium';
+  }
+
+  .mat-cell{
+    color: var(  --color-grey-light2) ;
+    font-size: 13px;
+		font-family: 'FiratRegular';
+  }
