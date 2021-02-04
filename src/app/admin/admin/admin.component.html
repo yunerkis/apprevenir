@@ -3,22 +3,8 @@
 	<h1 class="admin__title app-m-top">Crear cliente</h1>
 	<div class="admin__card">
 		<div class="admin__box">
-			<div class="admin__title app-m-top-2">¿Quién te recomendó usar Apprevenir?</div>
-			<mat-form-field class="width-100">
-				<mat-label>Mi universidad</mat-label>
-				<mat-select>
-					<mat-option>WIP</mat-option>
-				</mat-select>
-			</mat-form-field>
-			<div class="admin__university">Por favor elije tu <span class="admin__span">universidad </span> <label class="admin__label-text">(de ser posible dinámico según la elección)</label></div>
-			<mat-form-field class="width-100">
-				<mat-label>Universidad Católica Luis Amigó</mat-label>
-				<mat-select>
-					<mat-option>WIP</mat-option>
-				</mat-select>
-			</mat-form-field>
 			<form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
-				<div class="admin__title app-m-top">Información General</div>
+				<div class="admin__sub-title app-m-top">Información General</div>
 				<mat-form-field class="width-100">
 					<mat-label>Tipo de cliente</mat-label>
 					<mat-select formControlName="client">
@@ -89,7 +75,7 @@
 					<button class="btn btn-primary app-m-top" type="submit">Guardar</button>
 				</div>
 			</form>
-			<div class="admin__title">Información Específica</div>
+			<div class="admin__sub-title">Información Específica</div>
 			<div class="admin__text">Comunas y Barrios</div>
 			<table class="test-table">
 				<tr class="test-table__header">
