@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
+import { BehaviorSubject} from 'rxjs'; 
 // import Swal from 'sweetalert2';
 
 @Injectable({
@@ -10,11 +11,9 @@ import { Router } from '@angular/router';
 export class TestService {
 
   url = environment.url;
-
   token = localStorage.getItem('token');
-
   profile = JSON.parse(localStorage.getItem('profile'));
-
+  testResult = new BehaviorSubject({});
   headers = new HttpHeaders({
     'Authorization': 'Bearer ' + this.token
   })
@@ -36,25 +35,7 @@ export class TestService {
 
   storeAnswer(answer) {
 
-    return this.http.post(`${this.url}/api/v1/users/answer`, answer, {headers: this.headers}).subscribe(
-      res => {
-        // return res['data']; this.testInfo.next(res['data']);
-        // this.router.navigate(['test/test-result']);
-
-      }, error => {
-
-        if (error.error.data == 'disabled') {
-
-          localStorage.removeItem('token');
-          localStorage.removeItem('profile');
-          // Swal.fire(
-          //   'Error',
-          //   error.error.data,
-          //   'error'
-          // )
-          this.router.navigate(['/']);
-        }
-      });
+    return this.http.post(`${this.url}/api/v1/users/answer`, answer, {headers: this.headers});
   }
 
   myResults() {

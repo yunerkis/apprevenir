@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { TestService } from '../services/test/test.service';
+import { DomSanitizer } from '@angular/platform-browser';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormArray  } from '@angular/forms';
 
 @Component({
@@ -16,6 +17,11 @@ export class TestComponent implements OnInit {
   answers = [];
   answer = {};
   questions: any;
+  result = false;
+  resultLevel = "";
+  url_video = "";
+  professional_help = "";
+  url_interest = "";
   order = {
     0:"a",
     1:"b",
@@ -31,6 +37,24 @@ export class TestComponent implements OnInit {
     11:"l",
     12:"m",
   };
+  gifLevel = {
+    'Leve': '<img src="../../../assets/images/leve.gif" alt="leve">',
+    'Ausencia de Ansiedad': '<img src="../../../assets/images/leve.gif" alt="leve">',
+    'Ausencia de depresión': '<img src="../../../assets/images/leve.gif" alt="leve">',
+    'Moderado': '<img src="../../../assets/images/moderado.gif" alt="moderado">',
+    'Severo': '<img src="../../../assets/images/severo.gif" alt="severo">',
+    'Presencia de Ansiedad': '<img src="../../../assets/images/severo.gif" alt="severo">',
+    'Presencia de depresión': '<img src="../../../assets/images/severo.gif" alt="severo">',
+  };
+  colorsLevel = {
+    'Leve': 'color: #20E57E',
+    'Ausencia de Ansiedad': 'color: #20E57E',
+    'Ausencia de depresión': 'color: #20E57E',
+    'Moderado': 'color: #FFA14E',
+    'Severo': 'color: #FF4E60',
+    'Presencia de Ansiedad': 'color: #FF4E60',
+    'Presencia de depresión': 'color: #FF4E60',
+  };
 
   get formArray(): AbstractControl | null { return this.formGroup.get('formArray'); }
 
@@ -38,6 +62,7 @@ export class TestComponent implements OnInit {
     private route: ActivatedRoute,
     public testService: TestService,
     private formBuilder: FormBuilder,
+    private _sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit() {
@@ -58,8 +83,42 @@ export class TestComponent implements OnInit {
       this.formGroup = this.formBuilder.group({ formArray: this.formBuilder.array(this.answers) });
       console.log(this.test);
     });
-
-   
   }
+
+  onSubmit() {
+
+    let arrayAnswers =  this.formGroup.value.formArray;
+    let key = 'answer_';
+    let objAnswers = [];
+    arrayAnswers.forEach((e, i) => {
+      objAnswers.push(e[key+i]);
+    });
+
+    let result = {
+      'test_id': this.test['id'],
+      'answers':objAnswers,
+      'addiction_id': this.route.snapshot.queryParamMap.get("addiction_id")
+    }
+
+    this.testService.storeAnswer(result).subscribe( res => {
+      this.result = true;
+      this.resultLevel = res['data']['resultLevel'];
+      this.url_video = res['data']['url_video'];
+      this.professional_help = res['data']['professional_help'];
+      this.url_interest = res['data']['url_interest'];
+    });
+  }
+
+  getVideoIframe(url) {
+    var video, results;
+
+    if (url === null) {
+        return '';
+    }
+    results = url.match('[\\?&]v=([^&#]*)');
+    video   = (results === null) ? url : results[1];
+
+    return this._sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video);   
+}
 
 }

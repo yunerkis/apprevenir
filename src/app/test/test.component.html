@@ -10,7 +10,7 @@
 			<img alt="PersonIcon" src="{{url}}/image/{{test['image']}}" class="test__person" />
 		</div>
 		<div class="test__box">
-			<form class="test-form" [formGroup]="formGroup">
+			<form class="test-form" [formGroup]="formGroup" *ngIf="!result">
 				<mat-horizontal-stepper linear #stepper formArrayName="formArray">
 					<mat-step formGroupName="{{i}}" [stepControl]="formArray?.get([i])" *ngFor="let question of questions; let i = index">
 						<div class="test__ask">
@@ -42,60 +42,56 @@
 				</mat-horizontal-stepper>
 			</form>
 
-		<!--Vista de resultado de test-->	
-		<mat-tab-group>
-			<mat-tab>
-				<ng-template mat-tab-label>
-					<mat-icon class="example-tab-icon">thumb_up</mat-icon>
-					Resultado
-				</ng-template>
-				<div class="test__tab">
-					<div class="test__type">
-						<img alt="PersonIcon" src="./../../../assets/bg/apprevenir-ludopatia.png" />
-						<label>Severo</label>
+			<!--Vista de resultado de test-->	
+			<mat-tab-group *ngIf="result">
+				<mat-tab>
+					<ng-template mat-tab-label>
+						<mat-icon class="example-tab-icon">thumb_up</mat-icon>
+						Resultado
+					</ng-template>
+					<div class="test__tab">
+						<div class="test__type">
+							<div [innerHTML]="gifLevel[resultLevel]"></div>
+            				<div [style]="colorsLevel[resultLevel]">{{resultLevel}}</div>
+						</div>
 					</div>
-				</div>
-			</mat-tab>
-		
-			<mat-tab>
-				<ng-template mat-tab-label>
-					<mat-icon class="example-tab-icon">thumb_up</mat-icon>
-					Información
-				</ng-template>
-				<div class="test__tab">
-					<div class="test__type">
-						<img alt="PersonIcon" src="./../../../assets/bg/apprevenir-ludopatia.png" />
-						<label>Severo</label>
+				</mat-tab>
+			
+				<mat-tab>
+					<ng-template mat-tab-label>
+						<mat-icon class="example-tab-icon">thumb_up</mat-icon>
+						Información
+					</ng-template>
+					<div class="test__tab">
+						<div class="test__type">
+							<iframe width="100%" height="315" [src]="getVideoIframe(url_video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						</div>
 					</div>
-				</div>
-			</mat-tab>
-		
-			<mat-tab>
-				<ng-template mat-tab-label>
-					<mat-icon class="example-tab-icon">thumb_up</mat-icon>
-					Ayuda
-				</ng-template>
-				<div class="test__tab">
-					<div class="test__type">
-						
+				</mat-tab>
+			
+				<mat-tab>
+					<ng-template mat-tab-label>
+						<mat-icon class="example-tab-icon">thumb_up</mat-icon>
+						Ayuda
+					</ng-template>
+					<div class="test__tab">
+						<div class="test__type" [innerHTML]="professional_help">
+						</div>
 					</div>
-				</div>
-			</mat-tab>
+				</mat-tab>
 
-			<mat-tab>
-				<ng-template mat-tab-label>
-					<mat-icon class="example-tab-icon">thumb_up</mat-icon>
-					Enlaces
-				</ng-template>
-				<div class="test__tab">
-					<div class="test__type">
-						<img alt="PersonIcon" src="./../../../assets/bg/apprevenir-ludopatia.png" />
-						<label>Severo</label>
+				<mat-tab>
+					<ng-template mat-tab-label>
+						<mat-icon class="example-tab-icon">thumb_up</mat-icon>
+						Enlaces
+					</ng-template>
+					<div class="test__tab">
+						<div class="test__type" [innerHTML]="url_interest">
+						</div>
 					</div>
-				</div>
-			</mat-tab>
+				</mat-tab>
 
-		</mat-tab-group>
+			</mat-tab-group>
 		</div>
 	</div>
 </div>
