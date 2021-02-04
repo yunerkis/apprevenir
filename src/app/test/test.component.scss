@@ -75,6 +75,17 @@
 		flex-direction: column;
 		color: var(--color-normal-grey);
 	}
+	&__tab {
+        height: 573px;
+        display: flex;
+        justify-content: center;
+    }
+    &__type {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
 .app-flex {
 	margin-top: 3rem;
