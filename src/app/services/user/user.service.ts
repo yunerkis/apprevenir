@@ -89,54 +89,31 @@ export class UserService {
     }
   }
 
+  client(data) {
+
+    return this.http.post(`${this.url}/api/v1/register`, data).subscribe(
+      res => {
+
+        // Swal.fire(
+        //   'Guardado',
+        //   'Usuario registrado correctamente',
+        //   'success'
+        // )   
+        this.router.navigate(['app/edit-client']);
+        
+      }, data => {
+
+       // Swal.fire(
+        //   'Error',
+        //   error.error.data,
+        //   'error'
+        // )
+      });
+  }
+
   getClientsList(clientType) {
 
     return this.http.get(`${this.url}/api/v1/clients?client=${clientType}`);
-  }
-
-  storeClient(client) {
-    return this.http.post(`${this.url}/api/v1/clients`, client, {headers: this.headers}).subscribe(
-      res => {
-
-        // Swal.fire(
-        //   'Guardado',
-        //   ''Perfil actualizado',
-        //   'success'
-        // )   
-        this.router.navigate(['/']);
-
-      }, error => {
-
-        // Swal.fire(
-        //   'Error',
-        //   error.error.data,
-        //   'error'
-        // )
-        this.router.navigate(['/']);
-      });
-  }
-
-  updateClient(client) {
-
-    return this.http.put(`${this.url}/api/v1/clients/${client.id}`, client, {headers: this.headers}).subscribe(
-      res => {
-
-        // Swal.fire(
-        //   'Guardado',
-        //   ''Perfil actualizado',
-        //   'success'
-        // )   
-        this.router.navigate(['/']);
-
-      }, error => {
-
-        // Swal.fire(
-        //   'Error',
-        //   error.error.data,
-        //   'error'
-        // )
-        this.router.navigate(['/']);
-      });
   }
 
   countries() {

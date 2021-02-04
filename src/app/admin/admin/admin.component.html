@@ -17,68 +17,78 @@
 					<mat-option>WIP</mat-option>
 				</mat-select>
 			</mat-form-field>
-			<div class="admin__title app-m-top">Información General</div>
-			<mat-form-field class="width-100">
-				<mat-label>Tipo de cliente</mat-label>
-				<mat-select>
-					<mat-option>Persona Natural</mat-option>
-					<mat-option>Entidades Territoriales</mat-option>
-					<mat-option>Secretarías de Educación</mat-option>
-					<mat-option>Instituciones Educativas</mat-option>
-					<mat-option>Universidades</mat-option>
-					<mat-option>Empresas</mat-option>
-				</mat-select>
-			</mat-form-field>
-			<mat-form-field class="width-100">
-				<mat-label>Pais</mat-label>
-				<mat-select>
-					<mat-option>
-						empty
-					</mat-option>
-				</mat-select>
-			</mat-form-field>
-			<mat-form-field class="width-100">
-				<mat-label>Departamento</mat-label>
-				<mat-select>
-					<mat-option>
-						empty
-					</mat-option>
-				</mat-select>
-			</mat-form-field>
-			<mat-form-field class="width-100">
-				<mat-label>Ciudad</mat-label>
-				<mat-select>
-					<mat-option>
-						empty
-					</mat-option>
-				</mat-select>
-			</mat-form-field>
-			<mat-form-field class="width-100">
-				<mat-label>Nombre</mat-label>
-				<input type="email" matInput>
-			</mat-form-field>
-			<mat-form-field class="width-100">
-				<mat-label>Nit. o C.C.</mat-label>
-				<input type="email" matInput>
-			</mat-form-field>
-			<mat-form-field class="width-100">
-				<mat-label>Número de Contacto</mat-label>
-				<input type="email" matInput>
-			</mat-form-field>
-			<mat-form-field class="width-100">
-				<mat-label>Logo (200 x 55px)</mat-label>
-				<input type="text" matInput>
-				<span class="material-icons color-grey " matSuffix>
-					cloud_upload
-					</span>
-			</mat-form-field>
-			<mat-form-field class="width-100">
-				<mat-label>Color principal</mat-label>
-				<input type="text" matInput>
-				<span class="material-icons color-grey " matSuffix>
-					color_lens
-					</span>
-			</mat-form-field>
+			<form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+				<div class="admin__title app-m-top">Información General</div>
+				<mat-form-field class="width-100">
+					<mat-label>Tipo de cliente</mat-label>
+					<mat-select formControlName="client">
+						<mat-option value="entidades territoriales">Entidades Territoriales</mat-option>
+						<mat-option value="secretarias de educacion">Secretarías de Educación</mat-option>
+						<mat-option value="instituciones educativas">Instituciones Educativas</mat-option>
+						<mat-option value="universidades">Universidades</mat-option>
+						<mat-option value="empresas">Empresas</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field class="width-100">
+					<mat-label>Pais</mat-label>
+					<mat-select formControlName="country_id" #country (selectionChange)="getStates(country.value)">
+						<mat-option value="{{country.id}}" *ngFor="let country of countries">{{ country.name }}</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field class="width-100">
+					<mat-label>Departamento</mat-label>
+					<mat-select formControlName="state_id" #state (selectionChange)="getCities(state.value)">
+						<mat-option value="{{state.id}}" *ngFor="let state of states">{{ state.name }}</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field class="width-100">
+					<mat-label>Ciudad</mat-label>
+					<mat-select formControlName="city_id">
+						<mat-option value="{{city.id}}" *ngFor="let city of cities">{{ city.name }}</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field class="width-100">
+					<mat-label>Nombre</mat-label>
+					<input type="text" matInput formControlName="first_names">
+				</mat-form-field>
+				<mat-form-field class="width-100">
+					<mat-label>Nit. o C.C.</mat-label>
+					<input type="email" matInput>
+				</mat-form-field>
+				<mat-form-field class="width-100">
+					<mat-label>Número de Contacto</mat-label>
+					<input type="text" matInput formControlName="phone">
+				</mat-form-field>
+				<mat-form-field class="width-100">
+					<mat-label>Email</mat-label>
+					<input type="email" matInput formControlName="email">
+				</mat-form-field>
+				<mat-form-field class="width-100">
+					<mat-label>Password</mat-label>
+					<input type="password" matInput formControlName="password">
+				</mat-form-field>
+				<mat-form-field class="width-100">
+					<mat-label>Repetir contraseña</mat-label>
+					<input type="password" matInput formControlName="password_confirmation">
+				</mat-form-field>
+				<mat-form-field class="width-100">
+					<mat-label>Logo (200 x 55px)</mat-label>
+					<input type="text" matInput>
+					<span class="material-icons color-grey " matSuffix>
+						cloud_upload
+						</span>
+				</mat-form-field>
+				<mat-form-field class="width-100">
+					<mat-label>Color principal</mat-label>
+					<input type="text" matInput>
+					<span class="material-icons color-grey " matSuffix>
+						color_lens
+						</span>
+				</mat-form-field>
+				<div>
+					<button class="btn btn-primary app-m-top" type="submit">Guardar</button>
+				</div>
+			</form>
 			<div class="admin__title">Información Específica</div>
 			<div class="admin__text">Comunas y Barrios</div>
 			<table class="test-table">
@@ -255,9 +265,7 @@
 
 			</section>
 
-			<div>
-				<button class="btn btn-primary app-m-top">Guardar</button>
-			</div>
+			
 		</div>
 	</div>
 </div>
