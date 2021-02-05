@@ -85,8 +85,24 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
     }
+	&__result {
+		font-size: 60px;
+		font-family: 'KanitMedium';
+	}
+	&__mat-label {
+		height: 100px !important;
+
+	}
 }
 .app-flex {
 	margin-top: 3rem;
+}
+
+.info-text {
+	color: #3E6472;
+	font-size: 16px;
+	font-family: 'KanitNormal';
+	margin-top: 16rem;
 }

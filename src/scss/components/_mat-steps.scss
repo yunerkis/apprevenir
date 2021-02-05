@@ -78,3 +78,13 @@
     display: flex !important;
     flex-direction: column !important;
 }
+
+.mat-step-header .mat-step-header-ripple {
+    display: none;
+}
+
+.test {
+    .mat-tab-label {
+        height: 100px !important;
+    }
+}

@@ -38,13 +38,13 @@ export class TestComponent implements OnInit {
     12:"m",
   };
   gifLevel = {
-    'Leve': '<img src="../../../assets/images/leve.gif" alt="leve">',
-    'Ausencia de Ansiedad': '<img src="../../../assets/images/leve.gif" alt="leve">',
-    'Ausencia de depresión': '<img src="../../../assets/images/leve.gif" alt="leve">',
-    'Moderado': '<img src="../../../assets/images/moderado.gif" alt="moderado">',
-    'Severo': '<img src="../../../assets/images/severo.gif" alt="severo">',
-    'Presencia de Ansiedad': '<img src="../../../assets/images/severo.gif" alt="severo">',
-    'Presencia de depresión': '<img src="../../../assets/images/severo.gif" alt="severo">',
+    'Leve': '<img src="../../../assets/images/leve.gif" alt="leve" width="290px">',
+    'Ausencia de Ansiedad': '<img src="../../../assets/images/leve.gif" alt="leve" width="290px">',
+    'Ausencia de depresión': '<img src="../../../assets/images/leve.gif" alt="leve" width="290px">',
+    'Moderado': '<img src="../../../assets/images/moderado.gif" alt="moderado" width="290px">',
+    'Severo': '<img src="../../../assets/images/severo.gif" alt="severo" width="290px">',
+    'Presencia de Ansiedad': '<img src="../../../assets/images/severo.gif" alt="severo" width="290px">',
+    'Presencia de depresión': '<img src="../../../assets/images/severo.gif" alt="severo" width="290px">',
   };
   colorsLevel = {
     'Leve': 'color: #20E57E',

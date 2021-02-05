@@ -103,7 +103,6 @@ export class NavigationComponent implements OnInit {
     this.userIsAdmin = this.router.url.startsWith("/app/admin");
 
     this.router.events.subscribe((routerEvent:Event)=> {
-      console.log(routerEvent);
       if (routerEvent instanceof NavigationStart){
         this.userIsAdmin = routerEvent.url.startsWith("/app/admin");
       }
