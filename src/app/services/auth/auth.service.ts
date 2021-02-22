@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
+import { storeAuhToken, clearAuthStore, storeProfileInfo } from "./authStore";
 // import Swal from 'sweetalert2';
 
 @Injectable({
@@ -26,13 +27,14 @@ export class AuthService {
 
     return this.http.post(`${this.url}/api/v1/login`, credentials).subscribe(
       res => {
+        const accessToken = res["data"].access_token;
+        const profileObject = res["data"].profile;
+        profileObject.email = credentials["email"]; // Bruh...
 
-        localStorage.setItem('token', res['data'].access_token);
-        res['data'].profile.email = credentials['email'];
-        res['data'].profile.id = res['data'].id;
-        localStorage.setItem('profile', JSON.stringify(res['data'].profile)); 
+        storeAuhToken(accessToken);
+        storeProfileInfo(profileObject);
+
         this.router.navigate(['app/home']); 
-
       }, error => {
 
         // Swal.fire(
@@ -47,11 +49,8 @@ export class AuthService {
     
     this.http.get(`${this.url}/api/v1/logout`, {headers: this.headers}).subscribe(
       res => {
-        
-        localStorage.removeItem('token');
-        localStorage.removeItem('profile');
+        clearAuthStore();
         this.router.navigate(['/']);
-
       }, error => {
         
         // Swal.fire(

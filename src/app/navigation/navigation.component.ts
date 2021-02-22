@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import {Router, ActivatedRoute, RouterEvent, Event, NavigationStart} from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
+import { getStoredProfileInfo } from "../services/auth/authStore";
 
 interface MenuElement {
   name: string;
@@ -72,6 +73,7 @@ const MENU_ELEMENTS : MenuElement[] = [{
 export class NavigationComponent implements OnInit {
 
   public userIsAdmin = false;
+  public userName = "Nombre de usuario";
 
   private _transformer = (node: MenuElement, level: number) => {
     return {
@@ -99,7 +101,8 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    const profile = getStoredProfileInfo();
+    this.userName = `${profile.firstNames} ${profile.lastNames}`;
     this.userIsAdmin = this.router.url.startsWith("/app/admin");
 
     this.router.events.subscribe((routerEvent:Event)=> {

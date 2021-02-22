@@ -6,7 +6,7 @@ import { storedAuthTokenIsValid } from "./authStore";
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardService implements CanActivate {
+export class AnonGuardService implements CanActivate {
 
   constructor(
     private router : Router,
@@ -14,10 +14,10 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(): boolean {
     if (storedAuthTokenIsValid()) {
-      return true;
+      this.router.navigate(['/app/home']);
+      return false;
     }
       
-    this.router.navigate(['/']);
-    return false; 
+    return true; 
   }
 }

@@ -19,12 +19,13 @@ import { EditSystemUserComponent } from './admin/edit-system-user/edit-system-us
 import { EditClientComponent } from './admin/edit-client/edit-client.component';
 
 import { AuthGuardService } from '../app/services/auth/auth-guard.service';
+import { AnonGuardService } from '../app/services/auth/anon-guard.service';
 
 const appRoutes: Routes = [
-  { path: '', component: LoginComponent},
-  { path: 'test/:id', component: TestComponent, canActivate: [AuthGuardService]},
-  { path: 'recovery', component: RecoveryComponent },
-  { path: 'registry', component: RegistrationComponent },
+  { path: '', component: LoginComponent, canActivate: [AnonGuardService] },
+  { path: 'test/:id', component: TestComponent, canActivate: [AuthGuardService] },
+  { path: 'recovery', component: RecoveryComponent, canActivate: [AnonGuardService] },
+  { path: 'registry', component: RegistrationComponent, canActivate: [AnonGuardService] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'app', component: NavigationComponent,
     children:[
