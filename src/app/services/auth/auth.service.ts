@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { storeAuhToken, clearAuthStore, storeProfileInfo } from "./authStore";
-// import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -36,29 +36,24 @@ export class AuthService {
 
         this.router.navigate(['app/home']); 
       }, error => {
+        const errorMessage = 
+          error.error?.data || 
+          "No fue posible contactar al servidor. Por favor revisa tu conexión a internet e inténtalo de nuevo";
 
-        // Swal.fire(
-        //   'Error',
-        //   error.error.data,
-        //   'error'
-        // )
+        Swal.fire(
+          'Error',
+          errorMessage,
+          'error'
+        );
       });
   }
 
   logout() {
-    
-    this.http.get(`${this.url}/api/v1/logout`, {headers: this.headers}).subscribe(
-      res => {
-        clearAuthStore();
-        this.router.navigate(['/']);
-      }, error => {
-        
-        // Swal.fire(
-        //   'Error',
-        //   error.error.data,
-        //   'error'
-        // )
-        this.router.navigate(['/']);
-      });
+    clearAuthStore();
+    this.router.navigate(['/']);
+
+    // We really don't care at all if this request is successful or not:
+    // We already deleted the auth info from local storage 🤷 
+    this.http.get(`${this.url}/api/v1/logout`, {headers: this.headers});
   }
 }
