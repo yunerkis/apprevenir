@@ -29,3 +29,9 @@
 .mat-tree-node {
     padding-left: 0 !important;
 }
+
+.menu-drop {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}

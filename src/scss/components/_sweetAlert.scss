@@ -1,0 +1,32 @@
+.swal2-popup {
+    box-shadow: 0px 0px 80px #26A79E78;
+    border: 1px solid #F5F5F5;
+    border-radius: 10px;
+}
+
+.swal2-title {
+    font-size: 17px;
+    font-family: 'KanitMedium';
+}
+
+.swal2-content {
+    font-size: 17px;
+    font-family: 'KanitMedium'; 
+}
+
+.swal2-styled.swal2-confirm {
+    border-radius: 22px !important;
+    border-style: none;
+    cursor: pointer;
+    font-size: 16px;
+    height: 44px;
+    outline: none;
+    text-decoration: none;
+    font-family: 'kanitRegular';
+    padding: 0 30px;
+    background-color: #009E9E !important;
+}
+
+.swal2-styled:focus {
+    box-shadow: none !important;
+}

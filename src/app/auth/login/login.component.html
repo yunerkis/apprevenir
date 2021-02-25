@@ -14,10 +14,10 @@
 					<mat-label>Email</mat-label>
 					<input type="email" matInput formControlName="email">
 					<mat-error *ngIf="loginForm.get('email').hasError('email') && !loginForm.get('email').hasError('required')">
-						Please enter a valid email address
+						Por favor ingresar un correo electrónico válido
 					</mat-error>
 					<mat-error *ngIf="loginForm.get('email').hasError('required')">
-						Email is <strong>required</strong>
+						El correo electrónico es <strong>necesario</strong>
 					</mat-error>
 					<img src="./../../../assets/icons/email_outline.svg" alt="" matSuffix>
 				</mat-form-field>
@@ -26,10 +26,11 @@
 				</div>
 				<mat-form-field class="example-full-width">
 					<mat-label>Contraseña</mat-label>
-					<input type="password" matInput formControlName="password">
+					<input [type]="show ? 'text' : 'password'" placeholder="Contraseña" formControlName="password" matInput>
 					<mat-error *ngIf="loginForm.get('password').hasError('required')">
-						Password is <strong>required</strong>
+						La contraseña es <strong>necesaria</strong>
 					</mat-error>
+					<img [src]="show ? './../../../assets/icons/material-visibility.svg' : './../../../assets/icons/material-visibility-off.svg'"alt="" matSuffix class="app-m-rigth width-icon" (click)="password()">
 					<img src="./../../../assets/icons/lock_outline.svg" alt="" matSuffix>
 				</mat-form-field>
 				<div class="box-checkbox">
@@ -43,10 +44,9 @@
 				</div>
 				<button class="btn btn-secondary width-100" routerLink="/registry">Crear una cuenta</button>
 				<div class="section-two__termns">
-					Al continuar, estás confirmando que has leído nuestros <a>Términos y condiciones</a>  y <a>Política de privacidad</a>
+					Al continuar, estás confirmando que has leído nuestros <a (click)="openDialog()" class="terms-modal">Términos y condiciones <span class="terms-span">y</span> Política de privacidad</a>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
-<!--- Al continuar, estás confirmando que has leído nuestros <a (click)="openDialog()">Términos y condiciones</a>  y <a href="">Política de privacidad</a>-->

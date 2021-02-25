@@ -3,8 +3,11 @@
     <mat-icon (click)="drawer.toggle()" class="burger app-cursor">menu</mat-icon>
     <img alt="Logo" src="../../../assets/bg/COLOR-BORDE.svg" class="logo-app" />
     <span class="example-spacer"></span>
-    <img src="../../../assets/icons/accountcircle_outline.svg" alt=""> <label class="user-text app-m-name">{{userName}}</label>
-    <mat-icon [matMenuTriggerFor]="menu" class="burger app-cursor">keyboard_arrow_down</mat-icon>
+    <div [matMenuTriggerFor]="menu" class="menu-drop">
+        <img src="../../../assets/icons/accountcircle_outline.svg" alt=""> 
+        <label class="user-text app-m-name" style="cursor: pointer;">{{userName}}</label>
+        <mat-icon  class="burger app-cursor">keyboard_arrow_down</mat-icon>
+    </div>
         <mat-menu #menu="matMenu">
             <button mat-menu-item routerLink="admin">
                 <img src="../../../assets/icons/settings_outline.svg" alt="">

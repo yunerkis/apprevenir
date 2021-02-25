@@ -11,6 +11,28 @@
 			<mat-horizontal-stepper #stepper>
 				<mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
 					<form [formGroup]="firstFormGroup">
+						<div class="registration__title">¿Quién te recomendó usar Apprevenir?</div>
+						<div>
+							<mat-form-field class="width-100">
+								<mat-select>
+									<mat-option>Por iniciativa propia</mat-option>
+									<mat-option>Mi ciudad o municipio</mat-option>
+									<mat-option>Mi institución educativa</mat-option>
+									<mat-option>Mi universidad</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+						<div class="registration__university">Por favor elije tu recomendación</div>
+						<div>
+							<mat-form-field class="width-100">
+								<mat-select>
+									<mat-option>Por iniciativa propia</mat-option>
+									<mat-option>Mi ciudad o municipio</mat-option>
+									<mat-option>Mi institución educativa</mat-option>
+									<mat-option>Mi universidad</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
 						<ng-template matStepLabel>Información Personal</ng-template>
 						<div>
 							<div class="registration__title">Información personal</div>

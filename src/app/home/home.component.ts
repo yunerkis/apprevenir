@@ -26,7 +26,9 @@ export class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(ModalHomeQuestionComponent, {
       data: {
         test: test
-      }
+      },
+      id: "modal-home-padding"
+
     });
 
     dialogRef.afterClosed().subscribe(result => {

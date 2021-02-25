@@ -20,7 +20,7 @@ export class TestComponent implements AfterViewInit {
     'city',
     'type_user',
     'level',
-    'answer',
+    'icon',
   ];
   public dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
@@ -42,7 +42,7 @@ export interface PeriodicElement {
   city: string;
   type_user: string;
   level: string;
-  answer: string;
+  icon: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
@@ -56,6 +56,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
     city: 'Medellin',
     type_user: "Consumidor",
     level: 'Moderado',
-    answer: 'icono'
+    icon: "flight_land"
   }
 ];

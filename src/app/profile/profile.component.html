@@ -15,7 +15,7 @@
                       <mat-icon class="example-tab-icon">account_circle</mat-icon>
                       Mis datos
                     </ng-template>
-                    <mat-horizontal-stepper #stepper>
+                    <mat-horizontal-stepper #stepper class="test__body">
                         <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
                             <form [formGroup]="firstFormGroup">
                                 <ng-template matStepLabel>Información Personal</ng-template>

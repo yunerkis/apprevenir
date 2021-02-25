@@ -1,34 +1,35 @@
 .mat-dialog-container {
-    border: none;
-    border-radius: 8px 8px 0px 0px;
-    width: 768px !important;
-    height: 700px !important;
-    overflow: hidden;
-    padding: 0 !important;
-
-    h3 {
-        color: var(--color-normal-grey);
-        font-family: 'KanitMedium';
-        font-size: 32px;
-        margin-bottom: 5rem;
-    }
-
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 0px 80px #26A79E78;
+    border-radius: 10px !important;
 }
 
 .modal-title {
     color: var(--color-normal-grey);
-    font-family: 'KanitMedium';
+    font-family: 'FiratRegular';
     font-size: 24px;
+    margin: 0 0 20px !important;
 }
 
 .modal-text {
     color: var(--color-normal-grey);
     font-family: 'FiratRegular';
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .modal-box {
     overflow: auto;
     height: 350px;
     margin-bottom: 2rem;
+}
+
+.modal-h3 {
+    color: var(--color-normal-grey);
+    font-family: 'KanitMedium';
+    font-size: 32px;
+    margin-bottom: 2rem;
+}
+
+#modal-home-padding {
+    padding: 0 0 15px 0 !important;
 }

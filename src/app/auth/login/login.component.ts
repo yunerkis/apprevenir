@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  show = false;
 
   constructor(
     public dialog: MatDialog,
@@ -43,5 +44,9 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(this.loginForm.value);
+  }
+
+  password() {
+    this.show = !this.show;
   }
 }

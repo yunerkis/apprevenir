@@ -46,6 +46,7 @@
 	}
 	&__ask{
 		display: flex;
+		align-items: center;
 	}
 	&__number {
 		color: var(--color-gray-dark-2);
@@ -57,7 +58,6 @@
 		color: var(--color-normal-grey);
         font-size: 24px;
 		font-family: 'FiratRegular';
-		margin-top: 18px;
 	}
 	&__radio {
 		display: flex;
