@@ -3,6 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import { TestService } from '../services/test/test.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormArray  } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { InformationModalComponent } from './information-modal/information-modal.component';
 
 @Component({
   selector: 'app-test',
@@ -63,7 +65,22 @@ export class TestComponent implements OnInit {
     public testService: TestService,
     private formBuilder: FormBuilder,
     private _sanitizer: DomSanitizer,
+    public dialog: MatDialog,
   ) { }
+
+  openDialogInformation(test) {
+    const dialogRef = this.dialog.open(InformationModalComponent, {
+      data: {
+        test: test
+      },
+      id: "modal-home-padding"
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   ngOnInit() {
 

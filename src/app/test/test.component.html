@@ -5,13 +5,17 @@
 			<div class="test__title">TEST</div>
 			<div class="test__flex">
 				<div class="test__text">{{ test['name'] }}</div>
-				<img alt="PersonIcon" src="../../../assets/icons/info_outline.svg" class="inputContainer__icon" />
+				<img 
+				alt="PersonIcon" 
+				src="../../../assets/icons/info_outline.svg" 
+				class="inputContainer__icon app-cursor"
+				(click)="openDialogInformation(test)" />
 			</div>
 			<img alt="PersonIcon" src="{{url}}/image/{{test['image']}}" class="test__person" />
 		</div>
 		<div class="test__box">
 			<form class="test-form" [formGroup]="formGroup" *ngIf="!result">
-				<mat-horizontal-stepper linear #stepper formArrayName="formArray">
+				<mat-horizontal-stepper linear #stepper formArrayName="formArray" class="one-steps">
 					<mat-step formGroupName="{{i}}" [stepControl]="formArray?.get([i])" *ngFor="let question of questions; let i = index">
 						<div class="test__ask">
 							<div class="test__number">
@@ -64,7 +68,7 @@
 					</ng-template>
 					<div class="test__tab">
 						<div class="test__type width-100">
-							<iframe width="100%" height="315" [src]="getVideoIframe(url_video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+							<iframe width="700px" height="405px" [src]="getVideoIframe(url_video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						</div>
 					</div>
 				</mat-tab>

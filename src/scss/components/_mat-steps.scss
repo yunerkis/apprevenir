@@ -31,6 +31,10 @@
         display: none;
     }
 
+    .mat-stepper-horizontal-line {
+        display: none;
+    }
+
     .mat-horizontal-stepper-header .mat-step-icon {
         margin-right: 0px;
     }
@@ -42,6 +46,7 @@
     }
     .mat-horizontal-stepper-header {
         padding: 0;
+        width: 100%;
     }
 
     .mat-step-header .mat-step-icon-selected,

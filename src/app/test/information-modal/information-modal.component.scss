@@ -1,0 +1,64 @@
+.modal-home {
+    .mat-dialog-container {
+        padding: 0 !important;
+    }
+    .mat-dialog-content {
+        padding: 0 !important;
+        margin: 0;
+        overflow: hidden;
+    }
+    &__bg {
+        height: 168px;
+        background-color: var(--color-primary);
+    }
+    &__flex {
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+        height: 168px;
+    }
+    &__box {
+        display: flex;
+        align-items: center;
+    }
+    &__title {
+        color: var(--color-white);
+        font-size: 17px;
+        font-family: 'KanitMedium';
+    }
+    &__text {
+        color: var(--color-white);
+        font-size: 35px;
+        font-family: 'KanitMedium';
+    }
+    &__site {
+        padding: 50px 0px 0 50px;
+    }
+    &__para {
+        padding: 50px;
+        height: 375px;
+        overflow-y: scroll;
+    }
+    &__grey {
+        color: var(--color-normal-grey);
+        font-family: "KanitNormal";
+        font-size: 17px;
+        margin-bottom: 20px;
+    }
+
+    &__bold {
+        font-size: 35px;
+        font-family: 'KanitMedium';
+        color: var(--color-normal-grey);
+    }
+
+    .test__person {
+        width: 60%;
+        position: relative;
+        right: -35%;
+    }
+
+    .btn-cancel {
+        padding: 0px 50px;
+    }
+}
