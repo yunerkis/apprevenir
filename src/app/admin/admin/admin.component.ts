@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormArray  } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user/user.service';
+import { CommunesModalComponent } from './communes-modal/communes-modal.component';
+import { CorrectionsModalComponent } from './corrections-modal/corrections-modal.component';
 
 interface User {
   name: string;
@@ -39,6 +42,7 @@ export class AdminComponent implements OnInit {
   constructor(
     public userService: UserService,
     private formBuilder: FormBuilder,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -99,5 +103,23 @@ export class AdminComponent implements OnInit {
     formData.last_names = 'cliente';
 
     this.userService.client(formData);
+  }
+
+  openDialogCorrection() {
+    const dialogRef = this.dialog.open(CorrectionsModalComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openDialogCommunes() {
+    const dialogRef = this.dialog.open(CommunesModalComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

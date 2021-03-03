@@ -102,6 +102,11 @@
         color: var(--color-error);
         font-weight: bold;
     }
+
+    &__box-text {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
 .test-table {

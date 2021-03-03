@@ -27,6 +27,8 @@ import { EditClientComponent } from './admin/edit-client/edit-client.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InformationModalComponent } from './test/information-modal/information-modal.component';
 import { TestDoneModalComponent } from './admin/test/test-done-modal/test-done-modal.component';
+import { CommunesModalComponent } from './admin/admin/communes-modal/communes-modal.component';
+import { CorrectionsModalComponent } from './admin/admin/corrections-modal/corrections-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +51,8 @@ import { TestDoneModalComponent } from './admin/test/test-done-modal/test-done-m
     AdminTestComponent,
     InformationModalComponent,
     TestDoneModalComponent,
+    CommunesModalComponent,
+    CorrectionsModalComponent,
     ],
   imports: [
     BrowserModule,

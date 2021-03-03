@@ -76,7 +76,12 @@
 				</div>
 			</form>
 			<div class="admin__sub-title">Información Específica</div>
-			<div class="admin__text">Comunas y Barrios</div>
+			<div class="admin__box-text">
+				<div class="admin__text">Comunas y Barrios</div>
+				<button mat-mini-fab color="primary" (click)="openDialogCommunes()">
+					<mat-icon>add</mat-icon>
+				</button>
+			</div>
 			<table class="test-table">
 				<tr class="test-table__header">
 				  <th>Comunas</th>
@@ -114,7 +119,12 @@
 						</span></td>
 				</tr>
 			  </table>
-			<div class="admin__text">Corregimientos y Veredas</div>
+			  <div class="admin__box-text">
+				<div class="admin__text">Corregimientos y Veredas</div>
+				<button mat-mini-fab color="primary" (click)="openDialogCorrection()">
+					<mat-icon>add</mat-icon>
+				</button>
+			</div>
 			<table class="test-table">
 				<tr class="test-table__header">
 				  <th>Corregimiento</th>

@@ -124,3 +124,7 @@
 .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background, .mat-checkbox-checked.mat-primary .mat-checkbox-background {
   background-color: #20E57E;
 }
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: var(--color-gray-dark-2);
+}
