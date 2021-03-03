@@ -1,6 +1,8 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import { TestDoneModalComponent } from '../test/test-done-modal/test-done-modal.component'
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
@@ -8,6 +10,11 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class TestComponent implements AfterViewInit {
   
+  constructor (
+    public dialog: MatDialog,
+  ) {
+    
+  }
   public resultsLength = 0;
   public displayedColumns: string[] = [
     'idUser', 
@@ -29,6 +36,15 @@ export class TestComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+
+  openDialogTestModal(test) {
+    const dialogRef = this.dialog.open(TestDoneModalComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
 
 export interface PeriodicElement {
@@ -42,7 +58,6 @@ export interface PeriodicElement {
   city: string;
   type_user: string;
   level: string;
-  icon: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
@@ -55,7 +70,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
     user: 'Yunerkis Leal',
     city: 'Medellin',
     type_user: "Consumidor",
-    level: 'Moderado',
-    icon: "flight_land"
+    level: 'Moderado'
   }
 ];

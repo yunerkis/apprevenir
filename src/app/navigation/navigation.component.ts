@@ -20,7 +20,7 @@ interface MenuNode {
 
 const MENU_ELEMENTS : MenuElement[] = [{
   name: "Usuarios finales",
-  icon: "account_box",
+  icon: "desktop_windows",
   children: [{
     name: "Crear usuario final",
     route: "admin"
