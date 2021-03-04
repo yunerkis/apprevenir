@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule,FormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ProfileModalComponent } from './profile-modal/profile-modal.component';
 
 export interface PeriodicElement {
   name: string;
@@ -9,16 +11,7 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: "Tecnologías", name: '08/09/20', weight: "--", symbol: '--'},
-  {position: "Tecnologías", name: '08/09/20', weight: "--", symbol: '--'},
-  {position: "Tecnologías", name: '08/09/20', weight: "--", symbol: '--'},
-  {position: "Tecnologías", name: '08/09/20', weight: "--", symbol: '--'},
-  {position: "Tecnologías", name: '08/09/20', weight: "--", symbol: '--'},
-  {position: "Tecnologías", name: '08/09/20', weight: "--", symbol: '--'},
-  {position: "Tecnologías", name: '08/09/20', weight: "--", symbol: '--'},
-  {position: "Tecnologías", name: '08/09/20', weight: "--", symbol: '--'},
-  {position: "Tecnologías", name: '08/09/20', weight: "--", symbol: '--'},
-  {position: "Tecnologías", name: '08/09/20', weight: "--", symbol: '--'},
+  {position: "Tecnologías", name: '08/09/20', weight: "MODERADO", symbol: '--'},
 ];
 @Component({
   selector: 'app-profile',
@@ -38,7 +31,9 @@ export class ProfileComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
   
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(
+    public dialog: MatDialog,
+    private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
@@ -46,6 +41,16 @@ export class ProfileComponent implements OnInit {
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
+    });
+  }
+
+  openDialogProfile() {
+    const dialogRef = this.dialog.open(ProfileModalComponent, {
+      id: "modal-width"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
     });
   }
 

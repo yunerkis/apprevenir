@@ -29,6 +29,7 @@ import { InformationModalComponent } from './test/information-modal/information-
 import { TestDoneModalComponent } from './admin/test/test-done-modal/test-done-modal.component';
 import { CommunesModalComponent } from './admin/admin/communes-modal/communes-modal.component';
 import { CorrectionsModalComponent } from './admin/admin/corrections-modal/corrections-modal.component';
+import { ProfileModalComponent } from './profile/profile-modal/profile-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +54,7 @@ import { CorrectionsModalComponent } from './admin/admin/corrections-modal/corre
     TestDoneModalComponent,
     CommunesModalComponent,
     CorrectionsModalComponent,
+    ProfileModalComponent,
     ],
   imports: [
     BrowserModule,
