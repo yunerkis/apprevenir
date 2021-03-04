@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
-// import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -29,20 +29,20 @@ export class UserService {
     return this.http.post(`${this.url}/api/v1/register`, data).subscribe(
       res => {
 
-        // Swal.fire(
-        //   'Guardado',
-        //   'Usuario registrado correctamente',
-        //   'success'
-        // )   
+        Swal.fire(
+          'Guardado',
+          'Usuario registrado correctamente',
+          'success'
+        )   
         this.router.navigate(['/']);
         
       }, data => {
 
-       // Swal.fire(
-        //   'Error',
-        //   error.error.data,
-        //   'error'
-        // )
+       Swal.fire(
+          'Error',
+          data.errors,
+          'error'
+        )
       });
   }
 
