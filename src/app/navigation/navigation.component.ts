@@ -52,7 +52,7 @@ const MENU_ELEMENTS : MenuElement[] = [{
   ]
 },{
   name: "Clientes",
-  icon: "person",
+  icon: "perm_identity",
   children: [{
     name: "Crear cliente",
     route: "admin-create-client"

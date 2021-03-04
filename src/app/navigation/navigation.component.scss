@@ -35,3 +35,12 @@
     align-items: center;
     cursor: pointer;
 }
+
+.logo-client {
+    width: 100%;
+    text-align: center;
+    margin: 15px 0;
+    &__app {
+        width: 10rem;
+    }
+}

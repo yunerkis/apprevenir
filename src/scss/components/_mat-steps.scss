@@ -94,9 +94,18 @@
 .test {
     .mat-tab-label {
         height: 100px !important;
+        color: var(--color-gray-dark-2);
+    }
+    .mat-icon {
+        margin-bottom: 10px;
     }
 }
 
 .mat-tab-label:focus:not(.mat-tab-disabled) {
     color: var(--color-normal-grey);
+}
+
+.mat-tab-label-active {
+    color: var(--color-normal-grey) !important;
+    opacity: 1 !important;
 }

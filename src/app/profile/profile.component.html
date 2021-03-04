@@ -1,7 +1,7 @@
 <div class="test">
 	<div class="test__content">
 		<div class="test__info">
-			<img alt="PersonIcon" src="../../../assets/icons/close_twotone.svg" class="test__icon" routerLink="/app/home" />
+			<img alt="PersonIcon" src="../../../assets/icons/close_twotone.svg" class="test__icon" routerLink="/" />
 			<div class="test__text">Nombres</div>
 			<div class="test__flex">
 				<div class="test__title">Apellidos</div>
@@ -12,7 +12,7 @@
 			<mat-tab-group>
                 <mat-tab>
                     <ng-template mat-tab-label>
-                      <mat-icon class="example-tab-icon">account_circle</mat-icon>
+                      <mat-icon class="example-tab-icon" fontSet="material-icons-outlined">account_circle</mat-icon>
                       Mis datos
                     </ng-template>
                     <mat-horizontal-stepper #stepper class="test__body">
@@ -59,7 +59,9 @@
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Fecha de Nacimiento</mat-label>
                                     <input matInput [matDatepicker]="picker">
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker-toggle matSuffix [for]="picker">
+                                        <mat-icon matDatepickerToggleIcon fontSet="material-icons-outlined" class="icon-date">date_range</mat-icon>
+                                    </mat-datepicker-toggle>
                                     <mat-datepicker #picker></mat-datepicker>
                                 </mat-form-field>
         
@@ -196,7 +198,7 @@
                 </mat-tab>
                 <mat-tab> 
                     <ng-template mat-tab-label>
-                        <mat-icon class="example-tab-icon">help_center</mat-icon>
+                        <mat-icon class="example-tab-icon"  fontSet="material-icons-outlined">live_help</mat-icon>
                         Mis test
                       </ng-template>
                     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
