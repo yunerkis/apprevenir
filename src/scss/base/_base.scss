@@ -10,6 +10,26 @@ body {
   color: var(--color-gray-dark-2);
 }
 
+#gif_level > ul > li > a {
+	color: var(--color-primary) !important;
+}
+
+#gif_level > ul  {
+	padding-left: 0 !important;
+  list-style-type: none;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: var(--color-primary)!important;
+}
+
+.spinner-span {
+    color: var(--color-gray-dark-2);
+		font-size: 16px;
+		font-family: 'KanitMedium';
+    margin-top: 1rem;
+}
+
 .inputContainer {
     display: inline-flex;
     flex: 1 1 300px;

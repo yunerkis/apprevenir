@@ -109,7 +109,7 @@
 			text-decoration: underline;
 		}
 	}
-	&__icon {
+	&__ico {
 		position: absolute;
 		top: 138px;
 		right: 3rem;
@@ -121,13 +121,14 @@
 		font-family: 'KanitNormal';
 		position: absolute;
 	}
+	&__info-box {
+		width: 87%;
+		margin-top: 2rem;
+	}
 }
 
 .addiction {
 	font-size: 15px;
-}
-#gif_level > ul > li > a {
-	color: var(--color-primary) !important;
 }
 
 .app-flex {

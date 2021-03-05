@@ -9,7 +9,7 @@
 	<div class="login__section-two">
 		<div class="loader" [hidden]="!loadingData">
 			<mat-spinner></mat-spinner>
-			<span style="font-family: 'KanitMedium';">Cargando Datos...</span>
+			<div class="spinner-span">Cargando Datos...</div>
 		</div>
 
 		<div class="section-two" [hidden]="loadingData">
@@ -113,7 +113,7 @@
 								</mat-error>
 							</mat-form-field>
 						</div>
-						<div class="app-flex">
+						<div class="app-flex" style="margin-top: 1rem;">
 							<button class="btn btn-secondary app-m-right">Cancelar</button>
 							<button class="btn btn-primary" matStepperNext (click)="onProfileNextClicked()">Siguiente</button>
 						</div>
@@ -166,7 +166,7 @@
 							</mat-form-field>
 						</div>
 
-						<div class="app-flex">
+						<div class="app-flex" style="margin-top: 1rem;">
 							<button class="btn btn-secondary app-m-right" matStepperPrevious>Anterior</button>
 							<button class="btn btn-primary" matStepperNext>Siguiente</button>
 						</div>
@@ -216,7 +216,7 @@
 						</div>
 					</form>
 
-					<div class="app-flex">
+					<div class="app-flex" style="margin-top: 1rem;">
 						<button class="btn btn-secondary app-m-right" matStepperPrevious>Anterior</button>
 						<button class="btn btn-primary" (click)="onSubmitClicked()">Completar Registro</button>
 					</div>
