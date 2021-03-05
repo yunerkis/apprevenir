@@ -43,6 +43,11 @@ export class TestService {
     return this.http.get(`${this.url}/api/v1/users/results/${this.profile.id}`, {headers: this.headers}); 
   }
 
+  getAllResutls() {
+        
+    return this.http.get(`${this.url}/api/v1/results/all`, {headers: this.headers}); 
+  }
+
   image(filename) {
 
     return this.http.get(`${this.url}/image/${filename}`);

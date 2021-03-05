@@ -2,7 +2,9 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import { TestDoneModalComponent } from '../test/test-done-modal/test-done-modal.component'
+import { TestDoneModalComponent } from '../test/test-done-modal/test-done-modal.component';
+import { TestService } from '../../services/test/test.service';
+
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
@@ -10,40 +12,63 @@ import { TestDoneModalComponent } from '../test/test-done-modal/test-done-modal.
 })
 export class TestComponent implements AfterViewInit {
   
+  color = {
+    'Severo': '#FF4E60',
+    'Moderado': '#FFA14E',
+    'Leve': '#20E57E'
+  };
+
   constructor (
     public dialog: MatDialog,
+    private testService: TestService
   ) {
     
   }
   public resultsLength = 0;
   public displayedColumns: string[] = [
     'idUser', 
-    'id', 
-    'type', 
+    'id',  
     'test', 
     'date', 
     'time', 
     'user', 
     'city',
-    'type_user',
     'level',
     'icon',
   ];
-  public dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  public dataSource = new MatTableDataSource<PeriodicElement>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
+    
+    this.testService.getAllResutls().subscribe(res => {
+      this.dataSource = res['data'];
+    });
     this.dataSource.paginator = this.paginator;
   }
 
   openDialogTestModal(test) {
+    
     const dialogRef = this.dialog.open(TestDoneModalComponent, {
+      data: {test}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  setStyle(color) {
+    return {
+      'background-color': this.color[color],
+      'color': '#fff',
+      'padding-left': '15px',
+      'padding-right': '15px',
+      'border-radius': '10px',
+      'padding-top': '1px',
+      'padding-bottom': '1px',
+    }
   }
 }
 

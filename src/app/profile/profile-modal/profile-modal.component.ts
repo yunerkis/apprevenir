@@ -34,7 +34,6 @@ export class ProfileModalComponent implements OnInit {
   ngOnInit(): void {
 
     this.dataSource = this.data['answers'];
-    console.log(this.data)
   }
 
   setStyle(color) {
