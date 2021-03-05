@@ -97,18 +97,31 @@
 		height: 100px !important;
 
 	}
+	&__school {
+		display: flex;
+    	align-items: center;
+		justify-content: flex-start;
+		.mat-icon {
+			margin-bottom: 0;
+			margin-right: 10px;
+			color: var(--color-gray-dark-2);
+		}
+		&__interest {
+			color: var(--color-primary);
+			text-decoration: underline;
+		}
+	}
 }
 
 .addiction {
 	font-size: 15px;
 }
 
-.test__type {
-	h2 {
-		text-align: left;
-	}
-}	
-	
+.test__school ~ ul {
+	color: var(--color-primary);
+	padding-left: 0;
+}
+
 .app-flex {
 	margin-top: 3rem;
 }

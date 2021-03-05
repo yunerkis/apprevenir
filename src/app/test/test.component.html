@@ -50,7 +50,7 @@
 			<mat-tab-group *ngIf="result">
 				<mat-tab>
 					<ng-template mat-tab-label>
-						<img alt="PersonIcon" src="../../../assets/icons/info_outline-grey.svg" class="inputContainer__icon" />
+						<mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
 						Resultado
 					</ng-template>
 					<div class="test__tab">
@@ -63,7 +63,7 @@
 			
 				<mat-tab>
 					<ng-template mat-tab-label>
-						<img alt="PersonIcon" src="../../../assets/icons/playcirclefilledwhite_outline.svg" class="inputContainer__icon" />
+						<mat-icon fontSet="material-icons-outlined">play_circle_outline</mat-icon>
 						Información
 					</ng-template>
 					<div class="test__tab">
@@ -75,7 +75,7 @@
 			
 				<mat-tab>
 					<ng-template mat-tab-label>
-						<img alt="PersonIcon" src="../../../assets/icons/supportagent_baseline.svg" class="inputContainer__icon" />
+						<mat-icon fontSet="material-icons-outlined">support_agent</mat-icon>
 						Ayuda
 					</ng-template>
 					<div class="test__tab">
@@ -86,11 +86,15 @@
 
 				<mat-tab>
 					<ng-template mat-tab-label>
-						<img alt="PersonIcon" src="../../../assets/icons/school_outline.svg" class="inputContainer__icon" />
+						<mat-icon fontSet="material-icons-outlined">school</mat-icon>
 						Enlaces
 					</ng-template>
 					<div class="test__tab">
-						<div class="test__type" [innerHTML]="url_interest">
+						<div>
+							<div class="test__school">
+								<mat-icon fontSet="material-icons-outlined">school</mat-icon>
+								<div class="test__interest" [innerHTML]="url_interest"></div>
+							</div>
 						</div>
 					</div>
 				</mat-tab>
