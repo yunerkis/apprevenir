@@ -10,16 +10,16 @@
     </div>
         <mat-menu #menu="matMenu">
             <button mat-menu-item routerLink="admin">
-                <img src="../../../assets/icons/settings_outline.svg" alt="">
-                <span class="user-text app-m-left-15">Administrar</span>
+                <mat-icon fontSet="material-icons-outlined">settings</mat-icon>
+                <span class="user-text">Administrar</span>
             </button>
             <button mat-menu-item routerLink="/profile">
-                <img src="../../../assets/icons/accountcircle_outline.svg" alt="">
-                <span class="user-text app-m-left-15">Mi perfil</span>
+                <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
+                <span class="user-text">Mi perfil</span>
             </button>
             <button mat-menu-item (click)="logout()">
-                <img src="../../../assets/icons/logout_baseline.svg" alt="" class="app-m-left">
-                <span class="user-text app-m-left-15">Cerrar sesión</span>
+                <mat-icon fontSet="material-icons-outlined">logout</mat-icon>
+                <span class="user-text">Cerrar sesión</span>
             </button>
         </mat-menu>
     
