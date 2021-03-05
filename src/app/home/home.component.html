@@ -23,7 +23,8 @@
 			<div class="card__text">{{ test.name }}</div>
 			<img *ngIf="test.image == ''" src="../../../assets/bg/apprevenir-ludopatia.png" alt="test image" class="card__img-man">
           	<img *ngIf="test.image != ''" src="{{url}}/image/{{test.image}}" alt="test image" class="card__img-man">
-			<button class="btn btn-primary" routerLink="/test/{{test.id}}">Hacer test</button>
+			<button *ngIf="test.addictions.length > 0" class="btn btn-primary" (click)="openDialogHome(test)">Hacer test</button>
+			<button  *ngIf="test.addictions.length == 0" class="btn btn-primary" routerLink="/test/{{test.id}}">Hacer test</button>
 		</div>
 	</div>
 </div>

@@ -30,6 +30,8 @@ import { TestDoneModalComponent } from './admin/test/test-done-modal/test-done-m
 import { CommunesModalComponent } from './admin/admin/communes-modal/communes-modal.component';
 import { CorrectionsModalComponent } from './admin/admin/corrections-modal/corrections-modal.component';
 import { ProfileModalComponent } from './profile/profile-modal/profile-modal.component';
+import { HomeModalComponent } from './home/home-modal/home-modal.component';
+import { ConfidentialModalComponent } from './test/confidential-modal/confidential-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +57,8 @@ import { ProfileModalComponent } from './profile/profile-modal/profile-modal.com
     CommunesModalComponent,
     CorrectionsModalComponent,
     ProfileModalComponent,
+    HomeModalComponent,
+    ConfidentialModalComponent,
     ],
   imports: [
     BrowserModule,

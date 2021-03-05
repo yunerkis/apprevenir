@@ -5,6 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormArray  } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { InformationModalComponent } from './information-modal/information-modal.component';
+import { ConfidentialModalComponent } from './confidential-modal/confidential-modal.component';
 
 @Component({
   selector: 'app-test',
@@ -13,6 +14,7 @@ import { InformationModalComponent } from './information-modal/information-modal
 })
 export class TestComponent implements OnInit {
 
+  addiction = null;
   url = this.testService.url;
   test = {};
   formGroup: FormGroup;
@@ -74,7 +76,16 @@ export class TestComponent implements OnInit {
         test: test
       },
       id: "modal-home-padding"
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openDialogConfidential() {
+    const dialogRef = this.dialog.open(ConfidentialModalComponent, {
+      id: "modal-home-padding"
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -88,6 +99,8 @@ export class TestComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get("id");
 
+    this.addiction = this.route.snapshot.queryParamMap.get("addiction");
+
     this.testService.getTest(id).subscribe(res => {
 
       this.test = res['data'];
@@ -98,7 +111,7 @@ export class TestComponent implements OnInit {
         this.answers.push(this.formBuilder.group(this.answer));
       });
       this.formGroup = this.formBuilder.group({ formArray: this.formBuilder.array(this.answers) });
-      console.log(this.test);
+      this.openDialogConfidential();
     });
   }
 

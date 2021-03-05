@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalHomeQuestionComponent } from '../modals/modal-home-question/modal-home-question.component';
+import { HomeModalComponent } from './home-modal/home-modal.component';
 import { TestService } from '../services/test/test.service';
 
 @Component({
@@ -21,20 +22,6 @@ export class HomeComponent implements OnInit {
     private testService: TestService,
     private formBuilder: FormBuilder,
   ) { }
-
-  openDialog(test) {
-    const dialogRef = this.dialog.open(ModalHomeQuestionComponent, {
-      data: {
-        test: test
-      },
-      id: "modal-home-padding"
-
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
 
   ngOnInit() {
 
@@ -59,4 +46,28 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  openDialog(test) {
+    const dialogRef = this.dialog.open(ModalHomeQuestionComponent, {
+      data: {
+        test: test
+      },
+      id: "modal-home-padding"
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openDialogHome(test) {
+    const dialogRef = this.dialog.open(HomeModalComponent, {
+      id: "modal-width",
+      data: test
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }

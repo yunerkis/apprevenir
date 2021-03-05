@@ -4,10 +4,10 @@
 			<img alt="PersonIcon" src="../../../assets/icons/close_twotone.svg" class="test__icon" routerLink="/app/home" />
 			<div class="test__title">TEST</div>
 			<div class="test__flex">
-				<div class="test__text">{{ test['name'] }}</div>
+				<div class="test__text">{{ test['name'] }} <span *ngIf="addiction && test['name']" class="addiction"> - {{ addiction }}</span></div>
 				<img 
 				alt="PersonIcon" 
-				src="../../../assets/icons/info_outline.svg" 
+				src="../../../assets/icons/info_outline.svg"
 				class="inputContainer__icon app-cursor"
 				(click)="openDialogInformation(test)" />
 			</div>

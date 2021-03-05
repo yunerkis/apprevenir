@@ -1,0 +1,30 @@
+<div class="modal-home">
+    <mat-dialog-content id="hellow">
+    <div class="modal-home__bg">
+      <div class="modal-home__flex">
+        <div class="modal-home__site">
+          <div class="modal-home__title">TEST</div>
+          <div class="modal-home__box">
+            <div class="modal-home__text">{{ data.name }}</div>
+          </div>
+        </div>
+        <div class="modal-home__site-b">
+          <img alt="PersonIcon" src="{{url}}/image/{{data.image}}" class="test__person" />
+        </div>
+      </div>
+    </div>
+    </mat-dialog-content>
+    <div class="modal-home__para">
+        <p>{{ data.description }}</p>
+        <form [formGroup]="addiction" (ngSubmit)="onSubmit(data.id)">
+            <select formControlName="addiction_id" required>
+              <option value="">Elige una opción</option>
+              <option [value]="addiction.pivot.addiction_id+' '+addiction.name" *ngFor="let addiction of data.addictions">{{ addiction.name }}</option>
+            </select>
+            <button class="modal-test__btn test" type="submit">Hacer test</button>
+          </form>
+    </div>
+    <div align="end" class="btn-cancel">
+      <button class="btn btn-secondary" [mat-dialog-close]="true" #close>Cerrar</button>
+    </div>
+  </div>
