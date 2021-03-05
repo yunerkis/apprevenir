@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Inject } from '@angular/core';
 
 export interface ProfileAnswer {
   number: string;
@@ -16,12 +18,34 @@ const ELEMENT_DATA: ProfileAnswer[] = [
 })
 export class ProfileModalComponent implements OnInit {
   
-  displayedColumns: string[] = ['number', 'question', 'answer'];
-  dataSource = ELEMENT_DATA;
+  color = {
+    'Severo': '#FF4E60',
+    'Moderado': '#FFA14E',
+    'Leve': '#20E57E'
+  };
 
-  constructor() { }
+  displayedColumns: string[] = ['N', 'Pregunta', 'Respuesta'];
+  dataSource = [];
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) { }
 
   ngOnInit(): void {
+
+    this.dataSource = this.data['answers'];
+    console.log(this.data)
   }
 
+  setStyle(color) {
+    return {
+      'background-color': this.color[color],
+      'color': '#fff',
+      'padding-left': '15px',
+      'padding-right': '15px',
+      'border-radius': '10px',
+      'padding-top': '1px',
+      'padding-bottom': '1px',
+    }
+  }
 }

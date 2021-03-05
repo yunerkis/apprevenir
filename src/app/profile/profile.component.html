@@ -206,33 +206,24 @@
                         <!--- Note that these columns can be defined in any order.
                               The actual rendered columns are set as a property on the row definition" -->
                       
-                        <!-- Position Column -->
-                        <ng-container matColumnDef="position">
-                          <th mat-header-cell *matHeaderCellDef>Test </th>
-                          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                        <ng-container matColumnDef="Test">
+                        <th mat-header-cell *matHeaderCellDef>Test </th>
+                        <td mat-cell *matCellDef="let element">{{ element.testName }}</td>
                         </ng-container>
-                      
-                        <!-- Name Column -->
-                        <ng-container matColumnDef="name">
-                          <th mat-header-cell *matHeaderCellDef> Fecha </th>
-                          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        <ng-container matColumnDef="Fecha">
+                        <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                        <td mat-cell *matCellDef="let element">{{ element.date }}</td>
                         </ng-container>
-                      
-                        <!-- Weight Column -->
-                        <ng-container matColumnDef="weight">
-                          <th mat-header-cell *matHeaderCellDef> Nivel </th>
-                        <td mat-cell *matCellDef="let element">
-                            <mat-chip-list aria-label="Fish selection" class="mat-test">
-                                <mat-chip color="accent" selected> {{element.weight}} </mat-chip>
-                            </mat-chip-list>
-                        </td>
+                        <ng-container matColumnDef="Nivel">
+                        <th mat-header-cell *matHeaderCellDef>Nivel</th>
+                        <td mat-cell *matCellDef="let element"><span [ngStyle]=setStyle(element.resultLevel)>{{ element.resultLevel }}</span></td>
                         </ng-container>
                       
                         <!-- Symbol Column -->
-                        <ng-container matColumnDef="symbol">
+                        <ng-container matColumnDef="Respuestas">
                           <th mat-header-cell *matHeaderCellDef> Respuesta </th>
                           <td mat-cell *matCellDef="let element">
-                            <mat-icon fontSet="material-icons-outlined" (click)="openDialogProfile()" class="icon-live">live_help</mat-icon>
+                            <mat-icon fontSet="material-icons-outlined" (click)="openDialogProfile(element)" class="icon-live">live_help</mat-icon>
                             </td>
                         </ng-container>
                       

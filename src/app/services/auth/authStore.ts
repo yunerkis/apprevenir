@@ -67,7 +67,7 @@ export function storeProfileInfo(profileInfo: any) {
   }
 
   const normalizedProfile: IProfileInfo = {
-    id: profileInfo.id,
+    id: profileInfo.user_id,
     userId: profileInfo.userId,
     email: profileInfo.email,
     firstNames: profileInfo.first_names,

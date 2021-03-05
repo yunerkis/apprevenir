@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule,FormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { TestService } from '../services/test/test.service';
 import { ProfileModalComponent } from './profile-modal/profile-modal.component';
 
 export interface PeriodicElement {
@@ -20,20 +21,29 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ProfileComponent implements OnInit {
   
+  color = {
+    'Severo': '#FF4E60',
+    'Moderado': '#FFA14E',
+    'Leve': '#20E57E'
+  };
+
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
   ]);
+  
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   isEditable = false;
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['Test', 'Fecha', 'Nivel', 'Respuestas'];
+  dataSource = [];
   
   constructor(
     public dialog: MatDialog,
-    private _formBuilder: FormBuilder) { }
+    private _formBuilder: FormBuilder,
+    private testService: TestService
+  ) { }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
@@ -42,11 +52,16 @@ export class ProfileComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
-  }
 
-  openDialogProfile() {
+    this.testService.myResults().subscribe(res => {
+      this.dataSource = res['data']
+    });
+  }
+  
+  openDialogProfile(test) {
     const dialogRef = this.dialog.open(ProfileModalComponent, {
-      id: "modal-width"
+      id: "modal-width",
+      data: test
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -54,4 +69,15 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  setStyle(color) {
+    return {
+      'background-color': this.color[color],
+      'color': '#fff',
+      'padding-left': '15px',
+      'padding-right': '15px',
+      'border-radius': '10px',
+      'padding-top': '1px',
+      'padding-bottom': '1px',
+    }
+  }
 }
