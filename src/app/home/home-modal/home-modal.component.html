@@ -14,7 +14,7 @@
       </div>
     </div>
     </mat-dialog-content>
-    <div class="modal-home__para">
+    <div class="modal-home__para modal-home__drugs">
         <p>{{ data.description }}</p>
         <form [formGroup]="addiction" (ngSubmit)="onSubmit(data.id)">
             <select formControlName="addiction_id" required>
