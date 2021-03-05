@@ -88,6 +88,11 @@
   color: var(--color-gray-dark-2);
 }
 
+.span-uppercase {
+  text-transform: uppercase !important;
+  font-family: 'FiratMedium';
+}
+
 #modal-width {
   width: 768px;
 }
