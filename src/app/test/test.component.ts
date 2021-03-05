@@ -85,7 +85,7 @@ export class TestComponent implements OnInit {
 
   openDialogConfidential() {
     const dialogRef = this.dialog.open(ConfidentialModalComponent, {
-      id: "modal-home-padding"
+      id: "modal-confidencial-width"
     });
 
     dialogRef.afterClosed().subscribe(result => {

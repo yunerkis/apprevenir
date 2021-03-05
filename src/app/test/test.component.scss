@@ -5,7 +5,7 @@
 	}
 	&__box {
 		width: 710px;
-		height: 763px;
+		height: auto;
 		overflow: auto;
 		border-radius: 10px;
 		margin: 0 auto;
@@ -85,9 +85,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
-
-
+		position: relative;
     }
 	&__result {
 		font-size: 60px;
@@ -111,24 +109,28 @@
 			text-decoration: underline;
 		}
 	}
+	&__icon {
+		position: absolute;
+		top: 138px;
+		right: 3rem;
+		color: var(--color-gray-dark-2);
+	}
+	&__info-text {
+		color: #3E6472;
+		font-size: 16px;
+		font-family: 'KanitNormal';
+		position: absolute;
+	}
 }
 
 .addiction {
 	font-size: 15px;
 }
-
-.test__school ~ ul {
-	color: var(--color-primary);
-	padding-left: 0;
+#gif_level > ul > li > a {
+	color: var(--color-primary) !important;
 }
 
 .app-flex {
 	margin-top: 3rem;
 }
 
-.info-text {
-	color: #3E6472;
-	font-size: 16px;
-	font-family: 'KanitNormal';
-	margin-top: 16rem;
-}

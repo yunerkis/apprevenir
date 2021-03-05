@@ -10,11 +10,6 @@ body {
   color: var(--color-gray-dark-2);
 }
 
-ul {
-  list-style:none;
-}
-
-
 .inputContainer {
     display: inline-flex;
     flex: 1 1 300px;
@@ -105,4 +100,10 @@ ul {
     outline-style: none !important;
     font-size: 13px;
   }
+}
+
+//Select style
+
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+  color: var(--color-primary);
 }
