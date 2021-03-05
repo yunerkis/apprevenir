@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { LoginComponent } from './auth/login/login.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
+import { ReferralHierarchyComponent } from "./auth/registration/referralHierarchy/renderer/referralHierarchy.component";
 import { HomeComponent } from './home/home.component';
 import { ModalComponent } from './auth/modal/modal.component';
 import { TestComponent } from './test/test.component';
@@ -37,6 +38,7 @@ import { ConfidentialModalComponent } from './test/confidential-modal/confidenti
     AppComponent,
     LoginComponent,
     RegistrationComponent,
+    ReferralHierarchyComponent,
     HomeComponent,
     ModalComponent,
     TestComponent,

@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule, FormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../../services/user/user.service';
+import { FormBuilder, FormGroup, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
+import { ReferralSources } from "./constants/referralSources";
+import { MaritalStatusValues } from "./constants/maritalStatusValues";
+import { EducationLevels } from './constants/educationLevels';
+import { BackendCity, BackendClientTypes, BackendCountry, BackendRegistrationRequest, BackendState } from '@typedefs/backend';
+import { HierarchyNode } from './referralHierarchy/HierarchyNode';
+import { buildRootHierarchy } from "./referralHierarchy/builders/hierarchyBuilder";
+import { getCities, getCountries, getStates } from '@services/geoData/geoDataSource';
+import { LocationFormGroup, LoginFormGroup, PersonalInfoFormGroup } from './forms/FormKeys';
+import { RegistrationResult, submitRegistrationForms } from './forms/registrationSubmitHandler';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -8,269 +18,218 @@ import { UserService } from '../../services/user/user.service';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
+  personalInfoFormGroup: FormGroup;
+  locationFormGroup: FormGroup;
+  loginFormGroup: FormGroup;
   
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  thirdFormGroup: FormGroup;
-  isEditable = false;
-  genders = [
-    {
-      gender : 'Femenino',
-      value: 1
-    },
-    {
-      gender : 'Masculino',
-      value: 2
-    },
-  ];
-  civil_statuses = [
-    {
-      status : 'Soltero/a',
-      value: 1
-    },
-    {
-      status : 'Casado/a',
-      value: 2
-    },
-    {
-      status : 'Viudo/a',
-      value: 3
-    },
-    {
-      status : 'Divorciado/a',
-      value: 4
-    },
-  ];
-  educations = [
-    {
-      education : 'Primaria',
-      value: 1
-    },
-    {
-      education : 'Bachiller',
-      value: 2
-    },
-    {
-      education : 'Universitario',
-      value: 3
-    },
-    {
-      education : 'Posgrado',
-      value: 4
-    },
-    {
-      education : 'Ninguno',
-      value: 5
-    },
-  ];
-  clientTypes = {
-    'persona natual' : ['Ninguno'],
-    'entidades territoriales' : [
-      'Entidad Territorial',
-      {
-        'Zona': ['zones', 'zone'],
-        'Comuna': ['communes', 'commune'],
-        'Barrio': ['neighborhoods', 'neighborhood']
-      }
-    ],
-    'secretarias de educacion': [
-      'Secretaría de Educación',
-      {
-        'Institución educativa': ['educationalInstitutions', 'educational_institution'],
-        'Grado': ['grades', 'grade']
-      }
+  loadingData = true;
+  
+  referralSources = ReferralSources;
+  rootReferralHierarchy: HierarchyNode | null = null;
 
-    ],
-    'instituciones educativas': [
-      'Institución Educativa',
-      {
-        'Grado': ['educationalGrades', 'grade']
-      }
-    ],
-    'universidades': [
-      'Universidad',
-      {
-        'Programa': ['programs', 'program'],
-        'Modalidad': ['modalities', 'modality	'],
-        'Semestre': ['semesters', 'semester']
-      }
-    ],
-    'empresas': [
-      'Empresa',
-      {
-        'Sede': ['locations', 'location'],
-        'Área': ['areas', 'area'],
-        'Turno': ['schedules', 'schedul']
-      }
-    ]
-  };
-  clients:any = false;
-  selects1: any = false;
-  selects2: any = false;
-  selects3: any = false;
-  referId = null;
-  label = [];
-  values = [];
-  countries = [];
-  states = [];
-  cities = [];
+  maritalStatusValues = MaritalStatusValues;
+  educationLevels = EducationLevels;
 
-  constructor(
-    private _formBuilder: FormBuilder,
-    private userService: UserService
-  ) { }
+  countries: BackendCountry[] | null = null;
+  states: BackendState[] | null = null;
+  cities: BackendCity[] | null = null;
 
-  ngOnInit(): void {
-    this.firstFormGroup = this._formBuilder.group({
-      client_type: ['', Validators.required],
-      client: [''],
-      selectA: [''],
-      selectB: [''],
-      selectC: [''],
-      first_names: ['', Validators.required],
-      last_name_one: ['', Validators.required],
-      first_name_two: ['', Validators.required],
-      birthday: ['', Validators.required],
-      gender_id: ['', Validators.required],
-      civil_status_id: ['', Validators.required],
-      education_level_id: ['', Validators.required],
-      
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      country_id: ['', Validators.required],
-      state_id: ['', Validators.required],
-      city_id: ['', Validators.required],
-    });
-    this.thirdFormGroup = this._formBuilder.group({
-      phone: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      password_confirmation: ['', Validators.required],
-    });
-    this.getCountries();
+  constructor(private _formBuilder: FormBuilder, private router: Router) {
+    this.referralHierarchyRequiredValidator = this.referralHierarchyRequiredValidator.bind(this);
+    this.dateValidator = this.dateValidator.bind(this);
+    this.onReferralSourceChanged = this.onReferralSourceChanged.bind(this);
+    this.onCountryChanged = this.onCountryChanged.bind(this);
+    this.onStateChanged = this.onStateChanged.bind(this);
+    this.passwordConfirmationValidator = this.passwordConfirmationValidator.bind(this);
+    this.onSubmitClicked = this.onSubmitClicked.bind(this);
+    this.handleRegistrationResult = this.handleRegistrationResult.bind(this);
   }
 
-  getClients(clientType) {
-    this.clients = false;
-    this.selects1 = false;   
-    this.selects2 = false;
-    this.selects3 = false;
+  get selectedReferralSource() {
+    return this.personalInfoFormGroup.get('referralSource').value;
+  }
 
-    if (clientType != 'persona natual') {
-      this.userService.getClientsList(clientType).subscribe(res => {
-        this.firstFormGroup.patchValue({
-          client: '',
-          selectA: '',
-          selectB: '',
-          selectC: ''
-        });
-        if (res['data'].length > 0) {
-          this.clients = res['data'];
-        }
-      });
+  get referralHierarchyMustBeShown() {
+    if (!this.personalInfoFormGroup) {
+      return false;
     }
+
+    return !!this.selectedReferralSource && this.selectedReferralSource !== BackendClientTypes.NaturalPerson;
   }
 
-  getSelect1(select1) {
-    this.label = [];
-    this.values = [];  
-    this.selects1 = false;   
-    this.selects2 = false;
-    this.selects3 = false;
-    this.referId = null;
+  get genderSelectionIsInvalid() {
+    if (!this.personalInfoFormGroup) {
+      return false;
+    }
 
-    this.firstFormGroup.patchValue({
-      selectA: '',
-      selectB: '',
-      selectC: ''
-    });
+    const control = this.personalInfoFormGroup.get('gender');
+    return control.dirty && control.hasError('required');
+  }
+
+  onProfileNextClicked() {
+    this.personalInfoFormGroup.get('gender').markAsDirty();
+  }
+
+  async ngOnInit(): Promise<void> {
+    this.personalInfoFormGroup = this._formBuilder.group({
+      referralSource: ['', Validators.required],
+      referralHierarchy1: ['', this.referralHierarchyRequiredValidator],
+      referralHierarchy2: [''],
+      referralHierarchy3: [''],
+      referralHierarchy4: [''],
+      referralHierarchy5: [''],
+      name: ['', Validators.required],
+      maidenName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      birthDate: ['', Validators.compose([Validators.required, this.dateValidator])],
+      gender: ['', Validators.required],
+      maritalStatus: ['', Validators.required],
+      educationLevel: ['', Validators.required]
+    } as PersonalInfoFormGroup);
+
+    this.locationFormGroup = this._formBuilder.group({
+      country: ['', Validators.required],
+      state: ['', Validators.required],
+      city: ['', Validators.required]
+    } as LocationFormGroup);
+
+    this.loginFormGroup = this._formBuilder.group({
+      phoneNumber: ['', Validators.required],
+      emailAddress: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(16)])],
+      passwordConfirmation: ['', Validators.compose([Validators.required, this.passwordConfirmationValidator])]
+    } as LoginFormGroup);
+
+    this.loadingData = true;
+    this.countries = await getCountries();
+    this.loadingData = false;
+  }
+
+  public referralHierarchyRequiredValidator(control: AbstractControl): ValidationErrors {
+    if (!this.referralHierarchyMustBeShown) {
+      return null;
+    }
+
+    if (!control.value) {
+      return { required: true };
+    }
+
+    return null;
+  }
+
+  public dateValidator(control: AbstractControl): ValidationErrors {
+    if (!control.value) {
+      return null;
+    }
+
+    const possibleDate = new Date(control.value);
+    if (possibleDate.getTime() == NaN) {
+      return { required: true };
+    }
+
+    return null;
+  }
+
+  public passwordConfirmationValidator(control: AbstractControl): ValidationErrors {
+    if (!this.loginFormGroup) {
+      return null;
+    }
+
+    const password = this.loginFormGroup.get('password').value;
+    if (password !== control.value) {
+      return { required: true };
+    }
+
+    return null;
+  }
+
+  public async onReferralSourceChanged() {
+    this.rootReferralHierarchy = null;
+    [1, 2, 3, 4, 5].forEach(
+      index => this.personalInfoFormGroup.get('referralHierarchy' + index).setValue('')
+    );
+
+    if (!this.referralHierarchyMustBeShown) {
+      return;
+    }
     
-    let type = this.clients[select1].client;
-    this.referId = this.clients[select1].id;
-    let data = this.clientTypes[type]; 
-    console.log(data)
-    for (const key in data[1]) {
-      this.label.push(key);
-      this.values.push(data[1][key]);
+    this.loadingData = true;
+    this.rootReferralHierarchy = await buildRootHierarchy(this.selectedReferralSource);
+    this.loadingData = false;
+  }
+
+  public async onCountryChanged() {
+    const selectedCountryId = this.locationFormGroup.get('country').value;
+    if (!selectedCountryId) {
+      return;
     }
 
-    this.selects1 = this.clients[select1][this.values[0][0]];
+    this.locationFormGroup.get('state').setValue('');
+    this.locationFormGroup.get('city').setValue('');
+    this.cities = null;
+
+    this.loadingData = true;
+    this.states = await getStates(selectedCountryId);
+    this.loadingData = false;
   }
 
-  getSelect2(select2) {
-    this.selects2 = false;
-    this.selects3 = false;
+  public async onStateChanged() {
+    const selectedStateId = this.locationFormGroup.get('state').value;
+    if (!selectedStateId) {
+      return;
+    }
 
-    this.firstFormGroup.patchValue({
-      selectB: '',
-      selectC: ''
-    });
+    this.locationFormGroup.get('city').setValue('');
 
-    this.selects2 = this.selects1[select2][this.values[1][0]];
+    this.loadingData = true;
+    this.cities = await getCities(selectedStateId);
+    this.loadingData = false;
   }
 
-  getSelect3(select3) {
-    this.selects3 = false;
+  public async onSubmitClicked() {
+    const allForms = [
+      this.personalInfoFormGroup, 
+      this.locationFormGroup, 
+      this.loginFormGroup
+    ];
 
-    this.firstFormGroup.patchValue({
-      selectC: ''
-    });
-
-    this.selects3 = this.selects2[select3][this.values[2][0]];
-  }
-
-  getCountries() {
-    this.userService.countries().subscribe(
-      res => {
-        this.countries = res['data'];
-      }, data => {
-        console.log(data.error.errors);
-      });
+    const formsAreValid = allForms.reduce(
+      (formsValid, form) => {
+        form.markAllAsTouched();
+        form.markAsDirty();
+        return formsValid && form.valid;
+      }, true
+    );
     
-  }
-
-  getStates(country) {
-    this.getCities('');
-    if (country != '') {
-      this.userService.states(country).subscribe(
-        res => {
-         this.states = res['data'];
-        }, data => {
-          console.log(data.error.errors);
-        });
-    } else {
-      this.states = [];
-      this.getCities('');
+    if (!formsAreValid) {
+      return;
+    }
+    
+    this.loadingData = true;
+    try {
+      const result = await submitRegistrationForms(...allForms);
+      this.handleRegistrationResult(result);
+    } catch (error) {
+      console.error("Error while trying to submit the registration data", error);
+      this.handleRegistrationResult({ wasSuccessful: false, errorMessages: [] });
+    } finally {
+      this.loadingData = false;
     }
   }
 
-  getCities(state) {
-    if (state != '') {
-      this.userService.cities(state).subscribe(
-        res => {
-         this.cities = res['data'];
-        }, data => {
-          console.log(data.error.errors);
-        });
-    } else {
-      this.cities = [];
-    }
-  }
+  async handleRegistrationResult(result: RegistrationResult) {
+    if (result.wasSuccessful) {
+      await Swal.fire("Bienvenido", "Has sido registrado exitósamente. Utiliza tu correo y contraseña para ingresar.", "success");
 
-  onSubmit() {
-    let formData = Object.assign(this.firstFormGroup.value, this.secondFormGroup.value, this.thirdFormGroup.value); 
-    let birthday = new Date(formData.birthday);
-    formData.last_names = formData.last_name_one+' '+formData.first_name_two;
-    formData.client = formData.client == '' ? 'persona natual' : formData.client;
-    formData.birthday = birthday.getFullYear() + "/" + (birthday.getMonth() + 1) + "/" +  birthday.getDate();   
-    formData.reference = this.referId;
-    formData.client_config = {
-      'client_type': formData.client_type,
-      'client': formData.client,
-      'selectA': formData.selectA,
-      'selectB': formData.selectB,
-      'selectC': formData.selectC,
-    };
-    this.userService.register(formData);
+      this.router.navigate(['']); 
+      return;
+    }
+
+    let errorMessage = "No fue posible contactar el servidor. Por favor revisa tu conexión a internet e inténtalo de nuevo";
+    if (result.errorMessages.length) {
+      errorMessage = "Por favor revisa los datos ingresados e inténtalo de nuevo: " + result.errorMessages.join(", ");
+    }
+
+    Swal.fire("Error", errorMessage, "error");
   }
 }
