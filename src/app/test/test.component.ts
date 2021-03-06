@@ -96,6 +96,7 @@ export class TestComponent implements OnInit {
 
   openDialogSuppor(levelResult) {
     const dialogRef = this.dialog.open(LeveModalComponent, {
+      id: "modal-drugs-width ",
       data: {
         level:levelResult,
         gifLevel: this.gifLevel[levelResult],
