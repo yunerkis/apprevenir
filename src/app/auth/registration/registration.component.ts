@@ -22,6 +22,7 @@ export class RegistrationComponent implements OnInit {
   locationFormGroup: FormGroup;
   loginFormGroup: FormGroup;
   
+  
   loadingData = true;
   
   referralSources = ReferralSources;
