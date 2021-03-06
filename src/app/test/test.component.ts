@@ -94,10 +94,12 @@ export class TestComponent implements OnInit {
     });
   }
 
-  openDialogSuppor(test) {
+  openDialogSuppor(levelResult) {
     const dialogRef = this.dialog.open(LeveModalComponent, {
       data: {
-        test: test
+        level:levelResult,
+        gifLevel: this.gifLevel[levelResult],
+        colorsLevel: this.colorsLevel[levelResult]
       },
     });
 
