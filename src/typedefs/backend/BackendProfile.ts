@@ -6,7 +6,7 @@ export interface BackendProfile {
   first_names: string,
   last_names: string,
   phone: string | null,
-  birhday: string | null,
+  birthday: string | null,
   education_level_id: number,
   is_student: number, // It really is a boolean, BRUH...
   gender_id: number | null,
@@ -14,8 +14,8 @@ export interface BackendProfile {
   country_id: number | null,
   state_id: number | null,
   city_id: number | null,
-  client_config: BackendClientConfig | null,
-  created_at: string,
-  updated_at: string,
+  client_config: string | BackendClientConfig | null,
+  created_at: string | null,
+  updated_at: string | null,
   deleted_at: string | null
 }

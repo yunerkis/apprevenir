@@ -2,10 +2,8 @@ import { FormGroup } from "@angular/forms";
 import { BackendClientTypes, BackendRegistrationRequest, BackendResponse } from "@typedefs/backend";
 import { RawFormData } from "./FormKeys";
 import { environment } from "@environments/environment";
-
-function formatDateComponent(dateComponent: number) {
-  return dateComponent.toString().padStart(2, "0");
-}
+import * as dayjs from "dayjs";
+import { getAuthToken, getStoredProfileInfo } from "@services/auth/authStore";
 
 export interface RegistrationResult {
   wasSuccessful: boolean,
@@ -13,50 +11,61 @@ export interface RegistrationResult {
 }
 
 export async function submitRegistrationForms(
+  isEditingProfile: boolean,
   ...forms: FormGroup[]
 ): Promise<RegistrationResult> {
   const rawFormData: RawFormData = forms.reduce((data, form) => Object.assign(data, form.value), {});
-  const birthday = new Date(rawFormData.birthDate);
-  const birthdayValue = 
-  `${birthday.getFullYear()}-${formatDateComponent(birthday.getMonth() + 1)}-${formatDateComponent(birthday.getDate())}`;
+  const birthdayValue = dayjs(rawFormData.birthDate).format("YYYY-MM-DD");
 
   const registrationPayload: BackendRegistrationRequest = {
     birthday: birthdayValue,
-    country_id: rawFormData.country,
-    state_id: rawFormData.state,
-    city_id: rawFormData.city,
-    civil_status_id: rawFormData.maritalStatus,
+    country_id: rawFormData.country as string,
+    state_id: rawFormData.state as string,
+    city_id: rawFormData.city as string,
+    civil_status_id: rawFormData.maritalStatus as string,
     client: "persona natual",
     client_type: rawFormData.referralSource as BackendClientTypes,
-    education_level_id: rawFormData.educationLevel,
-    email: rawFormData.emailAddress,
-    first_name_two: rawFormData.lastName,
-    first_names: rawFormData.name,
-    gender_id: parseInt(rawFormData.gender),
-    last_name_one: rawFormData.maidenName,
+    education_level_id: rawFormData.educationLevel as string,
+    email: rawFormData.emailAddress as string,
+    first_name_two: rawFormData.lastName as string,
+    first_names: rawFormData.name as string,
+    gender_id: parseInt(rawFormData.gender as string),
+    last_name_one: rawFormData.maidenName as string,
     last_names: rawFormData.maidenName + " " + rawFormData.lastName,
-    password: rawFormData.password,
-    password_confirmation: rawFormData.passwordConfirmation,
-    phone: rawFormData.phoneNumber,
-    reference: rawFormData.referralHierarchy1,
-    selectA: rawFormData.referralHierarchy2,
-    selectB: rawFormData.referralHierarchy3,
-    selectC: rawFormData.referralHierarchy4,
+    password: rawFormData.password as string,
+    password_confirmation: rawFormData.passwordConfirmation as string,
+    phone: rawFormData.phoneNumber as string,
+    reference: rawFormData.referralHierarchy1 as string,
     client_config: {
-      client: BackendClientTypes.NaturalPerson,
       client_type: rawFormData.referralSource as BackendClientTypes,
-      selectA: rawFormData.referralHierarchy2,
-      selectB: rawFormData.referralHierarchy3,
-      selectC: rawFormData.referralHierarchy4
+      client: rawFormData.referralHierarchy1 as string,
+      selectA: rawFormData.referralHierarchy2 as string,
+      selectB: rawFormData.referralHierarchy3 as string,
+      selectC: rawFormData.referralHierarchy4 as string,
+      selectD: rawFormData.referralHierarchy5 as string
     }
   };
 
-  const response = await fetch(`${environment.url}/api/v1/register`, {
+  let url = `${environment.url}/api/v1/register`;
+  let method = "POST";
+  let headers: { [key: string]: string } = {
+    "Content-Type": "application/json"
+  };
+
+  if (isEditingProfile) {
+    const currentProfile = getStoredProfileInfo();
+    url = `${environment.url}/api/v1/users/${currentProfile.id}`;
+    method = "PUT";
+    headers = {
+      ...headers,
+      "Authorization": `Bearer ${getAuthToken()}`
+    };
+  }
+
+  const response = await fetch(url, {
     body: JSON.stringify(registrationPayload),
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    }
+    method,
+    headers
   });
 
   const resultObject: RegistrationResult = { wasSuccessful: true, errorMessages: [] };
