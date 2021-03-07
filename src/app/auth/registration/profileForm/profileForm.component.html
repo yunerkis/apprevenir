@@ -1,6 +1,6 @@
 <app-loader #loader></app-loader>
 
-<div class="section-two" style="background-color: white;" [hidden]="loader.loadingData">
+<div class="section-two" [hidden]="loader.loadingData">
   <mat-horizontal-stepper #stepper [linear]="!profileUpdateModeEnabled">
     <div class="section-two__title">Crear una cuenta</div>
     <mat-step [stepControl]="personalInfoFormGroup">
