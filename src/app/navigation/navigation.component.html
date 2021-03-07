@@ -9,7 +9,7 @@
         <mat-icon  class="burger app-cursor">keyboard_arrow_down</mat-icon>
     </div>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item routerLink="admin">
+            <button mat-menu-item routerLink="admin" *ngIf="userIsAdmin">
                 <mat-icon fontSet="material-icons-outlined">settings</mat-icon>
                 <span class="user-text">Administrar</span>
             </button>
