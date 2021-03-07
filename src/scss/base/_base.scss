@@ -19,6 +19,14 @@ body {
   list-style-type: none;
 }
 
+.loader-show {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 10rem;
+}
+
 .mat-progress-spinner circle, .mat-spinner circle {
   stroke: var(--color-primary)!important;
 }

@@ -10,47 +10,49 @@
 		</div>
 		<div class="test__box">
 			<mat-tab-group>
-                <mat-tab>
-                    <ng-template mat-tab-label>
-                      <mat-icon class="example-tab-icon" fontSet="material-icons-outlined">account_circle</mat-icon>
-                      Mis datos
-                    </ng-template>
-                    <profile-form profile-update="true"></profile-form>
-                </mat-tab>
-                <mat-tab> 
-                    <ng-template mat-tab-label>
-                        <mat-icon class="example-tab-icon"  fontSet="material-icons-outlined">live_help</mat-icon>
-                        Mis test
-                      </ng-template>
-                    <div class="table-container">
-                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-                        <ng-container matColumnDef="Test">
-                        <th mat-header-cell *matHeaderCellDef>Test </th>
-                        <td mat-cell *matCellDef="let element">{{ element.testName }}</td>
-                        </ng-container>
-                        <ng-container matColumnDef="Fecha">
-                        <th mat-header-cell *matHeaderCellDef>Fecha</th>
-                        <td mat-cell *matCellDef="let element">{{ element.date }}</td>
-                        </ng-container>
-                        <ng-container matColumnDef="Nivel">
-                        <th mat-header-cell *matHeaderCellDef>Nivel</th>
-                        <td mat-cell *matCellDef="let element"><span class="span-uppercase" [ngStyle]=setStyle(element.resultLevel)>{{ element.resultLevel }}</span></td>
-                        </ng-container>
-                      
-                        <!-- Symbol Column -->
-                        <ng-container matColumnDef="Respuestas">
-                          <th mat-header-cell *matHeaderCellDef> Respuesta </th>
-                          <td mat-cell *matCellDef="let element">
-                            <mat-icon fontSet="material-icons-outlined" (click)="openDialogProfile(element)" class="icon-live">live_help</mat-icon>
-                            </td>
-                        </ng-container>
-                      
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
-                </div>
-                </mat-tab>
-            </mat-tab-group>
+        <mat-tab>
+            <ng-template mat-tab-label class="tab-test">
+              <mat-icon class="example-tab-icon" fontSet="material-icons-outlined">account_circle</mat-icon>
+              Mis datos
+            </ng-template>
+            <div class="test__profile">
+              <profile-form profile-update="true"></profile-form>
+            </div>
+        </mat-tab>
+        <mat-tab> 
+            <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon"  fontSet="material-icons-outlined">live_help</mat-icon>
+                Mis test
+              </ng-template>
+            <div class="table-container">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <ng-container matColumnDef="Test">
+                <th mat-header-cell *matHeaderCellDef>Test </th>
+                <td mat-cell *matCellDef="let element">{{ element.testName }}</td>
+                </ng-container>
+                <ng-container matColumnDef="Fecha">
+                <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+                </ng-container>
+                <ng-container matColumnDef="Nivel">
+                <th mat-header-cell *matHeaderCellDef>Nivel</th>
+                <td mat-cell *matCellDef="let element"><span class="span-uppercase" [ngStyle]=setStyle(element.resultLevel)>{{ element.resultLevel }}</span></td>
+                </ng-container>
+              
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="Respuestas">
+                  <th mat-header-cell *matHeaderCellDef> Respuesta </th>
+                  <td mat-cell *matCellDef="let element">
+                    <mat-icon fontSet="material-icons-outlined" (click)="openDialogProfile(element)" class="icon-live">live_help</mat-icon>
+                    </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        </mat-tab>
+      </mat-tab-group>
 		</div>
 	</div>
 </div>
