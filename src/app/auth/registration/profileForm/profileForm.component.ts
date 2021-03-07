@@ -218,7 +218,10 @@ export class ProfileFormComponent implements OnInit, AfterViewInit {
     }
 
     const currentFormData = await loadProfileFormData(this.userIdOverride);
-    if (currentFormData.personalInfo.referralSource) {
+    if (
+      currentFormData.personalInfo.referralSource &&
+      currentFormData.personalInfo.referralSource != BackendClientTypes.NaturalPerson
+    ) {
       this.rootReferralHierarchy = await buildRootHierarchy(
         currentFormData.personalInfo.referralSource as BackendClientTypes
       );
