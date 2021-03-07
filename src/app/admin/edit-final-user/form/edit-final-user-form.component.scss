@@ -26,3 +26,21 @@
 .table-action {
     cursor: pointer;
 }
+
+.admin {
+    margin: 0 auto;
+    width: 1050px;
+    margin-top: 8rem;
+    &__card {
+        height: 766px;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        box-shadow: 0px 3px 6px #26A79E26;
+        overflow: auto;
+        margin-bottom: 5rem;
+        border-radius: 10px;
+    }
+}
+.section-two {
+    width: 573px;
+    margin: 0 auto;
+}

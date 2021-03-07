@@ -36,7 +36,7 @@
                 <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
                   <!-- use a disabled button to provide padding for tree leaf -->
                   <button class="btn-list" mat-button routerLink="{{node.route}}"  routerLinkActive="router-link-active" >
-                    <mat-icon fontSet="material-icons-outlined" class="mat-icon-rtl-mirror">
+                    <mat-icon fontSet="material-icons-outlined" >
                         {{node.icon}}
                     </mat-icon>
                     {{node.name}}
@@ -46,7 +46,7 @@
                 <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
                   <button class="btn-list" mat-button  matTreeNodeToggle
                         [attr.aria-label]="'Toggle ' + node.name">
-                    <mat-icon class="mat-icon-rtl-mirror">
+                    <mat-icon fontSet="material-icons-outlined" >
                         {{node.icon}}
                     </mat-icon>
                     {{node.name}}

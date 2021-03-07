@@ -4,7 +4,7 @@ import { Location } from "@angular/common";
 
 @Component({
   templateUrl: "./edit-final-user-form.component.html",
-  styleUrls: ["./edit-final-user-form.component.html"]
+  styleUrls: ["./edit-final-user-form.component.scss"]
 })
 export class EditFinalUserForm {
   userId: string;

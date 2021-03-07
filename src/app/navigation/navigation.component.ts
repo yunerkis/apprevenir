@@ -30,7 +30,7 @@ interface MenuNode {
 const ADMIN_MENU_ELEMENTS: MenuElement[] = [
   {
     name: 'Usuarios finales',
-    icon: 'desktop_windows',
+    icon: 'account_box',
     children: [
       {
         name: 'Crear usuario final',
@@ -44,12 +44,12 @@ const ADMIN_MENU_ELEMENTS: MenuElement[] = [
   },
   {
     name: 'Test',
-    icon: 'help_center',
+    icon: 'live_help',
     route: 'admin/test',
   },
   {
     name: 'Informes',
-    icon: 'assignment',
+    icon: 'content_paste',
     route: 'admin/report',
   },
   {
