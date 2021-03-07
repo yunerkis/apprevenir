@@ -37,6 +37,7 @@ import { LeveModalComponent } from './test/leve-modal/leve-modal.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { LoaderComponent } from './core/loader/loader.component';
 import { EditFinalUserForm } from './admin/edit-final-user/form/edit-final-user-form.component';
+import { NotFoundComponent } from './navigation/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { EditFinalUserForm } from './admin/edit-final-user/form/edit-final-user-
     ConfidentialModalComponent,
     LeveModalComponent,
     LoaderComponent,
-    EditFinalUserForm
+    EditFinalUserForm,
+    NotFoundComponent
     ],
   imports: [
     BrowserModule,

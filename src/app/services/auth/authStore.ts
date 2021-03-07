@@ -2,7 +2,7 @@ import { EventBus } from "@services/messaging/EventBus";
 import { EventMessageWithPayload, KnownMessageKeys } from "@services/messaging/EventMessage";
 import { BackendUser } from "@typedefs/backend";
 
-enum Roles {
+export enum Roles {
   Root = "root",
   Admin = "admin",
   Client = "client"
@@ -25,6 +25,7 @@ export interface IProfileInfo {
   cityId: number,
   clientConfig: any | null,
   role: Roles,
+  isAdmin: boolean,
   createdAt: Date,
   updatedAt: Date | null
 }
@@ -92,6 +93,10 @@ export function updateStoredProfile(user: BackendUser) {
   storeProfileInLocalStorage(currentProfile);
 }
 
+function isRoleAdmin(role: unknown) {
+  return role === Roles.Admin || role === Roles.Root;
+}
+
 export function storeProfileInfo(profileInfo: any) {
   if (!profileInfo) {
     throw new Error("Can not store null profile data");
@@ -114,6 +119,7 @@ export function storeProfileInfo(profileInfo: any) {
     cityId: profileInfo.city_id,
     clientConfig: profileInfo.client_config, // TODO: Normalize this...
     role: profileInfo.role as Roles,
+    isAdmin: isRoleAdmin(profileInfo.role),
     createdAt: new Date(profileInfo.created_at),
     updatedAt: profileInfo.updated_at == null ? null : new Date(profileInfo.updated_at)
   };
@@ -128,11 +134,6 @@ function storeProfileInLocalStorage(profile: IProfileInfo) {
   EventBus.instance.publishMessage(message);
 }
 
-export function isUserAdmin() {
-  const profile = getStoredProfileInfo();
-  return profile.role == Roles.Admin || profile.role == Roles.Root;
-}
-
 export function getStoredProfileInfo(): IProfileInfo {
   const storedProfileJSON = localStorage.getItem("profile");
   if (!storedProfileJSON) {
@@ -140,13 +141,17 @@ export function getStoredProfileInfo(): IProfileInfo {
   }
 
   // Dates are parsed as ISO8601 strings, we have to manually convert them back to Date objects
-  const profileObject = JSON.parse(storedProfileJSON);
+  const profileObject = JSON.parse(storedProfileJSON) as IProfileInfo;
   profileObject.createdAt = new Date(profileObject.createdAt);
   if (profileObject.updatedAt) {
     profileObject.updatedAt = new Date(profileObject.updatedAt);
   }
 
-  return profileObject as IProfileInfo;
+  if (typeof profileObject.isAdmin !== "boolean") {
+    profileObject.isAdmin = isRoleAdmin(profileObject.role);
+  }
+
+  return profileObject;
 }
 
 export function clearAuthStore() {
