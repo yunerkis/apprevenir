@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Location } from "@angular/common";
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ReferralSources } from "../constants/referralSources";
 import { MaritalStatusValues } from "../constants/maritalStatusValues";
 import { EducationLevels } from '../constants/educationLevels';
@@ -12,14 +13,19 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { loadProfileFormData } from '../forms/profileFormLoader';
 import { buildLocationFormGroup, buildLoginFormGroup, buildPersonalInfoFormGroup } from './formSchema';
+import { LoaderComponent } from 'src/app/core/loader/loader.component';
 
 @Component({
   selector: 'profile-form',
   templateUrl: './profileForm.component.html',
   styleUrls: ['./profileForm.component.scss']
 })
-export class ProfileFormComponent implements OnInit {
+export class ProfileFormComponent implements OnInit, AfterViewInit {
   @Input("profile-update") profileUpdateModeEnabled: boolean;
+  @Input("admin-mode") adminModeEnabled: boolean;
+  @Input("user-id-override") userIdOverride: string | null;
+
+  @ViewChild(LoaderComponent) loader: LoaderComponent;
 
   personalInfoFormGroup: FormGroup;
   locationFormGroup: FormGroup;
@@ -35,14 +41,19 @@ export class ProfileFormComponent implements OnInit {
   states: BackendState[] | null = null;
   cities: BackendCity[] | null = null;
 
-  constructor(private _formBuilder: FormBuilder, private router: Router) {
+  constructor(
+    private _formBuilder: FormBuilder, private _router: Router,
+    private _location: Location
+  ) {
+    this.profileUpdateModeEnabled = !!this.profileUpdateModeEnabled;
+    this.adminModeEnabled = !!this.adminModeEnabled;
+
     this.onReferralSourceChanged = this.onReferralSourceChanged.bind(this);
     this.onCountryChanged = this.onCountryChanged.bind(this);
     this.onStateChanged = this.onStateChanged.bind(this);
     this.onSubmitClicked = this.onSubmitClicked.bind(this);
     this.handleRegistrationResult = this.handleRegistrationResult.bind(this);
     this.loadProfileFormDataIfNeeded = this.loadProfileFormDataIfNeeded.bind(this);
-    this.showLoadingIndicator = this.showLoadingIndicator.bind(this);
   }
 
   get selectedReferralSource() {
@@ -70,14 +81,18 @@ export class ProfileFormComponent implements OnInit {
     this.personalInfoFormGroup.get('gender').markAsDirty();
   }
 
-  async ngOnInit(): Promise<void> {
-    this.profileUpdateModeEnabled = !!this.profileUpdateModeEnabled;
+  onCancelClicked() {
+    this._location.back();
+  }
 
+  async ngOnInit(): Promise<void> {
     this.personalInfoFormGroup = buildPersonalInfoFormGroup(this._formBuilder);
     this.locationFormGroup = buildLocationFormGroup(this._formBuilder);
     this.loginFormGroup = buildLoginFormGroup(this._formBuilder, this.profileUpdateModeEnabled);
+  }
 
-    await this.showLoadingIndicator(async () => {
+  async ngAfterViewInit() {
+    await this.loader.showLoadingIndicator(async () => {
       this.countries = await getCountries();
       await this.loadProfileFormDataIfNeeded();
     });
@@ -96,7 +111,7 @@ export class ProfileFormComponent implements OnInit {
       return;
     }
     
-    await this.showLoadingIndicator(async () => {
+    await this.loader.showLoadingIndicator(async () => {
       this.rootReferralHierarchy = await buildRootHierarchy(this.selectedReferralSource);
     });
   }
@@ -111,7 +126,7 @@ export class ProfileFormComponent implements OnInit {
     this.locationFormGroup.get('city').setValue('');
     this.cities = null;
 
-    await this.showLoadingIndicator(async () => {
+    await this.loader.showLoadingIndicator(async () => {
       this.states = await getStates(selectedCountryId);
     });
   }
@@ -124,7 +139,7 @@ export class ProfileFormComponent implements OnInit {
 
     this.locationFormGroup.get('city').setValue('');
 
-    await this.showLoadingIndicator(async () => {
+    await this.loader.showLoadingIndicator(async () => {
       this.cities = await getCities(selectedStateId);
     });
   }
@@ -148,9 +163,9 @@ export class ProfileFormComponent implements OnInit {
       return;
     }
     
-    await this.showLoadingIndicator(async () => {
+    await this.loader.showLoadingIndicator(async () => {
       try {
-        const result = await submitRegistrationForms(this.profileUpdateModeEnabled, ...allForms);
+        const result = await submitRegistrationForms(this.profileUpdateModeEnabled, this.adminModeEnabled, ...allForms);
         this.handleRegistrationResult(result);
       } catch (error) {
         console.error("Error while trying to submit the registration data", error);
@@ -160,17 +175,32 @@ export class ProfileFormComponent implements OnInit {
   }
 
   async handleRegistrationResult(result: RegistrationResult) {
-    let successTitle = "Bienvenido";
-    let successMessage = "Has sido registrado exitosamente. Utiliza tu correo y contraseña para ingresar.";
-    if (this.profileUpdateModeEnabled) {
-      successTitle = "Perfil Actualizado";
-      successMessage = "Tus datos han sido actualizados correctamente";
-    }
-
     if (result.wasSuccessful) {
+      let successTitle = "Bienvenido";
+      let successMessage = "Has sido registrado exitosamente. Utiliza tu correo y contraseña para ingresar.";
+      
+      if (this.profileUpdateModeEnabled) {
+        successTitle = "Perfil Actualizado";
+        successMessage = "Tus datos han sido actualizados correctamente";
+      }
+
+      if (this.adminModeEnabled) {
+        if (this.profileUpdateModeEnabled) {
+          successTitle = "Perfil Actualizado";
+          successMessage = "Los datos del usuario han sido actualizados";
+        } else {
+          successTitle = "Usuario creado";
+          successMessage = "El usuario ha sido creado correctamente";
+        }
+      }
+      
       await Swal.fire(successTitle, successMessage, "success");
 
-      this.router.navigate(['']); 
+      if (this.profileUpdateModeEnabled) {
+        this._location.back();
+      } else {
+        this._router.navigate(['']); 
+      }
       return;
     }
 
@@ -187,8 +217,7 @@ export class ProfileFormComponent implements OnInit {
       return;
     }
 
-    const currentFormData = await loadProfileFormData();
-
+    const currentFormData = await loadProfileFormData(this.userIdOverride);
     if (currentFormData.personalInfo.referralSource) {
       this.rootReferralHierarchy = await buildRootHierarchy(
         currentFormData.personalInfo.referralSource as BackendClientTypes
@@ -206,17 +235,5 @@ export class ProfileFormComponent implements OnInit {
     this.personalInfoFormGroup.patchValue(currentFormData.personalInfo);
     this.locationFormGroup.patchValue(currentFormData.location);
     this.loginFormGroup.patchValue(currentFormData.login);
-  }
-
-  loadingReferences = 0;
-  async showLoadingIndicator<TReturn>(promiseFactory: () => Promise<TReturn>): Promise<TReturn> {
-    this.loadingReferences++;
-    const result = await promiseFactory();
-    this.loadingReferences--;
-    return result;
-  }
-
-  get loadingData() {
-    return this.loadingReferences > 0;
   }
 }
