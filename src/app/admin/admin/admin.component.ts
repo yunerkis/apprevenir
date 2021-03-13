@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormArray  } from '@angular/forms';
+import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from 'src/app/services/user/user.service';
 import { CommunesModalComponent } from './communes-modal/communes-modal.component';
 import { CorrectionsModalComponent } from './corrections-modal/corrections-modal.component';
@@ -14,6 +16,22 @@ interface Data {
   users: User[];
 }
 
+export interface PeriodicElement {
+  idUser: string;
+  name: string;
+  type: string;
+  test: string;
+  date: string;
+}
+
+const ELEMENT_DATA: PeriodicElement[] = [
+  { idUser: '001', 
+    name: 'Industrias Noel', 
+    type: 'Empresa', 
+    test: 'Activo', 
+    date: 'icon'
+  }
+];
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -21,7 +39,21 @@ interface Data {
 })
 
 export class AdminComponent implements OnInit {
+  public disabled = false;
+  public color: ThemePalette = 'primary';
+  public touchUi = false;
 
+  public displayedColumns: string[] = [
+    'idUser', 
+    'name', 
+    'type', 
+    'test', 
+    'date'
+  ];
+  public dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+
+  colorCtr: AbstractControl = new FormControl(null);
+  selectedFiles : any;
   clientForm: FormGroup;
   selectable = true;
   removable = true;
@@ -63,10 +95,13 @@ export class AdminComponent implements OnInit {
   }
 
   getCountries() {
-
     this.userService.countries().subscribe( res => {
         this.countries = res['data'];
       });
+  }
+
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
   }
 
   getStates(country) {

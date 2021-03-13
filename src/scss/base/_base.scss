@@ -135,3 +135,24 @@ body {
 .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
   color: var(--color-primary);
 }
+
+//Inputs and icons
+
+.field-icons {
+  display: flex;
+  align-items: center;
+  .mat-form-field-wrapper {
+    width: 98% !important;
+  }
+  &__picker {
+    .mat-icon-button {
+      border: 1px solid var(--color-grey-dark-1);
+      color: var(--color-grey-medium-2);
+    }
+  }
+}
+
+.icon-upload {
+  border: 1px solid var(--color-grey-dark-1) !important;
+  color: var(--color-grey-medium-2);
+}
