@@ -43,11 +43,6 @@ const ADMIN_MENU_ELEMENTS: MenuElement[] = [
     ],
   },
   {
-    name: 'Test',
-    icon: 'live_help',
-    route: 'admin/test',
-  },
-  {
     name: 'Informes',
     icon: 'content_paste',
     route: 'admin/report',
