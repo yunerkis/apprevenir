@@ -92,25 +92,20 @@
 				</button>
 			</div>
 			<table class="test-table" mat-table [dataSource]="dataSource" matSort matSortActive="position" matSortDisableClear matSortDirection="desc" >
-				<ng-container matColumnDef="idUser">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Id</th>
-				<td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
+				<ng-container matColumnDef="comuna">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Comuna</th>
+				<td mat-cell *matCellDef="let element"> {{element.comuna}} </td>
 				</ng-container>
-				<ng-container matColumnDef="name">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Nombre</th>
-				<td mat-cell *matCellDef="let element"> {{element.name}} </td>
+				<ng-container matColumnDef="barrio">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Barrio</th>
+				<td mat-cell *matCellDef="let element"> {{element.barrio}} </td>
 				</ng-container>
-				<ng-container matColumnDef="type">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Tipo </th>
-				<td mat-cell *matCellDef="let element"> {{element.type}} </td>
-				</ng-container>
-				<ng-container matColumnDef="test">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Estado</th>
-				<td mat-cell *matCellDef="let element"> {{element.test}} </td>
-				</ng-container>
-				<ng-container matColumnDef="date">
+				<ng-container matColumnDef="edit">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Edición</th>
-				<td mat-cell *matCellDef="let element"> {{element.date}} </td>
+				<td mat-cell *matCellDef="let element">
+					<mat-icon fontSet="material-icons-outlined" class="app-cursor">edit</mat-icon>
+					<mat-icon fontSet="material-icons-outlined" class="app-cursor">delete</mat-icon>
+				</td>
 				</ng-container>
 				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -122,32 +117,26 @@
 					<mat-icon>add</mat-icon>
 				</button>
 			</div>
-			<table class="test-table">
-				<tr class="test-table__header">
-				  <th>Corregimiento</th>
-				  <th>Veredas</th>
-				</tr>
-				<tr>
-				  <td>San Cristobal</td>
-				  <td>Guayabal</td>
-				  <td><span class="material-icons">
-					restore_from_trash
-					</span>
-					<span class="material-icons">
-						edit
-						</span></td>
-				</tr>
-				<tr>
-				  <td>San Antonio de Prado</td>
-				  <td>El Poblado</td>
-				  <td><span class="material-icons">
-					restore_from_trash
-					</span>
-					<span class="material-icons">
-						edit
-						</span></td>
-				</tr>
+			<table class="test-table" mat-table [dataSource]="data_Source" matSort matSortActive="position" matSortDisableClear matSortDirection="desc" >
+				<ng-container matColumnDef="corregimiento">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Corregimiento</th>
+				<td mat-cell *matCellDef="let element"> {{element.corregimiento}} </td>
+				</ng-container>
+				<ng-container matColumnDef="vereda">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Vereda</th>
+				<td mat-cell *matCellDef="let element"> {{element.vereda}} </td>
+				</ng-container>
+				<ng-container matColumnDef="edit">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Edición</th>
+				<td mat-cell *matCellDef="let element">
+					<mat-icon fontSet="material-icons-outlined" class="app-cursor">edit</mat-icon>
+					<mat-icon fontSet="material-icons-outlined" class="app-cursor">delete</mat-icon>
+				</td>
+				</ng-container>
+				<tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumn;"></tr>
 			</table>
+
 			<div class="admin__turno">Ingrese las sedes separadas por coma o presionando (Enter)</div>
 			<div class="admin__chips">
 				<div class="admin__sede">Sedes</div>

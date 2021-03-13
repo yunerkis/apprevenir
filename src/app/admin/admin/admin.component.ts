@@ -16,20 +16,28 @@ interface Data {
   users: User[];
 }
 
-export interface PeriodicElement {
-  idUser: string;
-  name: string;
-  type: string;
-  test: string;
-  date: string;
+export interface CommunesElement {
+  comuna: string;
+  barrio: string;
+  edit: string;
+}
+export interface CorrectionsElement {
+  corregimiento: string;
+  vereda: string;
+  edit: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { idUser: '001', 
-    name: 'Industrias Noel', 
-    type: 'Empresa', 
-    test: 'Activo', 
-    date: 'icon'
+const COMMUNES_ELEMENT_DATA: CommunesElement[] = [
+  { comuna: '001', 
+    barrio: 'Industrias Noel', 
+    edit: 'icon'
+  }
+];
+
+const CORRECTIONS_ELEMENT_DATA: CorrectionsElement[] = [
+  { corregimiento: '001', 
+    vereda: 'Industrias Noel', 
+    edit: 'icon'
   }
 ];
 @Component({
@@ -42,16 +50,18 @@ export class AdminComponent implements OnInit {
   public disabled = false;
   public color: ThemePalette = 'primary';
   public touchUi = false;
-
+  public dataSource = new MatTableDataSource<CommunesElement>(COMMUNES_ELEMENT_DATA);
+  public data_Source = new MatTableDataSource<CorrectionsElement>(CORRECTIONS_ELEMENT_DATA);
   public displayedColumns: string[] = [
-    'idUser', 
-    'name', 
-    'type', 
-    'test', 
-    'date'
+    'comuna', 
+    'barrio', 
+    'edit'
   ];
-  public dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-
+  public displayedColumn: string[] = [
+    'corregimiento', 
+    'vereda', 
+    'edit'
+  ];
   colorCtr: AbstractControl = new FormControl(null);
   selectedFiles : any;
   clientForm: FormGroup;
