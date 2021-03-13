@@ -38,6 +38,7 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { LoaderComponent } from './core/loader/loader.component';
 import { EditFinalUserForm } from './admin/edit-final-user/form/edit-final-user-form.component';
 import { NotFoundComponent } from './navigation/not-found/not-found.component';
+import { PolicyModalComponent } from './auth/policy-modal/policy-modal.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { NotFoundComponent } from './navigation/not-found/not-found.component';
     LeveModalComponent,
     LoaderComponent,
     EditFinalUserForm,
-    NotFoundComponent
+    NotFoundComponent,
+    PolicyModalComponent
     ],
   imports: [
     BrowserModule,
