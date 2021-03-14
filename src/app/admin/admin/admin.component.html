@@ -80,9 +80,6 @@
 						<ngx-mat-color-picker #picker [touchUi]="touchUi" [color]="color"></ngx-mat-color-picker>
 					</div>
 				</div>
-				<div>
-					<button class="btn btn-primary app-m-top" type="submit">Guardar</button>
-				</div>
 			</form>
 			<div class="admin__sub-title">Información Específica</div>
 			<div class="admin__box-text">
@@ -137,86 +134,37 @@
 				<tr mat-row *matRowDef="let row; columns: displayedColumn;"></tr>
 			</table>
 
-			<div class="admin__turno">Ingrese las sedes separadas por coma o presionando (Enter)</div>
-			<div class="admin__chips">
-				<div class="admin__sede">Sedes</div>
-				<mat-form-field class="width-100">
-					<mat-chip-list #chipList aria-label="User selection">
-						<mat-chip  [selectable]="selectable" [removable]="removable">
-							Medellín
-							<mat-icon matChipRemove>cancel</mat-icon>
-						</mat-chip>
-						<mat-chip  [selectable]="selectable" [removable]="removable">
-							Ríonegro
-							<mat-icon matChipRemove>cancel</mat-icon>
-						</mat-chip>
-					</mat-chip-list>
-				</mat-form-field>
-			</div>
-			<div class="admin__turno">Ingrese las áreas separadas por coma o presionando (Enter)</div>
-			<div class="admin__chips">
-				<div class="admin__sede">Áreas</div>
-				<mat-form-field class="width-100">
-					<mat-chip-list #chipList aria-label="User selection">
-						<mat-chip  [selectable]="selectable" [removable]="removable">
-							Producción
-							<mat-icon matChipRemove>cancel</mat-icon>
-						</mat-chip>
-						<mat-chip  [selectable]="selectable" [removable]="removable">
-							Administrativa
-							<mat-icon matChipRemove>cancel</mat-icon>
-						</mat-chip>
-						<mat-chip  [selectable]="selectable" [removable]="removable">
-							Puntos de Venta
-							<mat-icon matChipRemove>cancel</mat-icon>
-						</mat-chip>
-					</mat-chip-list>
-				</mat-form-field>
-			</div>
-			<div class="admin__turno">Ingrese los turnos separados por coma o presionando (Enter)</div>
-			<div class="admin__chips">
-				<div class="admin__sede">Turnos</div>
-				<mat-form-field class="width-100">
-					<mat-chip-list #chipList aria-label="User selection">
-						<mat-chip  [selectable]="selectable" [removable]="removable">
-							8 - 12
-							<mat-icon matChipRemove>cancel</mat-icon>
-						</mat-chip>
-						<mat-chip  [selectable]="selectable" [removable]="removable">
-							1 - 7
-							<mat-icon matChipRemove>cancel</mat-icon>
-						</mat-chip>
-						<mat-chip  [selectable]="selectable" [removable]="removable">
-							Nocturna
-							<mat-icon matChipRemove>cancel</mat-icon>
-						</mat-chip>
-					</mat-chip-list>
-				</mat-form-field>
-			</div>
-			<div class="admin__turno">Ingrese las instituciones educativas separadas por coma o presionando (Enter)</div>
-			<div class="admin__chips">
-				<div class="admin__sede">Instituciones educativas</div>
-				<mat-form-field class="width-100">
-					<mat-chip-list #chipList aria-label="User selection">
-						<mat-chip  [selectable]="selectable" [removable]="removable">
-							I.E. CEFA
-							<mat-icon matChipRemove>cancel</mat-icon>
-						</mat-chip>
-						<mat-chip  [selectable]="selectable" [removable]="removable">
-							Ferrini
-							<mat-icon matChipRemove>cancel</mat-icon>
-						</mat-chip>
-						<mat-chip  [selectable]="selectable" [removable]="removable">
-							I.E. INEM
-							<mat-icon matChipRemove>cancel</mat-icon>
-						</mat-chip>
-						<mat-chip  [selectable]="selectable" [removable]="removable">
-							I.E Manuela Restrepo
-							<mat-icon matChipRemove>cancel</mat-icon>
-						</mat-chip>
-					</mat-chip-list>
-				</mat-form-field>
-			</div>
+			<chip-input 
+				description="Ingrese las sedes separadas por coma o presionando (Enter)" 
+				title="Sedes"
+				[options]="possibleAreas"
+				formKey="selectedAreas"
+				placeholder="Sedes">
+			</chip-input>
+
+			<chip-input 
+				description="Ingrese las áreas separadas por coma o presionando (Enter)" 
+				title="Área"
+				[options]="possibleAreas"
+				formKey="selectedAreas"
+				placeholder="Áreas">
+			</chip-input>
+
+			<chip-input 
+				description="Ingrese los turnos separados por coma o presionando (Enter)" 
+				title="Turnos"
+				[options]="possibleAreas"
+				formKey="selectedAreas"
+				placeholder="Turnos">
+			</chip-input>
+
+			<chip-input 
+				description="Ingrese las instituciones educativas separadas por coma o presionando (Enter)" 
+				title="Instituciones educativas"
+				[options]="possibleAreas"
+				formKey="selectedAreas"
+				placeholder="Instituciones educativas">
+			</chip-input>
 
 			<div class="admin__title app-m-bottom">Tests habilitados</div>
 			<section class="app-flex" style="   justify-content: space-between;">
@@ -247,7 +195,9 @@
 
 			</section>
 
-			
+			<div>
+				<button class="btn btn-primary app-m-top" type="submit">Guardar</button>
+			</div>
 		</div>
 	</div>
 </div>

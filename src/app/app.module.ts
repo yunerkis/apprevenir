@@ -38,6 +38,7 @@ import { LoaderComponent } from './core/loader/loader.component';
 import { EditFinalUserForm } from './admin/edit-final-user/form/edit-final-user-form.component';
 import { NotFoundComponent } from './navigation/not-found/not-found.component';
 import { PolicyModalComponent } from './auth/policy-modal/policy-modal.component';
+import { PillComponent } from './admin/admin/pill-component/pill.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { PolicyModalComponent } from './auth/policy-modal/policy-modal.component
     LoaderComponent,
     EditFinalUserForm,
     NotFoundComponent,
-    PolicyModalComponent
+    PolicyModalComponent,
+    PillComponent
     ],
   imports: [
     BrowserModule,

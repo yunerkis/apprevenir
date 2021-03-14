@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { PillOption } from '../pill-component/pill.component';
 
 @Component({
   selector: 'app-communes-modal',
@@ -7,6 +8,13 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./communes-modal.component.scss']
 })
 export class CommunesModalComponent implements OnInit {
+  possibleAreas: PillOption[] = [{
+    key: "1",
+    label: "Producción"
+  }, {
+    key: "2",
+    label: "Investigación"
+  }];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any

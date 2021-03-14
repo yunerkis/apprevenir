@@ -6,6 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from 'src/app/services/user/user.service';
 import { CommunesModalComponent } from './communes-modal/communes-modal.component';
 import { CorrectionsModalComponent } from './corrections-modal/corrections-modal.component';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { PillOption } from './pill-component/pill.component';
 
 interface User {
   name: string;
@@ -65,8 +67,6 @@ export class AdminComponent implements OnInit {
   colorCtr: AbstractControl = new FormControl(null);
   selectedFiles : any;
   clientForm: FormGroup;
-  selectable = true;
-  removable = true;
   countries = [];
   states = [];
   cities = [];
@@ -77,9 +77,13 @@ export class AdminComponent implements OnInit {
     {name: 'User3', id: 2},
   ]};
 
-  remove(getId: number): void {
-    this.data.users = [...this.data.users.filter(({id}) => getId !== id)];
-  }
+  possibleAreas: PillOption[] = [{
+    key: "1",
+    label: "Producción"
+  }, {
+    key: "2",
+    label: "Investigación"
+  }];
 
   constructor(
     public userService: UserService,
@@ -151,8 +155,7 @@ export class AdminComponent implements OnInit {
   }
 
   openDialogCorrection() {
-    const dialogRef = this.dialog.open(CorrectionsModalComponent, {
-    });
+    const dialogRef = this.dialog.open(CorrectionsModalComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -160,8 +163,7 @@ export class AdminComponent implements OnInit {
   }
 
   openDialogCommunes() {
-    const dialogRef = this.dialog.open(CommunesModalComponent, {
-    });
+    const dialogRef = this.dialog.open(CommunesModalComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
