@@ -36,12 +36,13 @@
     }
 
     &__card {
-        height: 2500px;
+        height: auto;
         background: #FFFFFF 0% 0% no-repeat padding-box;
         box-shadow: 0px 3px 6px #26A79E26;
         overflow: auto;
         margin-bottom: 5rem;
         border-radius: 10px;
+        padding-bottom: 5rem;
     }
 
     &__box {
@@ -111,12 +112,14 @@
 
 .test-table {
     border: 1px solid #4A657080;
-border-radius: 10px;
-width: 100%;
-color: #4A657080;
-font-family: "KanitNormal";
-font-size: 15px;
-padding: 1rem;
+    border-radius: 10px;
+    width: 100%;
+    color: #4A657080;
+    font-family: "KanitNormal";
+    font-size: 15px;
+    padding: 1rem;
+    margin-bottom: 3rem;
+    padding: 10px 0;
 
 th {
     text-align: left;

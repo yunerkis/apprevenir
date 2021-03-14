@@ -126,6 +126,17 @@
 		width: 87%;
 		margin-top: 2rem;
 	}
+
+	&__addiction {
+		display: flex;
+		align-items: center;
+
+		.test-form__option-answer {
+			margin-top: 5px;
+		}
+
+		margin-bottom: 20px;
+	}
 }
 
 .addiction {

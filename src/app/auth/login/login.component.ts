@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
+import { PolicyModalComponent } from '../policy-modal/policy-modal.component';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
@@ -23,6 +24,15 @@ export class LoginComponent implements OnInit {
   openDialog() {
 
     const dialogRef = this.dialog.open(ModalComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openDialogPolicy() {
+
+    const dialogRef = this.dialog.open(PolicyModalComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

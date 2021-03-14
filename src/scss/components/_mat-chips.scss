@@ -10,3 +10,18 @@
         background-color: var(--color-accent-orange);
     }
 }
+
+//Style for chip selections
+.admin {
+    &__turno {
+        color: var(--color-normal-grey);
+        font-family: 'FiratRegular';
+        font-size: 16px;
+        margin: 1rem 0;
+    }
+    &__sede {
+        color: #009E9E;
+        font-family: 'FiratRegular';
+        font-size: 13px;
+    }
+}

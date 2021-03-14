@@ -6,13 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
 import { LoginComponent } from './auth/login/login.component';
 import { ProfileFormComponent } from './auth/registration/profileForm/profileForm.component';
 import { ReferralHierarchyComponent } from "./auth/registration/clientConfig/referralHierarchy/renderer/referralHierarchy.component";
 import { HomeComponent } from './home/home.component';
 import { ModalComponent } from './auth/modal/modal.component';
 import { TestComponent } from './test/test.component';
-import { TestComponent as AdminTestComponent } from "./admin/test/test.component";
 import { RecoveryComponent } from './auth/recovery/recovery.component';
 import { ModalHomeQuestionComponent } from './modals/modal-home-question/modal-home-question.component';
 import { AdminComponent } from './admin/admin/admin.component';
@@ -27,7 +27,6 @@ import { EditClientComponent } from './admin/edit-client/edit-client.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { InformationModalComponent } from './test/information-modal/information-modal.component';
-import { TestDoneModalComponent } from './admin/test/test-done-modal/test-done-modal.component';
 import { CommunesModalComponent } from './admin/admin/communes-modal/communes-modal.component';
 import { CorrectionsModalComponent } from './admin/admin/corrections-modal/corrections-modal.component';
 import { ProfileModalComponent } from './profile/profile-modal/profile-modal.component';
@@ -39,6 +38,8 @@ import { LoaderComponent } from './core/loader/loader.component';
 import { EditFinalUserForm } from './admin/edit-final-user/form/edit-final-user-form.component';
 import { NotFoundComponent } from './navigation/not-found/not-found.component';
 import { ClientConfigComponent } from './auth/registration/clientConfig/client-config.component';
+import { PolicyModalComponent } from './auth/policy-modal/policy-modal.component';
+import { PillComponent } from './admin/admin/pill-component/pill.component';
 
 @NgModule({
   declarations: [
@@ -61,9 +62,7 @@ import { ClientConfigComponent } from './auth/registration/clientConfig/client-c
     SystemUserComponent,
     EditSystemUserComponent,
     EditClientComponent,
-    AdminTestComponent,
     InformationModalComponent,
-    TestDoneModalComponent,
     CommunesModalComponent,
     CorrectionsModalComponent,
     ProfileModalComponent,
@@ -73,7 +72,9 @@ import { ClientConfigComponent } from './auth/registration/clientConfig/client-c
     LoaderComponent,
     EditFinalUserForm,
     NotFoundComponent,
-    ClientConfigComponent
+    ClientConfigComponent,
+    PolicyModalComponent,
+    PillComponent
   ],
   imports: [
     BrowserModule,
@@ -82,9 +83,12 @@ import { ClientConfigComponent } from './auth/registration/clientConfig/client-c
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule 
+    HttpClientModule,
+    NgxMatColorPickerModule
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

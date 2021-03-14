@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormArray  } from '@angular/forms';
+import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from 'src/app/services/user/user.service';
 import { CommunesModalComponent } from './communes-modal/communes-modal.component';
 import { CorrectionsModalComponent } from './corrections-modal/corrections-modal.component';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { PillOption } from './pill-component/pill.component';
 
 interface User {
   name: string;
@@ -14,6 +18,30 @@ interface Data {
   users: User[];
 }
 
+export interface CommunesElement {
+  comuna: string;
+  barrio: string;
+  edit: string;
+}
+export interface CorrectionsElement {
+  corregimiento: string;
+  vereda: string;
+  edit: string;
+}
+
+const COMMUNES_ELEMENT_DATA: CommunesElement[] = [
+  { comuna: '001', 
+    barrio: 'Industrias Noel', 
+    edit: 'icon'
+  }
+];
+
+const CORRECTIONS_ELEMENT_DATA: CorrectionsElement[] = [
+  { corregimiento: '001', 
+    vereda: 'Industrias Noel', 
+    edit: 'icon'
+  }
+];
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -21,10 +49,24 @@ interface Data {
 })
 
 export class AdminComponent implements OnInit {
-
+  public disabled = false;
+  public color: ThemePalette = 'primary';
+  public touchUi = false;
+  public dataSource = new MatTableDataSource<CommunesElement>(COMMUNES_ELEMENT_DATA);
+  public data_Source = new MatTableDataSource<CorrectionsElement>(CORRECTIONS_ELEMENT_DATA);
+  public displayedColumns: string[] = [
+    'comuna', 
+    'barrio', 
+    'edit'
+  ];
+  public displayedColumn: string[] = [
+    'corregimiento', 
+    'vereda', 
+    'edit'
+  ];
+  colorCtr: AbstractControl = new FormControl(null);
+  selectedFiles : any;
   clientForm: FormGroup;
-  selectable = true;
-  removable = true;
   countries = [];
   states = [];
   cities = [];
@@ -35,9 +77,13 @@ export class AdminComponent implements OnInit {
     {name: 'User3', id: 2},
   ]};
 
-  remove(getId: number): void {
-    this.data.users = [...this.data.users.filter(({id}) => getId !== id)];
-  }
+  possibleAreas: PillOption[] = [{
+    key: "1",
+    label: "Producción"
+  }, {
+    key: "2",
+    label: "Investigación"
+  }];
 
   constructor(
     public userService: UserService,
@@ -63,10 +109,13 @@ export class AdminComponent implements OnInit {
   }
 
   getCountries() {
-
     this.userService.countries().subscribe( res => {
         this.countries = res['data'];
       });
+  }
+
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
   }
 
   getStates(country) {
@@ -106,8 +155,7 @@ export class AdminComponent implements OnInit {
   }
 
   openDialogCorrection() {
-    const dialogRef = this.dialog.open(CorrectionsModalComponent, {
-    });
+    const dialogRef = this.dialog.open(CorrectionsModalComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -115,8 +163,7 @@ export class AdminComponent implements OnInit {
   }
 
   openDialogCommunes() {
-    const dialogRef = this.dialog.open(CommunesModalComponent, {
-    });
+    const dialogRef = this.dialog.open(CommunesModalComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
