@@ -14,6 +14,7 @@ export interface IProfileInfo {
   email: string,
   firstNames: string,
   lastNames: string,
+  lastNamesTwo: string,
   phoneNumber: string,
   birthday: string,
   educationLevelId: number,
@@ -79,6 +80,7 @@ export function updateStoredProfile(user: BackendUser) {
   const currentProfile = getStoredProfileInfo();
   currentProfile.firstNames = user.profile.first_names;
   currentProfile.lastNames = user.profile.last_names;
+  currentProfile.lastNamesTwo = user.profile.last_names_two;
   currentProfile.phoneNumber = user.profile.phone;
   currentProfile.birthday = user.profile.birthday; // TODO: dayjs this...
   currentProfile.educationLevelId = user.profile.education_level_id;
@@ -108,6 +110,7 @@ export function storeProfileInfo(profileInfo: any) {
     email: profileInfo.email,
     firstNames: profileInfo.first_names,
     lastNames: profileInfo.last_names,
+    lastNamesTwo: profileInfo.last_names_two,
     phoneNumber: profileInfo.phone,
     birthday: profileInfo.birthday, // TODO: dayjs this...
     educationLevelId: profileInfo.education_level_id,

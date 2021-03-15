@@ -5,6 +5,7 @@ export interface BackendProfile {
   user_id: number,
   first_names: string,
   last_names: string,
+  last_names_two: string,
   phone: string | null,
   birthday: string | null,
   education_level_id: number,

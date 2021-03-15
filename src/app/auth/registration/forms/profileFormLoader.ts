@@ -34,10 +34,6 @@ export async function loadProfileFormData(userIdOveride: string | null = null): 
     }
   }
 
-  const lastNameComponents = userProfile.last_names?.split(" ") || [];
-  const lastName = lastNameComponents.length > 1 ? lastNameComponents[1] : "";
-  const maidenName = lastNameComponents.length > 0 ? lastNameComponents[0] : "";
-
   return {
     personalInfo: {
       referralSource: clientConfig?.client_type,
@@ -49,8 +45,8 @@ export async function loadProfileFormData(userIdOveride: string | null = null): 
       birthDate: birthdayValue,
       educationLevel: userProfile.education_level_id?.toString(),
       gender: userProfile.gender_id?.toString(),
-      lastName,
-      maidenName,
+      lastName: userProfile.last_names,
+      lastNameTwo: userProfile.last_names_two,
       maritalStatus: userProfile.civil_status_id?.toString(),
       name: userProfile.first_names
     },
