@@ -10,8 +10,8 @@ export type PersonalInfoFormKeys =
   | "referralSource"
   | ReferralHierarchyKeys
   | "name"
-  | "maidenName"
   | "lastName"
+  | "lastNameTwo"
   | "birthDate"
   | "gender"
   | "maritalStatus"

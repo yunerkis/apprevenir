@@ -1,0 +1,21 @@
+.level {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    &__title {
+        color: var(--color-normal-grey);
+        font-family: "KanitRegular";
+        font-size: 16px;
+        margin-right: 10px;
+    }
+    &__chip {
+        color: var(--color-white) !important;
+        font-family: 'FiratRegular';
+        background-color: var(--color-accent-orange) !important;
+    }
+    &__text {
+        color: var(--color-normal-grey);
+        font-family: "KanitMedium";
+        font-size: 24px;
+    }
+}

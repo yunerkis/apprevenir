@@ -40,6 +40,7 @@ import { NotFoundComponent } from './navigation/not-found/not-found.component';
 import { ClientConfigComponent } from './auth/registration/clientConfig/client-config.component';
 import { PolicyModalComponent } from './auth/policy-modal/policy-modal.component';
 import { PillComponent } from './admin/admin/pill-component/pill.component';
+import { ReportModalComponent } from './admin/report/report-modal/report-modal.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { PillComponent } from './admin/admin/pill-component/pill.component';
     NotFoundComponent,
     ClientConfigComponent,
     PolicyModalComponent,
-    PillComponent
+    PillComponent,
+    ReportModalComponent
   ],
   imports: [
     BrowserModule,

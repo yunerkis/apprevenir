@@ -2,22 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 
-export interface ProfileAnswer {
-  number: string;
-  question: string;
-  answer: string;
-}
-const ELEMENT_DATA: ProfileAnswer[] = [
-  {number: "Tecnologías", question: '08/09/20', answer: "MODERADO"},
-];
-
 @Component({
-  selector: 'app-profile-modal',
-  templateUrl: './profile-modal.component.html',
-  styleUrls: ['./profile-modal.component.scss']
+  selector: 'app-report-modal',
+  templateUrl: './report-modal.component.html',
+  styleUrls: ['./report-modal.component.scss']
 })
-export class ProfileModalComponent implements OnInit {
-  
+export class ReportModalComponent implements OnInit {
+
   color = {
     'Severo': '#FF4E60',
     'Moderado': '#FFA14E',
@@ -36,7 +27,6 @@ export class ProfileModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.dataSource = this.data['answers'];
   }
 
