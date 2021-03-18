@@ -9,6 +9,7 @@ import { MaterialModule } from './material.module';
 import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
 import { LoginComponent } from './auth/login/login.component';
 import { ProfileFormComponent } from './auth/registration/profileForm/profileForm.component';
+import { UserSystemFormComponent } from './admin/userSystemForm/userSystemForm.component';
 import { ReferralHierarchyComponent } from "./auth/registration/clientConfig/referralHierarchy/renderer/referralHierarchy.component";
 import { HomeComponent } from './home/home.component';
 import { ModalComponent } from './auth/modal/modal.component';
@@ -41,12 +42,14 @@ import { ClientConfigComponent } from './auth/registration/clientConfig/client-c
 import { PolicyModalComponent } from './auth/policy-modal/policy-modal.component';
 import { PillComponent } from './admin/admin/pill-component/pill.component';
 import { ReportModalComponent } from './admin/report/report-modal/report-modal.component';
+import { EditSystemUserFormComponent } from './admin/edit-system-user/form/edit-system-user-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ProfileFormComponent,
+    UserSystemFormComponent,
     RegistrationComponent,
     ReferralHierarchyComponent,
     HomeComponent,
@@ -76,7 +79,8 @@ import { ReportModalComponent } from './admin/report/report-modal/report-modal.c
     ClientConfigComponent,
     PolicyModalComponent,
     PillComponent,
-    ReportModalComponent
+    ReportModalComponent,
+    EditSystemUserFormComponent,
   ],
   imports: [
     BrowserModule,

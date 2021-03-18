@@ -12,3 +12,4 @@ export { Country } from "./geographicData/Country";
 export { State } from "./geographicData/State";
 export { City } from "./geographicData/City";
 export { RegistrationRequest } from "./registration/RegistrationRequest";
+export { RegistrationSystemRequest } from "./registration/RegistrationSystemRequest";
