@@ -36,6 +36,7 @@ export class ClientConfigComponent {
   public async onReferralSourceChanged() {
     this.rootReferralHierarchy = null;
     this.referralConfigDS = null;
+    this.referralConfigAttributes = null;
     
     [1, 2, 3, 4, 5].forEach(
       index => {
