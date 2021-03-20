@@ -8,16 +8,17 @@ import { City, Country, State, Test, ZoneType } from '@typedefs/backend';
 import { LoaderComponent } from 'src/app/core/loader/loader.component';
 import { ZoneEditModalComponent } from './zone-edit-modal/zone-edit-modal.component';
 import { NewClientTypes } from './constants/newClientTypes';
-import { buildClientFormGroup, configureTestsControl, storeBrandImageFiles } from './formSchema';
+import { buildClientFormGroup, configureTestsControl, loadUserIntoForm, storeBrandImageFiles } from './formSchema';
 import { ZoneInputConfig } from './models/ZoneInputConfig';
 import { UserZone } from './models/UserZone';
 import { ClientTypes } from "@typedefs/backend/userData/ClientTypes";
 import { ChipInputComponent } from './chip-autocomplete/chip-input.component';
 import { getAllTests } from '@services/test/testsDataSource';
 import { submitClientCreationForm } from './formSubmitter';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BackendError } from '@services/common';
 import Swal from 'sweetalert2';
+import { getUserData } from '@services/user/usersDataSource';
 
 @Component({
   selector: 'edit-client',
@@ -33,6 +34,11 @@ export class EditClientComponent implements AfterViewInit {
     'children', 
     'actions'
   ];
+
+  editTargetClientId: number | null = null;
+  get editModeIsEnabled() {
+    return this.editTargetClientId != null && !isNaN(this.editTargetClientId);
+  }
   
   clientForm: FormGroup;
 
@@ -60,10 +66,16 @@ export class EditClientComponent implements AfterViewInit {
 
   constructor(
     private router: Router,
+    private currentRoute: ActivatedRoute,
     private dialog: MatDialog,
     formBuilder: FormBuilder
   ) {
-    this.clientForm = buildClientFormGroup(formBuilder, false);
+    const params = currentRoute.snapshot.paramMap;
+    if (params.has("id")) {
+      this.editTargetClientId = parseInt(params.get("id"));
+    }
+
+    this.clientForm = buildClientFormGroup(formBuilder, this.editModeIsEnabled);
   }
 
   get allUrbanZones(): UserZone[] {
@@ -147,7 +159,8 @@ export class EditClientComponent implements AfterViewInit {
 
       this.countries = await getCountries();
       this.clientForm.get('country').enable();
-      //await this.loadProfileFormDataIfNeeded();
+
+      await this.loadClientInfoIfNeeded();
     });
   }
 
@@ -225,7 +238,7 @@ export class EditClientComponent implements AfterViewInit {
 
   deleteRuralZone(currentZone: UserZone) {
     currentZone.deletedByUser = true;
-    this.ruralZonesDS.data = this.activeUrbanZones;
+    this.ruralZonesDS.data = this.activeRuralZones;
   }
 
   async openUrbanZoneEditDialog(currentZone?: UserZone) {
@@ -271,6 +284,26 @@ export class EditClientComponent implements AfterViewInit {
     this.allChipInputs.forEach(input => input.runValidations());
   }
 
+  async loadClientInfoIfNeeded() {
+    if (!this.editModeIsEnabled) {
+      return;
+    }
+
+    const user = await getUserData(this.editTargetClientId);
+    if (typeof user.profile.country_id === "number") {
+      this.states = await getStates(user.profile.country_id);
+    } 
+
+    if (typeof user.profile.state_id === "number") {
+      this.cities = await getCities(user.profile.state_id);
+    }
+
+    loadUserIntoForm(user, this.clientForm);
+
+    this.urbanZonesDS.data = this.activeUrbanZones;
+    this.ruralZonesDS.data = this.activeRuralZones;
+  }
+
   async onSubmitClicked() {
     this.runValidationsOnChipInputs();
     this.clientForm.markAllAsTouched();
@@ -281,10 +314,15 @@ export class EditClientComponent implements AfterViewInit {
     
     try {
       await this.loader.showLoadingIndicator(async () => {
-        await submitClientCreationForm(this.clientForm.value);
+        await submitClientCreationForm(this.clientForm.getRawValue(), this.editModeIsEnabled, this.editTargetClientId);
       });
 
-      await Swal.fire("Cliente creado", "El cliente ha sido creado con éxito", "success");
+      if (this.editModeIsEnabled) {
+        await Swal.fire("Cliente actualizado", "El cliente ha sido actualizado con éxito", "success");
+      } else {
+        await Swal.fire("Cliente creado", "El cliente ha sido creado con éxito", "success");
+      }
+
       this.router.navigate(['app/admin/clients']);
 
       return;
@@ -294,8 +332,11 @@ export class EditClientComponent implements AfterViewInit {
       let errorMessage = "No fue posible contactar al servidor. Por favor revisa tu conexión a internet e inténtalo de nuevo.";
       if (error instanceof BackendError) {
         errorMessage = "Por favor revisa los datos ingresados e inténtalo de nuevo: <br />" 
-          + error.errorMessages.join(", ") 
-          + "<br /> Es posible que debas volver a la lista de clientes y eliminar este cliente antes de poder intentarlo de nuevo.";
+          + error.errorMessages.join(", ");
+
+        if (!this.editModeIsEnabled) {
+          errorMessage += "<br /> Es posible que debas volver a la lista de clientes para editar este cliente antes de intentarlo de nuevo.";
+        }
       }
 
       Swal.fire("Error", errorMessage, "error");
@@ -314,7 +355,7 @@ const urbanZoneConfigTemplate: Omit<ZoneInputConfig, "currentChildTerms" | "curr
 
 const ruralZoneConfigTemplate: Omit<ZoneInputConfig, "currentChildTerms" | "currentZoneName"> = {
   zoneTypeName: "Corregimiento",
-  zoneNameInputLabel: "Nombre de la Vereda",
+  zoneNameInputLabel: "Nombre de el Corregimiento",
   zoneNameRequiredMessage: "Por favor ingresa un nombre válido",
   childrenInputTitle: "Veredes",
   childrenInputDescription: "Ingrese las veredas separadas por coma o presionando (Enter)",

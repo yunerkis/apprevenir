@@ -5,8 +5,8 @@ import { ClientFormRawValues } from "./formSchema";
 import { UserInputTerm } from "./models/UserInputTerm";
 import { UserZone } from "./models/UserZone";
 
-export async function submitClientCreationForm(rawValues: ClientFormRawValues): Promise<void> {
-  const userId = await createUser(rawValues);
+export async function submitClientCreationForm(rawValues: ClientFormRawValues, editModeEnabled: boolean, currentUserId: number | null): Promise<void> {
+  const userId = await createOrUpdateUser(rawValues, editModeEnabled, currentUserId);
   const clientType = rawValues.clientType as ClientTypes;
   switch (clientType) {
     case ClientTypes.Company:
@@ -32,32 +32,39 @@ export async function submitClientCreationForm(rawValues: ClientFormRawValues): 
   //await uploadEnabledTests(rawValues, userId);
 }
 
-async function createUser(rawValues: ClientFormRawValues): Promise<number> {
+async function createOrUpdateUser(rawValues: ClientFormRawValues, editModeEnabled: boolean, currentUserId: number | null): Promise<number> {
+  if (editModeEnabled && currentUserId === null) {
+    throw new Error("You must supply the current user id if you are editing a user");
+  } 
+  
   const userRequestData: ClientRegistrationRequest = {
     client: rawValues.clientType as ClientTypes,
     first_names: rawValues.names as string,
-    last_names: "\u00A0",
-    last_names_two: "\u00A0",
     phone: rawValues.phone as string,
     email: rawValues.email as string,
-    password: rawValues.password as string,
-    password_confirmation: rawValues.passwordConfirmation as string,
     country_id: rawValues.country as number,
     state_id: rawValues.state as number,
     city_id: rawValues.city as number,
     client_config: {
       national_id: rawValues.nationalId as string,
       // @ts-expect-error
-      brand_color: rawValues.brandColor.hex as string
+      brand_color: `#${rawValues.brandColor.hex}`
     }
   };
 
-  const userObject = await ensureResponseIsSuccessful<{ id: number }>(fetch(`${environment.url}/api/v1/register`, {
+  let method = "POST";
+  let url = `${environment.url}/api/v1/clients/new`;
+  if (editModeEnabled) {
+    method = "PUT";
+    url = `${environment.url}/api/v1/client/${currentUserId}`;
+  }
+
+  const userObject = await ensureResponseIsSuccessful<{ id: number }>(fetch(url, {
     headers: {
       "Content-Type": "application/json",
       ...getAuthHeaders()
     },
-    method: "POST",
+    method: method,
     body: JSON.stringify(userRequestData)
   }));
 
@@ -119,7 +126,8 @@ async function createZone(zone: UserZone, userId: number): Promise<void> {
   }));
 
   const zoneId = zoneResponse.id;
-  await runRESTRequests(computeTermDeltaRequests(zone.children, zoneId, "neighborhoods", "neighborhood", "commune_id"));
+  const deltaRequests = computeTermDeltaRequests(zone.children, zoneId, "neighborhoods", "neighborhood", "commune_id");
+  await runRESTRequests(deltaRequests);
 }
 
 async function updateZone(zone: UserZone, userId: number): Promise<void> {
@@ -134,7 +142,9 @@ async function updateZone(zone: UserZone, userId: number): Promise<void> {
       commune: zone.name
     })
   }));
-  await runRESTRequests(computeTermDeltaRequests(zone.children, zone.id, "neighborhoods", "neighborhood", "commune_id"));
+
+  const deltaRequests = computeTermDeltaRequests(zone.children, zone.id, "neighborhoods", "neighborhood", "commune_id"); 
+  await runRESTRequests(deltaRequests);
 }
 
 async function uploadUniversityData(rawValues: ClientFormRawValues, userId: number) {

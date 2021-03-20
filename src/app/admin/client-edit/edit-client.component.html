@@ -19,7 +19,7 @@
 				<mat-form-field class="width-100">
 					<mat-label>País</mat-label>
 					<mat-select formControlName="country" (selectionChange)="onCountryChanged()">
-						<mat-option value="{{country.id}}" *ngFor="let country of countries">{{ country.name }}</mat-option>
+						<mat-option [value]="country.id" *ngFor="let country of countries">{{ country.name }}</mat-option>
 					</mat-select>
 					<mat-error>
 						Por favor elige tu País
@@ -29,7 +29,7 @@
 				<mat-form-field class="width-100">
 					<mat-label>Departamento</mat-label>
 					<mat-select formControlName="state" (selectionChange)="onStateChanged()">
-						<mat-option value="{{state.id}}" *ngFor="let state of states">{{ state.name }}</mat-option>
+						<mat-option [value]="state.id" *ngFor="let state of states">{{ state.name }}</mat-option>
 					</mat-select>
 					<mat-error>
 						Por favor elige tu Departamento
@@ -39,7 +39,7 @@
 				<mat-form-field class="width-100">
 					<mat-label>Ciudad</mat-label>
 					<mat-select formControlName="city">
-						<mat-option value="{{city.id}}" *ngFor="let city of cities">{{ city.name }}</mat-option>
+						<mat-option [value]="city.id" *ngFor="let city of cities">{{ city.name }}</mat-option>
 					</mat-select>
 					<mat-error>
 						Por favor elige tu Ciudad
@@ -78,22 +78,6 @@
 					</mat-error>
 				</mat-form-field>
 
-				<mat-form-field class="width-100">
-					<mat-label>Contraseña</mat-label>
-					<input type="password" matInput formControlName="password">
-					<mat-error>
-						La contraseña debe tener entre 8 y 30 caracteres
-					</mat-error>
-				</mat-form-field>
-
-				<mat-form-field class="width-100">
-					<mat-label>Repetir contraseña</mat-label>
-					<input type="password" matInput formControlName="passwordConfirmation">
-					<mat-error>
-						La confirmación debe ser igual a la contraseña
-					</mat-error>
-				</mat-form-field>
-
 				<div class="field-icons">
 					<mat-form-field>
 						<mat-label>Logo (JPG o PNG - 200x55px)</mat-label>
@@ -111,14 +95,14 @@
 				<div class="field-icons">
 					<mat-form-field>
 						<mat-label>Color principal</mat-label>
-						<input matInput [ngxMatColorPicker]="picker" formControlName="brandColor">
+						<input matInput [ngxMatColorPicker]="brandColorPicker" #brandColorInput formControlName="brandColor">
 						<mat-error>
 							Por favor ingresa un color válido usando el ícono ubicado al costado
 						</mat-error>
 					</mat-form-field>
 					<div class="field-icons__picker">
-						<ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
-						<ngx-mat-color-picker #picker [touchUi]="touchUi" [color]="color"></ngx-mat-color-picker>
+						<ngx-mat-color-toggle matSuffix [for]="brandColorPicker"></ngx-mat-color-toggle>
+						<ngx-mat-color-picker #brandColorPicker [touchUi]="touchUi" [color]="color"></ngx-mat-color-picker>
 					</div>
 				</div>
 			</form>
