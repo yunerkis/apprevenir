@@ -9,6 +9,7 @@ import { MaterialModule } from './material.module';
 import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
 import { LoginComponent } from './auth/login/login.component';
 import { ProfileFormComponent } from './auth/registration/profileForm/profileForm.component';
+import { UserSystemFormComponent } from './admin/userSystemForm/userSystemForm.component';
 import { ReferralHierarchyComponent } from "./auth/registration/clientConfig/referralHierarchy/renderer/referralHierarchy.component";
 import { HomeComponent } from './home/home.component';
 import { ModalComponent } from './auth/modal/modal.component';
@@ -27,8 +28,7 @@ import { EditClientComponent } from './admin/edit-client/edit-client.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { InformationModalComponent } from './test/information-modal/information-modal.component';
-import { CommunesModalComponent } from './admin/admin/communes-modal/communes-modal.component';
-import { CorrectionsModalComponent } from './admin/admin/corrections-modal/corrections-modal.component';
+import { ZoneEditModalComponent } from './admin/admin/zone-edit-modal/zone-edit-modal.component';
 import { ProfileModalComponent } from './profile/profile-modal/profile-modal.component';
 import { HomeModalComponent } from './home/home-modal/home-modal.component';
 import { ConfidentialModalComponent } from './test/confidential-modal/confidential-modal.component';
@@ -39,14 +39,16 @@ import { EditFinalUserForm } from './admin/edit-final-user/form/edit-final-user-
 import { NotFoundComponent } from './navigation/not-found/not-found.component';
 import { ClientConfigComponent } from './auth/registration/clientConfig/client-config.component';
 import { PolicyModalComponent } from './auth/policy-modal/policy-modal.component';
-import { PillComponent } from './admin/admin/pill-component/pill.component';
+import { ChipInputComponent } from './admin/admin/chip-autocomplete/chip-input.component';
 import { ReportModalComponent } from './admin/report/report-modal/report-modal.component';
+import { EditSystemUserFormComponent } from './admin/edit-system-user/form/edit-system-user-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ProfileFormComponent,
+    UserSystemFormComponent,
     RegistrationComponent,
     ReferralHierarchyComponent,
     HomeComponent,
@@ -64,8 +66,7 @@ import { ReportModalComponent } from './admin/report/report-modal/report-modal.c
     EditSystemUserComponent,
     EditClientComponent,
     InformationModalComponent,
-    CommunesModalComponent,
-    CorrectionsModalComponent,
+    ZoneEditModalComponent,
     ProfileModalComponent,
     HomeModalComponent,
     ConfidentialModalComponent,
@@ -75,8 +76,9 @@ import { ReportModalComponent } from './admin/report/report-modal/report-modal.c
     NotFoundComponent,
     ClientConfigComponent,
     PolicyModalComponent,
-    PillComponent,
-    ReportModalComponent
+    ChipInputComponent,
+    ReportModalComponent,
+    EditSystemUserFormComponent
   ],
   imports: [
     BrowserModule,

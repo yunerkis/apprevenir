@@ -2,78 +2,119 @@
 <div class="admin">
 	<h1 class="admin__title app-m-top">Crear cliente</h1>
 	<div class="admin__card">
-		<div class="admin__box">
-			<form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+		<app-loader #loader></app-loader>
+		<div class="admin__box" [hidden]="loader.loadingData">
+			<form [formGroup]="clientForm">
 				<div class="admin__sub-title app-m-top">Información General</div>
 				<mat-form-field class="width-100">
 					<mat-label>Tipo de cliente</mat-label>
-					<mat-select formControlName="client">
-						<mat-option value="entidades territoriales">Entidades Territoriales</mat-option>
-						<mat-option value="secretarias de educacion">Secretarías de Educación</mat-option>
-						<mat-option value="instituciones educativas">Instituciones Educativas</mat-option>
-						<mat-option value="universidades">Universidades</mat-option>
-						<mat-option value="empresas">Empresas</mat-option>
+					<mat-select formControlName="clientType" (selectionChange)="onClientTypeChanged()">
+						<mat-option *ngFor="let clientType of newClientTypes" [value]="clientType.key">{{clientType.label}}</mat-option>
 					</mat-select>
+					<mat-error>
+						Por favor elige el tipo de cliente
+					</mat-error>
 				</mat-form-field>
+
 				<mat-form-field class="width-100">
-					<mat-label>Pais</mat-label>
-					<mat-select formControlName="country_id" #country (selectionChange)="getStates(country.value)">
+					<mat-label>País</mat-label>
+					<mat-select formControlName="country" (selectionChange)="onCountryChanged()">
 						<mat-option value="{{country.id}}" *ngFor="let country of countries">{{ country.name }}</mat-option>
 					</mat-select>
+					<mat-error>
+						Por favor elige tu País
+					</mat-error>
 				</mat-form-field>
+
 				<mat-form-field class="width-100">
 					<mat-label>Departamento</mat-label>
-					<mat-select formControlName="state_id" #state (selectionChange)="getCities(state.value)">
+					<mat-select formControlName="state" (selectionChange)="onStateChanged()">
 						<mat-option value="{{state.id}}" *ngFor="let state of states">{{ state.name }}</mat-option>
 					</mat-select>
+					<mat-error>
+						Por favor elige tu Departamento
+					</mat-error>
 				</mat-form-field>
+
 				<mat-form-field class="width-100">
 					<mat-label>Ciudad</mat-label>
-					<mat-select formControlName="city_id">
+					<mat-select formControlName="city">
 						<mat-option value="{{city.id}}" *ngFor="let city of cities">{{ city.name }}</mat-option>
 					</mat-select>
+					<mat-error>
+						Por favor elige tu Ciudad
+					</mat-error>
 				</mat-form-field>
+
 				<mat-form-field class="width-100">
 					<mat-label>Nombre</mat-label>
-					<input type="text" matInput formControlName="first_names">
+					<input type="text" matInput formControlName="names">
+					<mat-error>
+						Nombre es <strong>requerido</strong>
+					</mat-error>
 				</mat-form-field>
+
 				<mat-form-field class="width-100">
 					<mat-label>Nit. o C.C.</mat-label>
-					<input type="email" matInput>
+					<input type="text" matInput formControlName="nationalId">
+					<mat-error>
+						Nit. o C.C. es <strong>requerido</strong>
+					</mat-error>
 				</mat-form-field>
+
 				<mat-form-field class="width-100">
 					<mat-label>Número de Contacto</mat-label>
 					<input type="text" matInput formControlName="phone">
+					<mat-error>
+						Número de Contacto es <strong>requerido</strong>
+					</mat-error>
 				</mat-form-field>
+
 				<mat-form-field class="width-100">
 					<mat-label>Email</mat-label>
 					<input type="email" matInput formControlName="email">
+					<mat-error>
+						Email es <strong>requerido</strong>
+					</mat-error>
 				</mat-form-field>
+
 				<mat-form-field class="width-100">
-					<mat-label>Password</mat-label>
+					<mat-label>Contraseña</mat-label>
 					<input type="password" matInput formControlName="password">
+					<mat-error>
+						La contraseña debe tener entre 8 y 30 caracteres
+					</mat-error>
 				</mat-form-field>
+
 				<mat-form-field class="width-100">
 					<mat-label>Repetir contraseña</mat-label>
-					<input type="password" matInput formControlName="password_confirmation">
+					<input type="password" matInput formControlName="passwordConfirmation">
+					<mat-error>
+						La confirmación debe ser igual a la contraseña
+					</mat-error>
 				</mat-form-field>
+
 				<div class="field-icons">
-					<mat-form-field class="columns">
-						<mat-label *ngIf="selectedFiles; else newFile">{{selectedFiles.item(0).name}}</mat-label>
-						<ng-template #newFile>
-							<mat-label>Choose file</mat-label>
-						</ng-template>
-						<input matInput disabled>
+					<mat-form-field>
+						<mat-label>Logo (JPG o PNG - 200x55px)</mat-label>
+						<input matInput formControlName="brandImageFiles">
+						<mat-error>
+							Por favor selecciona un archivo válido (JPG o PNG - 200x55px)
+						</mat-error>
 					</mat-form-field>
 					<button mat-icon-button matSuffix (click)="fileInput.click()"  class="icon-upload">
 						<mat-icon>upload</mat-icon>
 					</button>
-					<input hidden (change)="selectFile($event)" #fileInput type="file" id="file">
+					<input hidden (change)="onFilesSelected($event)" #fileInput type="file" id="file" accept="image/png, image/jpeg">
 				</div>
+
 				<div class="field-icons">
 					<mat-form-field>
 						<mat-label>Color principal</mat-label>
-						<input matInput [ngxMatColorPicker]="picker" [formControl]="colorCtr" [disabled]="disabled">
+						<input matInput [ngxMatColorPicker]="picker" formControlName="brandColor">
+						<mat-error>
+							Por favor ingresa un color válido usando el ícono ubicado al costado
+						</mat-error>
 					</mat-form-field>
 					<div class="field-icons__picker">
 						<ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
@@ -81,122 +122,186 @@
 					</div>
 				</div>
 			</form>
-			<div class="admin__sub-title">Información Específica</div>
-			<div class="admin__box-text">
-				<div class="admin__text">Comunas y Barrios</div>
-				<button mat-mini-fab color="primary" (click)="openDialogCommunes()">
-					<mat-icon>add</mat-icon>
-				</button>
+
+			<div class="admin__sub-title" [hidden]="!selectedClientType">Información Específica</div>
+
+			<div [hidden]="!clientIsTerritorialEntity">
+				<div class="admin__box-text">
+					<div class="admin__text">Comunas y Barrios</div>
+					<button mat-mini-fab color="primary" (click)="openUrbanZoneEditDialog()">
+						<mat-icon>add</mat-icon>
+					</button>
+				</div>
+
+				<table class="test-table" mat-table [dataSource]="urbanZonesDS">
+					<ng-container matColumnDef="name">
+						<th mat-header-cell *matHeaderCellDef>Comuna</th>
+						<td mat-cell *matCellDef="let element"> {{element.name}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="children">
+						<th mat-header-cell *matHeaderCellDef> Barrio</th>
+						<td mat-cell *matCellDef="let element"> {{element.childrenStrings}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="actions">
+						<th mat-header-cell *matHeaderCellDef>Edición</th>
+						<td mat-cell *matCellDef="let element">
+							<mat-icon fontSet="material-icons-outlined" class="app-cursor" (click)="openUrbanZoneEditDialog(element)">edit</mat-icon>
+							<mat-icon fontSet="material-icons-outlined" class="app-cursor" (click)="deleteUrbanZone(element)">delete</mat-icon>
+						</td>
+					</ng-container>
+
+					<tr mat-header-row *matHeaderRowDef="zoneTableColumns"></tr>
+					<tr mat-row *matRowDef="let row; columns: zoneTableColumns;"></tr>
+				</table>
+				
+				<div class="admin__box-text">
+					<div class="admin__text">Corregimientos y Veredas</div>
+					<button mat-mini-fab color="primary" (click)="openRuralZoneEditDialog()">
+						<mat-icon>add</mat-icon>
+					</button>
+				</div>
+
+				<table class="test-table" mat-table [dataSource]="ruralZonesDS">
+					<ng-container matColumnDef="name">
+						<th mat-header-cell *matHeaderCellDef>Corregimiento</th>
+						<td mat-cell *matCellDef="let element"> {{element.name}} </td>
+					</ng-container>
+					
+					<ng-container matColumnDef="children">
+						<th mat-header-cell *matHeaderCellDef> Vereda</th>
+						<td mat-cell *matCellDef="let element"> {{element.childrenStrings}} </td>
+					</ng-container>
+					
+					<ng-container matColumnDef="actions">
+						<th mat-header-cell *matHeaderCellDef>Edición</th>
+						<td mat-cell *matCellDef="let element">
+							<mat-icon fontSet="material-icons-outlined" class="app-cursor" (click)="openRuralZoneEditDialog(element)">edit</mat-icon>
+							<mat-icon fontSet="material-icons-outlined" class="app-cursor" (click)="deleteRuralZone(element)">delete</mat-icon>
+						</td>
+					</ng-container>
+					
+					<tr mat-header-row *matHeaderRowDef="zoneTableColumns"></tr>
+					<tr mat-row *matRowDef="let row; columns: zoneTableColumns;"></tr>
+				</table>
 			</div>
-			<table class="test-table" mat-table [dataSource]="dataSource" matSort matSortActive="position" matSortDisableClear matSortDirection="desc" >
-				<ng-container matColumnDef="comuna">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Comuna</th>
-				<td mat-cell *matCellDef="let element"> {{element.comuna}} </td>
-				</ng-container>
-				<ng-container matColumnDef="barrio">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Barrio</th>
-				<td mat-cell *matCellDef="let element"> {{element.barrio}} </td>
-				</ng-container>
-				<ng-container matColumnDef="edit">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Edición</th>
-				<td mat-cell *matCellDef="let element">
-					<mat-icon fontSet="material-icons-outlined" class="app-cursor">edit</mat-icon>
-					<mat-icon fontSet="material-icons-outlined" class="app-cursor">delete</mat-icon>
-				</td>
-				</ng-container>
-				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-			</table>
-			
-			<div class="admin__box-text">
-				<div class="admin__text">Corregimientos y Veredas</div>
-				<button mat-mini-fab color="primary" (click)="openDialogCorrection()">
-					<mat-icon>add</mat-icon>
-				</button>
+
+			<div [hidden]="!clientIsCompany">
+				<chip-input 
+					#companyLocationsInput
+					description="Ingrese las sedes separadas por coma o presionando (Enter)" 
+					title="Sedes"
+					[form]="clientForm"
+					formKey="locations"
+					placeholder="Sedes"
+					[valuesAreRequired]="clientIsCompany"
+					valuesMissingError="Por favor ingrese al menos una sede">
+				</chip-input>
+
+				<chip-input 
+					#companyAreasInput
+					description="Ingrese las áreas separadas por coma o presionando (Enter)" 
+					title="Área"
+					[form]="clientForm"
+					formKey="areas"
+					placeholder="Áreas"
+					[valuesAreRequired]="clientIsCompany"
+					valuesMissingError="Por favor ingrese al menos un área">
+				</chip-input>
+
+				<chip-input 
+					#companyShiftsInput
+					description="Ingrese los turnos separados por coma o presionando (Enter)" 
+					title="Turnos"
+					[form]="clientForm"
+					formKey="shifts"
+					placeholder="Turnos"
+					[valuesAreRequired]="clientIsCompany"
+					valuesMissingError="Por favor ingrese al menos un turno">
+				</chip-input>
 			</div>
-			<table class="test-table" mat-table [dataSource]="data_Source" matSort matSortActive="position" matSortDisableClear matSortDirection="desc" >
-				<ng-container matColumnDef="corregimiento">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Corregimiento</th>
-				<td mat-cell *matCellDef="let element"> {{element.corregimiento}} </td>
-				</ng-container>
-				<ng-container matColumnDef="vereda">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Vereda</th>
-				<td mat-cell *matCellDef="let element"> {{element.vereda}} </td>
-				</ng-container>
-				<ng-container matColumnDef="edit">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Edición</th>
-				<td mat-cell *matCellDef="let element">
-					<mat-icon fontSet="material-icons-outlined" class="app-cursor">edit</mat-icon>
-					<mat-icon fontSet="material-icons-outlined" class="app-cursor">delete</mat-icon>
-				</td>
-				</ng-container>
-				<tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
-				<tr mat-row *matRowDef="let row; columns: displayedColumn;"></tr>
-			</table>
 
-			<chip-input 
-				description="Ingrese las sedes separadas por coma o presionando (Enter)" 
-				title="Sedes"
-				[options]="possibleAreas"
-				formKey="selectedAreas"
-				placeholder="Sedes">
-			</chip-input>
+			<div [hidden]="!clientIsEducationBureau">
+				<chip-input 
+					#edBureauSchoolsInput
+					description="Ingrese las instituciones educativas separadas por coma o presionando (Enter)" 
+					title="Instituciones educativas"
+					[form]="clientForm"
+					formKey="schools"
+					placeholder="Instituciones educativas"
+					[valuesAreRequired]="clientIsEducationBureau"
+					valuesMissingError="Por favor ingrese al menos una institución educativa">
+				</chip-input>
 
-			<chip-input 
-				description="Ingrese las áreas separadas por coma o presionando (Enter)" 
-				title="Área"
-				[options]="possibleAreas"
-				formKey="selectedAreas"
-				placeholder="Áreas">
-			</chip-input>
+				<chip-input 
+					#edBureauGradesInput
+					description="Ingrese los grados separadas por coma o presionando (Enter)" 
+					title="Grados"
+					[form]="clientForm"
+					formKey="grades"
+					placeholder="Grados"
+					[valuesAreRequired]="clientIsEducationBureau"
+					valuesMissingError="Por favor ingrese al menos un grado">
+				</chip-input>
+			</div>
 
-			<chip-input 
-				description="Ingrese los turnos separados por coma o presionando (Enter)" 
-				title="Turnos"
-				[options]="possibleAreas"
-				formKey="selectedAreas"
-				placeholder="Turnos">
-			</chip-input>
+			<div [hidden]="!clientIsUniversity">
+				<chip-input 
+					#universityProgramsInput
+					description="Ingrese los programas separados por coma o presionando (Enter)" 
+					title="Programas"
+					[form]="clientForm"
+					formKey="programs"
+					placeholder="Programas"
+					[valuesAreRequired]="clientIsUniversity"
+					valuesMissingError="Por favor ingrese al menos un programa">
+				</chip-input>
 
-			<chip-input 
-				description="Ingrese las instituciones educativas separadas por coma o presionando (Enter)" 
-				title="Instituciones educativas"
-				[options]="possibleAreas"
-				formKey="selectedAreas"
-				placeholder="Instituciones educativas">
-			</chip-input>
+				<chip-input 
+					#universityModalitiesInput
+					description="Ingrese las modalidades separadas por coma o presionando (Enter)" 
+					title="Modalidades"
+					[form]="clientForm"
+					formKey="modalities"
+					placeholder="Modalidades"
+					[valuesAreRequired]="clientIsUniversity"
+					valuesMissingError="Por favor ingrese al menos una modalidad">
+				</chip-input>
+
+				<chip-input 
+					#universitySemestersInput
+					description="Ingrese los semestres separadas por coma o presionando (Enter)" 
+					title="Semestres"
+					[form]="clientForm"
+					formKey="semesters"
+					placeholder="Semestres"
+					[valuesAreRequired]="clientIsUniversity"
+					valuesMissingError="Por favor ingrese al menos un semestre">
+				</chip-input>
+			</div>
+
+			<div [hidden]="!clientIsEducationalInstitution">
+				<chip-input 
+					#schoolGradesInput
+					description="Ingrese los grados separadas por coma o presionando (Enter)" 
+					title="Grados"
+					[form]="clientForm"
+					formKey="schoolGrades"
+					placeholder="Grados"
+					[valuesAreRequired]="clientIsEducationalInstitution"
+					valuesMissingError="Por favor ingrese al menos un grado">
+				</chip-input>
+			</div>
 
 			<div class="admin__title app-m-bottom">Tests habilitados</div>
-			<section class="app-flex" style="   justify-content: space-between;">
-				<div>
-					<div class="app-m10-bottom"><mat-checkbox color="primary" class="example-margin">Alcohol</mat-checkbox></div>
-					<div class="app-m10-bottom"><mat-checkbox color="primary" class="example-margin">Ludopatía</mat-checkbox></div>
-					<div class="app-m10-bottom"><mat-checkbox color="primary" class="example-margin">Sexo</mat-checkbox></div>
-					<div class="app-m10-bottom"><mat-checkbox color="primary" class="example-margin">Depresión</mat-checkbox></div>
-				</div>
-				<div>
-					<div class="app-m10-bottom"><mat-checkbox color="primary" class="example-margin">Drogas</mat-checkbox></div>
-					<div class="app-m10-bottom"><mat-checkbox color="primary" class="example-margin">Redes sociales</mat-checkbox></div>
-					<div class="app-m10-bottom"><mat-checkbox color="primary" class="example-margin">Trabajo</mat-checkbox></div>
-					<div class="app-m10-bottom"><mat-checkbox color="primary" class="example-margin">Riesgo</mat-checkbox></div>
-				</div>
-				<div>
-					<div class="app-m10-bottom"><mat-checkbox color="primary" class="example-margin">Tabaco</mat-checkbox></div>
-					<div class="app-m10-bottom"><mat-checkbox color="primary" class="example-margin">Tecnologías</mat-checkbox></div>
-					<div class="app-m10-bottom"><mat-checkbox color="primary" class="example-margin">Compras</mat-checkbox></div>
-					<div class="app-m10-bottom"><mat-checkbox color="primary" class="example-margin">Etapas de Cambio</mat-checkbox></div>
-				</div>
-		
-				<div>
-					<div class="app-m10-bottom"><mat-checkbox color="primary" class="example-margin">Inhalables</mat-checkbox></div>
-					<div class="app-m10-bottom"><mat-checkbox color="primary" class="example-margin">Dependencia</mat-checkbox></div>
-					<div class="app-m10-bottom"><mat-checkbox color="primary" class="example-margin">Ansiedad</mat-checkbox></div>
-				</div>
-
-			</section>
+			<div class="admin__tests-container" [formGroup]="clientForm">
+				<mat-checkbox color="primary" *ngFor="let test of tests" formControlName="tests[{{test.id}}]">{{test.name}}</mat-checkbox>
+			</div>
+			<p *ngIf="userMustSelectATest" class="manual-error-label">Por favor habilita al menos un test</p>
 
 			<div>
-				<button class="btn btn-primary app-m-top" type="submit">Guardar</button>
+				<button class="btn btn-primary app-m-top" (click)="onSubmitClicked()">Guardar</button>
 			</div>
 		</div>
 	</div>
