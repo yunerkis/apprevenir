@@ -78,7 +78,9 @@ import { EditSystemUserFormComponent } from './admin/edit-system-user/form/edit-
     PolicyModalComponent,
     ChipInputComponent,
     ReportModalComponent,
-    EditSystemUserFormComponent
+    EditSystemUserFormComponent,
+    ReportModalComponent,
+    EditSystemUserFormComponent,
   ],
   imports: [
     BrowserModule,
