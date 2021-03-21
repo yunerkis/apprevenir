@@ -139,7 +139,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   private updateProfileData(profile: IProfileInfo) {
     this.userIsAdmin = profile.isAdmin;
-    this.userName = `${profile.firstNames} ${profile.lastNames}`;
+    this.userName = `${profile.firstNames} ${profile.lastNames} ${profile.lastNamesTwo}`;
   }
 
   logout() {
