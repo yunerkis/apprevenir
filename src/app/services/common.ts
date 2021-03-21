@@ -7,10 +7,14 @@ export function getAuthHeaders() {
   };
 }
 
-type ErrorsDictionary = { [key: string]: string[] };
+type ErrorsDictionary = string | { [key: string]: string[] };
 
 export class BackendError extends Error {
   get errorMessages(): string[] {
+    if (typeof this.rawErrors === "string") {
+      return [this.rawErrors];
+    }
+
     return Object.keys(this.rawErrors).map(key => this.rawErrors[key].join(", "));
   }
 
