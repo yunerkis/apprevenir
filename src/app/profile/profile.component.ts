@@ -68,7 +68,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private updateProfileData(profile: IProfileInfo) {
     this.userIsAdmin = profile.isAdmin;
     this.firstNames = profile.firstNames;
-    this.lastNames = profile.lastNames;
+    this.lastNames = `${profile.lastNames} ${profile.lastNamesTwo}`;
   }
   
   openDialogProfile(test) {
