@@ -20,5 +20,7 @@ export interface RegistrationRequest {
   password_confirmation: string,
   phone: string,
   reference: string,
-  state_id: string
+  state_id: string,
+  password_update_requested?: boolean,
+  current_password?: string
 }

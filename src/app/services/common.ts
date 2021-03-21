@@ -1,4 +1,5 @@
 import { BackendResponse } from "@typedefs/backend";
+import Swal from "sweetalert2";
 import { getAuthToken } from "./auth/authStore";
 
 export function getAuthHeaders() {
@@ -10,9 +11,9 @@ export function getAuthHeaders() {
 type ErrorsDictionary = string | { [key: string]: string[] };
 
 export class BackendError extends Error {
-  get errorMessages(): string[] {
+  get errorMessages(): string[] | string {
     if (typeof this.rawErrors === "string") {
-      return [this.rawErrors];
+      return this.rawErrors;
     }
 
     return Object.keys(this.rawErrors).map(key => this.rawErrors[key].join(", "));
@@ -31,4 +32,24 @@ export async function ensureResponseIsSuccessful<TPayload>(requestPromise: Retur
   }
 
   return response.data;
+}
+
+export async function showErrorMessage(error: any) {
+  let errorMessage = "No fue posible contactar el servidor. Por favor revisa tu conexión a internet e inténtalo de nuevo";
+
+  if (error instanceof BackendError) {
+    errorMessage = "Por favor revisa los datos ingresados e inténtalo de nuevo.";
+    let formattedErrors = "";
+    if (typeof error.rawErrors === "string") {
+      formattedErrors = `<li>${error.rawErrors}</li>`;
+    } else if (Array.isArray(error.rawErrors)) {
+      formattedErrors = error.rawErrors.map(error => `<li>${error}</li>`).join(" ");
+    }
+
+    if (formattedErrors != "") {
+      errorMessage += `<br /> <ul>${formattedErrors}</ul>`;
+    }
+  }
+  
+  await Swal.fire("Error", errorMessage, "error");
 }

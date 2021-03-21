@@ -27,7 +27,13 @@ export type LoginFormKeys =
   | "emailAddress"
   | "password"
   | "passwordConfirmation"
-  | "currentPassword";
+  | "currentPassword"
+  | "passwordChangeRequested";
 
 type AllFormKeys = PersonalInfoFormKeys | LocationFormKeys | LoginFormKeys;
-export type RawFormData = Record<Exclude<AllFormKeys, "birthDate">, string | number> & { birthDate: Date };
+export type RawFormData = Record<
+    Exclude<AllFormKeys, "birthDate" | "passwordChangeRequested">, string | number
+  > & { 
+    birthDate: Date,
+    passwordChangeRequested: boolean
+  };

@@ -5,13 +5,14 @@ import { MaritalStatusValues } from "../constants/maritalStatusValues";
 import { EducationLevels } from '../constants/educationLevels';
 import { City, Country, State } from '@typedefs/backend';
 import { getCities, getCountries, getStates } from '@services/geoData/geoDataSource';
-import { RegistrationResult, submitRegistrationForms } from '../forms/registrationSubmitHandler';
+import { submitRegistrationForms } from '../forms/registrationSubmitHandler';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { loadProfileFormData } from '../forms/profileFormLoader';
 import { buildLocationFormGroup, buildLoginFormGroup, buildPersonalInfoFormGroup } from './formSchema';
 import { LoaderComponent } from 'src/app/core/loader/loader.component';
 import { ClientConfigComponent } from '../clientConfig/client-config.component';
+import { showErrorMessage } from '@services/common';
 
 @Component({
   selector: 'profile-form',
@@ -41,9 +42,6 @@ export class ProfileFormComponent implements OnInit, AfterViewInit {
     private _formBuilder: FormBuilder, private _router: Router,
     private _location: Location
   ) {
-    this.profileUpdateModeEnabled = !!this.profileUpdateModeEnabled;
-    this.adminModeEnabled = !!this.adminModeEnabled;
-
     this.onCountryChanged = this.onCountryChanged.bind(this);
     this.onStateChanged = this.onStateChanged.bind(this);
     this.onSubmitClicked = this.onSubmitClicked.bind(this);
@@ -69,6 +67,9 @@ export class ProfileFormComponent implements OnInit, AfterViewInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.profileUpdateModeEnabled = !!this.profileUpdateModeEnabled;
+    this.adminModeEnabled = !!this.adminModeEnabled;
+
     this.personalInfoFormGroup = buildPersonalInfoFormGroup(this._formBuilder);
     this.locationFormGroup = buildLocationFormGroup(this._formBuilder);
     this.loginFormGroup = buildLoginFormGroup(this._formBuilder, this.profileUpdateModeEnabled);
@@ -79,6 +80,14 @@ export class ProfileFormComponent implements OnInit, AfterViewInit {
       this.countries = await getCountries();
       await this.loadProfileFormDataIfNeeded();
     });
+  }
+
+  get passwordChangeRequested() {
+    return this.loginFormGroup.get('passwordChangeRequested').value;
+  }
+
+  get creationModeEnabled() {
+    return !this.adminModeEnabled && !this.profileUpdateModeEnabled && !this.userIdOverride;
   }
 
   public async onCountryChanged() {
@@ -131,17 +140,16 @@ export class ProfileFormComponent implements OnInit, AfterViewInit {
     await this.loader.showLoadingIndicator(async () => {
       try {
         const result = await submitRegistrationForms(this.profileUpdateModeEnabled, this.adminModeEnabled, ...allForms);
-        this.handleRegistrationResult(result);
+        this.handleRegistrationResult();
       } catch (error) {
         console.error("Error while trying to submit the registration data", error);
-        this.handleRegistrationResult({ wasSuccessful: false, errorMessages: [] });
+        await showErrorMessage(error);
       }
     });
   }
 
-  async handleRegistrationResult(result: RegistrationResult) {
-    if (result.wasSuccessful) {
-      let successTitle = "Bienvenido";
+  async handleRegistrationResult() {
+    let successTitle = "Bienvenido";
       let successMessage = "Has sido registrado exitosamente. Utiliza tu correo y contraseña para ingresar.";
       
       if (this.profileUpdateModeEnabled) {
@@ -167,14 +175,6 @@ export class ProfileFormComponent implements OnInit, AfterViewInit {
         this._router.navigate(['']); 
       }
       return;
-    }
-
-    let errorMessage = "No fue posible contactar el servidor. Por favor revisa tu conexión a internet e inténtalo de nuevo";
-    if (result.errorMessages.length) {
-      errorMessage = "Por favor revisa los datos ingresados e inténtalo de nuevo: " + result.errorMessages.join(", ");
-    }
-
-    Swal.fire("Error", errorMessage, "error");
   }
 
   async loadProfileFormDataIfNeeded() {

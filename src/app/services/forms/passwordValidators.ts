@@ -3,6 +3,7 @@ import { FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/f
 export const PASSWORD_KEY = "password";
 export const PASSWORD_CONFIRMATION_KEY = "passwordConfirmation";
 export const CURRENT_PASSWORD_KEY = "currentPassword";
+export const CHANGE_PASSWORD_KEY = "passwordChangeRequested";
 
 export function buildPasswordEditMinLengthOverride(isEditingProfile: boolean): (group: FormGroup) => ValidationErrors | null {
   if (!isEditingProfile) {

@@ -173,17 +173,19 @@
           </mat-form-field>
         </div>
 
-        <div *ngIf="profileUpdateModeEnabled">
+        <mat-checkbox formControlName="passwordChangeRequested" *ngIf="profileUpdateModeEnabled">Deseas cambiar tu contraseña?</mat-checkbox>
+
+        <div *ngIf="passwordChangeRequested">
           <mat-form-field class="example-full-width">
             <mat-label>Contraseña actual</mat-label>
             <input type="password" matInput required formControlName="currentPassword">
             <mat-error>
-              Por favor ingresa tu contraseña actual si deseas cambiarla
+              Por favor ingresa tu contraseña actual
             </mat-error>
           </mat-form-field>
         </div>
         
-        <div class="registration__box">
+        <div class="registration__box" *ngIf="passwordChangeRequested || creationModeEnabled">
           <mat-form-field class="width-48">
             <mat-label>Contraseña</mat-label>
             <input type="password" matInput required formControlName="password">

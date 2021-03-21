@@ -10,11 +10,12 @@ import {
   getPasswordConfirmationFieldValidator, 
   CURRENT_PASSWORD_KEY,
   PASSWORD_CONFIRMATION_KEY, 
-  PASSWORD_KEY
+  PASSWORD_KEY,
+  CHANGE_PASSWORD_KEY
 } from "@services/forms/passwordValidators";
 import { getEmailFieldDefinition } from "@services/forms/emailAddress";
 
-type FormValidationTuple = [string] | [string | { value: string, disabled?: boolean } , ValidatorFn];
+type FormValidationTuple = [string | boolean] | [string | boolean | { value: string, disabled?: boolean } , ValidatorFn];
 type PersonalInfoFormSchema = Record<PersonalInfoFormKeys, FormValidationTuple>;
 type LocationFormSchema = Record<LocationFormKeys, FormValidationTuple>;
 type LoginFormSchema = Record<LoginFormKeys, FormValidationTuple>;
@@ -57,7 +58,8 @@ export function buildLoginFormGroup(formBuilder: FormBuilder, isEditingProfile: 
     emailAddress: getEmailFieldDefinition(isEditingProfile),
     [PASSWORD_KEY]: ['', getPasswordFieldValidators(isEditingProfile)],
     [PASSWORD_CONFIRMATION_KEY]: ['', getPasswordConfirmationFieldValidator()],
-    [CURRENT_PASSWORD_KEY]: ['']
+    [CURRENT_PASSWORD_KEY]: [''],
+    [CHANGE_PASSWORD_KEY]: [false]
   };
 
   return formBuilder.group(loginFormSchema, {
