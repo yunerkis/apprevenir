@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { getAllUsers } from '@services/user/usersDataSource';
+import { getEndUsers } from '@services/user/usersDataSource';
 import { User } from '@typedefs/backend';
 import { LoaderComponent } from 'src/app/core/loader/loader.component';
 
@@ -43,7 +43,7 @@ export class EditFinalUserComponent implements AfterViewInit {
 
   async ngAfterViewInit() {
     await this.loader.showLoadingIndicator(async () => {
-      const users = await getAllUsers();
+      const users = await getEndUsers();
       this.resultsLength = users.length;
       this.updateUsersTable(users);
     });
