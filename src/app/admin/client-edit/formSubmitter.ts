@@ -1,5 +1,6 @@
 import { environment } from "@environments/environment";
 import { ensureResponseIsSuccessful, getAuthHeaders } from "@services/common";
+import { setEnabledTestIdsForClient } from "@services/test/testsDataSource";
 import { ClientRegistrationRequest, ClientTypes } from "@typedefs/backend";
 import { ClientFormRawValues } from "./formSchema";
 import { UserInputTerm } from "./models/UserInputTerm";
@@ -28,8 +29,7 @@ export async function submitClientCreationForm(rawValues: ClientFormRawValues, e
       throw new Error(`Uploading a registration form for client type '${clientType}' is not implemented`);
   }
 
-  // TODO: Write this when the API has been implemented
-  //await uploadEnabledTests(rawValues, userId);
+  await uploadEnabledTests(rawValues, userId);
 }
 
 async function createOrUpdateUser(rawValues: ClientFormRawValues, editModeEnabled: boolean, currentUserId: number | null): Promise<number> {
@@ -247,4 +247,11 @@ async function runRESTRequests(requests: RESTRequest[]): Promise<void> {
   });
 
   await Promise.all(promises);
+}
+
+function uploadEnabledTests(rawValues: ClientFormRawValues, userId: number) {
+  const enabledTestIds = Object.keys(rawValues.selectedTests)
+    .filter(key => rawValues.selectedTests[key])
+    .map(key => parseInt(key));
+  return setEnabledTestIdsForClient(userId, enabledTestIds);
 }

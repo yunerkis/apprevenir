@@ -32,7 +32,8 @@ export type ClientFormKeys =
   | "schoolGrades"
   | "selectedTests";
 
-export type ClientFormRawValues = Record<ClientFormKeys, unknown>;
+export type ClientFormRawValues = Record<Exclude<ClientFormKeys, "selectedTests">, unknown>
+  & { selectedTests: { [key: number]: boolean } };
 
 export function buildClientFormGroup(formBuilder: FormBuilder, isEditing: boolean): FormGroup {
   return formBuilder.group({
@@ -61,7 +62,7 @@ export function buildClientFormGroup(formBuilder: FormBuilder, isEditing: boolea
   });
 }
 
-export function loadUserIntoForm(user: User, formGroup: FormGroup) {
+export function loadUserIntoForm(user: User, enabledTestIds: number[], formGroup: FormGroup) {
   if (typeof user.profile.country_id === "number") {
     formGroup.get('state').enable();
   } 
@@ -112,6 +113,11 @@ export function loadUserIntoForm(user: User, formGroup: FormGroup) {
       loadTerritorialEntityData(user as any, formGroup);
       break;
   }
+
+  enabledTestIds.forEach(testId => {
+    formGroup.get("selectedTests").value[testId] = true;
+    formGroup.get(`tests[${testId}]`).setValue(true);
+  });
 
   formGroup.get('email').disable();
   formGroup.get('clientType').disable();

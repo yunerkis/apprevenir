@@ -13,10 +13,10 @@ import { ZoneInputConfig } from './models/ZoneInputConfig';
 import { UserZone } from './models/UserZone';
 import { ClientTypes } from "@typedefs/backend/userData/ClientTypes";
 import { ChipInputComponent } from './chip-autocomplete/chip-input.component';
-import { getAllTests } from '@services/test/testsDataSource';
+import { getAllTests, getEnabledTestIdsForClient } from '@services/test/testsDataSource';
 import { submitClientCreationForm } from './formSubmitter';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BackendError } from '@services/common';
+import { BackendError, showErrorMessage } from '@services/common';
 import Swal from 'sweetalert2';
 import { getUserData } from '@services/user/usersDataSource';
 
@@ -290,6 +290,8 @@ export class EditClientComponent implements AfterViewInit {
     }
 
     const user = await getUserData(this.editTargetClientId);
+    const enabledTestIds = await getEnabledTestIdsForClient(this.editTargetClientId);
+
     if (typeof user.profile.country_id === "number") {
       this.states = await getStates(user.profile.country_id);
     } 
@@ -298,7 +300,7 @@ export class EditClientComponent implements AfterViewInit {
       this.cities = await getCities(user.profile.state_id);
     }
 
-    loadUserIntoForm(user, this.clientForm);
+    loadUserIntoForm(user, enabledTestIds, this.clientForm);
 
     this.urbanZonesDS.data = this.activeUrbanZones;
     this.ruralZonesDS.data = this.activeRuralZones;
@@ -327,19 +329,7 @@ export class EditClientComponent implements AfterViewInit {
 
       return;
     } catch (error) {
-      console.error(error);
-
-      let errorMessage = "No fue posible contactar al servidor. Por favor revisa tu conexión a internet e inténtalo de nuevo.";
-      if (error instanceof BackendError) {
-        errorMessage = "Por favor revisa los datos ingresados e inténtalo de nuevo: <br />" 
-          + error.errorMessages.join(", ");
-
-        if (!this.editModeIsEnabled) {
-          errorMessage += "<br /> Es posible que debas volver a la lista de clientes para editar este cliente antes de intentarlo de nuevo.";
-        }
-      }
-
-      Swal.fire("Error", errorMessage, "error");
+      await showErrorMessage(error);
     }
   }
 }
