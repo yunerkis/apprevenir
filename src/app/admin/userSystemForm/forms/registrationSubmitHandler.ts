@@ -31,7 +31,7 @@ export async function submitRegistrationForms(
     phone: rawFormData.phoneNumber as string,
   };
 
-  let url = `${environment.url}/api/v1/users/systems/create`;
+  let url = `${environment.url}/api/v1/users/systems/create?system=true`;
   let method = "POST";
   let headers: { [key: string]: string } = {
     "Content-Type": "application/json",

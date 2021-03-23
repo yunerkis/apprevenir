@@ -53,10 +53,10 @@ async function createOrUpdateUser(rawValues: ClientFormRawValues, editModeEnable
   };
 
   let method = "POST";
-  let url = `${environment.url}/api/v1/clients/new`;
+  let url = `${environment.url}/api/v1/clients/register`;
   if (editModeEnabled) {
     method = "PUT";
-    url = `${environment.url}/api/v1/client/${currentUserId}`;
+    url = `${environment.url}/api/v1/clients/${currentUserId}`;
   }
 
   const userObject = await ensureResponseIsSuccessful<{ id: number }>(fetch(url, {
