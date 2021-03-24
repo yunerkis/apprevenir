@@ -42,6 +42,7 @@ export class ReportComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.dataSource.filterPredicate = this.filterTestRows;
     
     this.testService.getAllResutls().subscribe(res => {
 
@@ -84,6 +85,17 @@ export class ReportComponent implements AfterViewInit {
 
   onPDFExportRequested() {
     generateExport(ExportType.TestResults, ExportFormat.PDF);
+  }
+
+  filterTestRows(row: TestResultRow, input: string): boolean {
+    const filterText = input.toUpperCase();
+    return [
+      row.id.toString(),
+      row.test,
+      row.city,
+      row.level,
+      row.email
+    ].some(label => label.includes(filterText));
   }
 }
 
