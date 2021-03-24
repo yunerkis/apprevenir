@@ -16,3 +16,6 @@ export { Test } from "./tests/Test";
 export { TestCategory } from "./tests/TestCategory";
 export { RegistrationSystemRequest } from "./registration/RegistrationSystemRequest";
 export { ClientRegistrationRequest } from "./registration/ClientRegistrationRequest";
+export { TestResult, TestAssessmentSeverity } from "./tests/TestResult";
+export { TestQuestion } from "./tests/TestQuestion";
+export { TestAnswer } from "./tests/TestAnswer";

@@ -14,6 +14,6 @@ export interface Test extends TimestampedObject {
   introduction: string,
   description: string,
   status: TestStatus,
-  categories: TestCategory[],
-  addictions: unknown[] 
+  categories?: TestCategory[],
+  addictions?: unknown[] 
 }
