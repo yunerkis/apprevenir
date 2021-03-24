@@ -216,7 +216,7 @@ export class EditClientComponent implements AfterViewInit {
     };
 
     const result = await ZoneEditModalComponent.show(this.dialog, config);
-    if (!result.userConfirmed) {
+    if (!result || !result.userConfirmed) {
       return;
     }
 
@@ -249,7 +249,7 @@ export class EditClientComponent implements AfterViewInit {
     };
 
     const result = await ZoneEditModalComponent.show(this.dialog, config);
-    if (!result.userConfirmed) {
+    if (!result || !result.userConfirmed) {
       return;
     }
 

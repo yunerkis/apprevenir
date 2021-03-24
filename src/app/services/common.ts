@@ -35,6 +35,8 @@ export async function ensureResponseIsSuccessful<TPayload>(requestPromise: Retur
 }
 
 export async function showErrorMessage(error: any) {
+  console.error(error);
+
   let errorMessage = "No fue posible contactar el servidor. Por favor revisa tu conexión a internet e inténtalo de nuevo";
 
   if (error instanceof BackendError) {

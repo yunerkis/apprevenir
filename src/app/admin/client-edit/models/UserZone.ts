@@ -18,6 +18,6 @@ export class UserZone {
   }
 
   public get cameFromServer() {
-    return this.id !== null;
+    return typeof this.id === "number";
   }
 }

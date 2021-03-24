@@ -216,7 +216,7 @@ function computeTermDeltaRequests(
       };
     }
 
-    if (termWasCreated(term)) {
+    if (termWasDeleted(term)) {
       return {
         method: "DELETE",
         url: `${environment.url}/api/v1/${urlFragment}/${term.id}`,
