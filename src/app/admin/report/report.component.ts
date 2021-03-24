@@ -5,6 +5,8 @@ import { TestService } from '../../services/test/test.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ReportModalComponent } from './report-modal/report-modal.component';
 import { ExportFormat, ExportType, generateExport } from '@services/exports/exportsDataSource';
+import { MatSort } from '@angular/material/sort';
+import { TestAssessmentSeverity } from '@typedefs/backend';
 
 @Component({
   selector: 'app-report',
@@ -12,16 +14,6 @@ import { ExportFormat, ExportType, generateExport } from '@services/exports/expo
   styleUrls: ['./report.component.scss']
 })
 export class ReportComponent implements AfterViewInit {
-  
-  color = {
-    'Severo': '#FF4E60',
-    'Moderado': '#FFA14E',
-    'Leve': '#20E57E',
-    'Ausencia de Ansiedad': '#20E57E',
-    'Ausencia de depresión': '#20E57E',
-    'Presencia de Ansiedad': '#FF4E60',
-    'Presencia de depresión': '#FF4E60',
-  };
 
   public resultsLength = 0;
   public displayedColumns: string[] = [
@@ -37,7 +29,7 @@ export class ReportComponent implements AfterViewInit {
     'email',
     'answer',
   ];
-  public dataSource = new MatTableDataSource<PeriodicElement>([]);
+  public dataSource = new MatTableDataSource<TestResultRow>([]);
 
   constructor (
     public dialog: MatDialog,
@@ -45,14 +37,16 @@ export class ReportComponent implements AfterViewInit {
   ) {}
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     
     this.testService.getAllResutls().subscribe(res => {
 
       this.dataSource = new MatTableDataSource(res['data']);
 
-      this.dataSource.paginator = this.paginator;
     });
 
     
@@ -70,16 +64,18 @@ export class ReportComponent implements AfterViewInit {
     });
   }
 
-  setStyle(color) {
-    return {
-      'background-color': this.color[color],
-      'color': '#fff',
-      'padding-left': '15px',
-      'padding-right': '15px',
-      'border-radius': '10px',
-      'padding-top': '1px',
-      'padding-bottom': '1px',
-    }
+  getTestChipClass(assessmentLevel: TestAssessmentSeverity): string {
+    const chipClassNames: { [key in TestAssessmentSeverity]: string } = {
+      [TestAssessmentSeverity.Minor]: "assessmentChipMinor",
+      [TestAssessmentSeverity.Moderate]: "assessmentChipModerate",
+      [TestAssessmentSeverity.Severe]: "assessmentChipSevere",
+      [TestAssessmentSeverity.AbsenceAnxiety]: "assessmentChipAbsenceAnxiety",
+      [TestAssessmentSeverity.AbsenceDepression]: "assessmentChipAbsenceDepression",
+      [TestAssessmentSeverity.PresenceDepression]: "assessmentChipPresenceDepression",
+      [TestAssessmentSeverity.PresenseAnxiety]: "assessmentChipPresenceAnxiety"
+    };
+
+    return chipClassNames[assessmentLevel];
   }
 
   onExcelExportRequested() {
@@ -91,7 +87,7 @@ export class ReportComponent implements AfterViewInit {
   }
 }
 
-export interface PeriodicElement {
+export interface TestResultRow {
   idUser: number;
   id: number;
   test: string;
@@ -104,18 +100,3 @@ export interface PeriodicElement {
   email: string;
   answer: string;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { idUser: 1, 
-    id: 2, 
-    test: 'Tecnologías', 
-    date: '08/09/20', 
-    time: '10:44:15', 
-    user: 'Yunerkis Leal',
-    city: 'Medellin',
-    level: 'Moderado',
-    phone: '123456',
-    email: 'test@test.com',
-    answer: 'icono'
-  }
-];

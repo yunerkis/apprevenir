@@ -100,8 +100,8 @@
           Nivel
         </th>
         <td mat-cell *matCellDef="let element">
-          <mat-chip-list aria-label="Fish selection" class="mat-test">
-            <mat-chip [ngStyle]="setStyle(element.resultLevel)" selected>{{
+          <mat-chip-list>
+            <mat-chip [className]="getTestChipClass(element.resultLevel)">{{
               element.resultLevel
             }}</mat-chip>
           </mat-chip-list>

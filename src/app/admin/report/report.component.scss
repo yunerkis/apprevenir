@@ -22,3 +22,47 @@
         align-items: center;
     }
 }
+
+@mixin assessmentChip {
+    color: #fff;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.assessmentChipSevere {
+    @include assessmentChip;
+    background-color: #FF4E60;
+}
+
+.assessmentChipModerate {
+    @include assessmentChip;
+    background-color: #FFA14E;
+}
+
+.assessmentChipMinor {
+    @include assessmentChip;
+    background-color: #20E57E;
+}
+
+.assessmentChipAbsenceAnxiety {
+    @include assessmentChip;
+    background-color: #20E57E;
+}
+
+.assessmentChipAbsenceDepression {
+    @include assessmentChip;
+    background-color: #20E57E;
+}
+
+.assessmentChipPresenceAnxiety {
+    @include assessmentChip;
+    background-color: #FF4E60;
+}
+
+.assessmentChipPresenceDepression {
+    @include assessmentChip;
+    background-color: #FF4E60;
+}

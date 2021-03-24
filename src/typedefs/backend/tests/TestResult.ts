@@ -3,14 +3,15 @@ import { User } from "../userData/User";
 import { Test } from "./Test";
 import { TestAnswer } from "./TestAnswer";
 
-export type TestAssessmentSeverity =
-  | 'Severo' 
-  | 'Moderado' 
-  | 'Leve' 
-  | 'Ausencia de Ansiedad' 
-  | 'Ausencia de depresión' 
-  | 'Presencia de Ansiedad' 
-  | 'Presencia de depresión';
+export enum TestAssessmentSeverity {
+  Severe = 'Severo',
+  Moderate = 'Moderado',
+  Minor = 'Leve',
+  AbsenceAnxiety = 'Ausencia de Ansiedad',
+  AbsenceDepression = 'Ausencia de depresión',
+  PresenseAnxiety = 'Presencia de Ansiedad',
+  PresenceDepression = 'Presencia de depresión'
+}
 
 export interface TestResult extends TimestampedObject {
   id: number,
