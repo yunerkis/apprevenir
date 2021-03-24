@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { InformationModalComponent } from './information-modal/information-modal.component';
 import { ConfidentialModalComponent } from './confidential-modal/confidential-modal.component';
 import { LeveModalComponent } from './leve-modal/leve-modal.component';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-test',
@@ -18,7 +19,7 @@ export class TestComponent implements OnInit {
   addiction = null;
   addiction_id = false;
   addictionDesc = null;
-  url = this.testService.url+'/storage';
+  imagesBaseUrl = `${environment.url}/images`;
   test = {};
   formGroup: FormGroup;
   answers = [];
