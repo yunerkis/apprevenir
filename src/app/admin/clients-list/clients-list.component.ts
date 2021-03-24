@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ExportFormat, ExportType, generateExport } from '@services/exports/exportsDataSource';
 import { deleteUser, getAllClients } from '@services/user/usersDataSource';
 import { ClientTypes, User } from '@typedefs/backend';
 import { LoaderComponent } from 'src/app/core/loader/loader.component';
@@ -97,6 +98,14 @@ export class ClientsListComponent implements AfterViewInit {
 
   filterClients(client: ClientRowElement, filter: string) {
     return client.name.toLowerCase().includes(filter.toLowerCase());
+  }
+
+  onExcelExportRequested() {
+    generateExport(ExportType.Clients, ExportFormat.Excel);
+  }
+
+  onPDFExportRequested() {
+    generateExport(ExportType.Clients, ExportFormat.PDF);
   }
 }
 

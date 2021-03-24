@@ -6,6 +6,7 @@ import { LoaderComponent } from 'src/app/core/loader/loader.component';
 import { getSystemUsers } from '@services/user/usersDataSource';
 import { User } from '@typedefs/backend';
 import { getStoredProfileInfo } from "@services/auth/authStore";
+import { ExportFormat, ExportType, generateExport } from '@services/exports/exportsDataSource';
 
 type UserRow = {
   userId: number;
@@ -69,5 +70,13 @@ export class EditSystemUserComponent implements AfterViewInit {
 
   onEditRequested(userId: number) {
     this._router.navigate([userId], { relativeTo: this._activatedRoute });
+  }
+
+  onExcelExportRequested() {
+    generateExport(ExportType.SystemUsers, ExportFormat.Excel);
+  }
+
+  onPDFExportRequested() {
+    generateExport(ExportType.SystemUsers, ExportFormat.PDF);
   }
 }

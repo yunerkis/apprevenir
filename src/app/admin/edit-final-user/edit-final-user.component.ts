@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ExportFormat, ExportType, generateExport } from '@services/exports/exportsDataSource';
 import { deleteUser, getEndUsers } from '@services/user/usersDataSource';
 import { User } from '@typedefs/backend';
 import { LoaderComponent } from 'src/app/core/loader/loader.component';
@@ -117,5 +118,13 @@ export class EditFinalUserComponent implements AfterViewInit {
       userRow.firstNames.toUpperCase(),
       userRow.lastNames.toUpperCase()
     ].some(text => text.includes(filterText));
+  }
+
+  onExcelExportRequested() {
+    generateExport(ExportType.EndUsers, ExportFormat.Excel);
+  }
+
+  onPDFExportRequested() {
+    generateExport(ExportType.EndUsers, ExportFormat.PDF);
   }
 }

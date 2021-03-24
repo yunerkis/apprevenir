@@ -4,6 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { TestService } from '../../services/test/test.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ReportModalComponent } from './report-modal/report-modal.component';
+import { ExportFormat, ExportType, generateExport } from '@services/exports/exportsDataSource';
 
 @Component({
   selector: 'app-report',
@@ -79,6 +80,14 @@ export class ReportComponent implements AfterViewInit {
       'padding-top': '1px',
       'padding-bottom': '1px',
     }
+  }
+
+  onExcelExportRequested() {
+    generateExport(ExportType.TestResults, ExportFormat.Excel);
+  }
+
+  onPDFExportRequested() {
+    generateExport(ExportType.TestResults, ExportFormat.PDF);
   }
 }
 
