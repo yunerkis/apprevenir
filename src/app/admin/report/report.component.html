@@ -1,5 +1,6 @@
 <div class="test-admin">
-  <div class="test-admin__box">
+	<app-loader #loader></app-loader>
+  <div class="test-admin__box" [hidden]="loader.loadingData">
     <h1 class="test-admin__title app-m-top">Test Informe</h1>
     <button
       mat-mini-fab
@@ -9,7 +10,7 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <div class="test-admin__card">
+  <div class="test-admin__card" [hidden]="loader.loadingData">
     <div class="test-admin__box">
       <div class="home__search">
         <div class="inputContainer-search">
@@ -51,7 +52,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
           Id Usuario
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.user_id }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.userId }}</td>
       </ng-container>
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
@@ -82,8 +83,7 @@
           Usuario
         </th>
         <td mat-cell *matCellDef="let element">
-          {{ element.user.profile.first_names }}
-          {{ element.user.profile.last_names }}
+					{{ element.userName }}
         </td>
       </ng-container>
       <ng-container matColumnDef="city">
@@ -91,8 +91,8 @@
           Ciudad
         </th>
         <td mat-cell *matCellDef="let element">
-          <span *ngIf="element.user.profile.city != null">{{
-            element.user.profile.city.name
+          <span>{{
+            element.city
           }}</span>
         </td>
       </ng-container>
@@ -114,18 +114,18 @@
           Teléfono
         </th>
         <td mat-cell *matCellDef="let element">
-          {{ element.user.profile.phone }}
+          {{ element.phone }}
         </td>
       </ng-container>
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
           Email
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.user.email }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
       </ng-container>
       <ng-container matColumnDef="answer">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Respuestas
+          Ver respuestas
         </th>
         <td mat-cell *matCellDef="let element">
           <mat-icon

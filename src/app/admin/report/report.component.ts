@@ -6,7 +6,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { ReportModalComponent } from './report-modal/report-modal.component';
 import { ExportFormat, ExportType, generateExport } from '@services/exports/exportsDataSource';
 import { MatSort } from '@angular/material/sort';
-import { TestAssessmentSeverity } from '@typedefs/backend';
+import { TestAssessmentSeverity, TestResult } from '@typedefs/backend';
+import { getAuthHeaders } from '@services/common';
+import { getAllTestResults } from '@services/test/testsDataSource';
+import { LoaderComponent } from 'src/app/core/loader/loader.component';
 
 @Component({
   selector: 'app-report',
@@ -14,7 +17,6 @@ import { TestAssessmentSeverity } from '@typedefs/backend';
   styleUrls: ['./report.component.scss']
 })
 export class ReportComponent implements AfterViewInit {
-
   public resultsLength = 0;
   public displayedColumns: string[] = [
     'idUser', 
@@ -32,36 +34,46 @@ export class ReportComponent implements AfterViewInit {
   public dataSource = new MatTableDataSource<TestResultRow>([]);
 
   constructor (
-    public dialog: MatDialog,
-    private testService: TestService
+    public dialog: MatDialog
   ) {}
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(LoaderComponent) loader: LoaderComponent;
 
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.dataSource.filterPredicate = this.filterTestRows;
     
-    this.testService.getAllResutls().subscribe(res => {
+    await this.loader.showLoadingIndicator(async () => {
+      const testResults = await getAllTestResults();
+      const rows = this.buildTestResultRows(testResults);
 
-      this.dataSource = new MatTableDataSource(res['data']);
-
+      this.dataSource.data = rows;
+      this.resultsLength = rows.length;
     });
-
-    
   }
 
-  openDialogTestModalReport(test) {
-    
-    const dialogRef = this.dialog.open(ReportModalComponent, {
+  buildTestResultRows(testResults: TestResult[]): TestResultRow[] {
+    return testResults.map(result => ({
+      id: result.id,
+      city: "", // TODO!
+      date: result.date,
+      time: result.time,
+      email: result.user.email,
+      phone: result.user.profile.phone,
+      userId: result.user.id,
+      resultLevel: result.resultLevel,
+      testName: result.testName,
+      userName: `${result.user.profile.first_names} ${result.user.profile.last_names} ${result.user.profile.last_names_two}`
+    }));
+  }
+
+  openDialogTestModalReport(test: TestResultRow) {
+    this.dialog.open(ReportModalComponent, {
       id: "modal-width",
       data: test
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 
@@ -91,24 +103,25 @@ export class ReportComponent implements AfterViewInit {
     const filterText = input.toUpperCase();
     return [
       row.id.toString(),
-      row.test,
+      row.userId.toString(),
+      row.userName.toString(),
+      row.testName,
       row.city,
-      row.level,
+      row.resultLevel,
       row.email
     ].some(label => label.includes(filterText));
   }
 }
 
 export interface TestResultRow {
-  idUser: number;
+  userId: number;
   id: number;
-  test: string;
+  testName: string;
   date: string;
   time: string;
-  user: string;
+  userName: string;
   city: string;
-  level: string;
+  resultLevel: TestAssessmentSeverity;
   phone: string;
   email: string;
-  answer: string;
 }

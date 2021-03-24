@@ -1,9 +1,15 @@
-import { Test } from "@typedefs/backend";
+import { Test, TestResult } from "@typedefs/backend";
 import { environment } from "@environments/environment";
 import { ensureResponseIsSuccessful, getAuthHeaders } from "@services/common";
 
 export function getAllTests(): Promise<Test[]> {
   return ensureResponseIsSuccessful<Test[]>(fetch(`${environment.url}/api/v1/tests`, {
+    headers: getAuthHeaders()
+  }));
+}
+
+export function getAllTestResults(): Promise<TestResult[]> {
+  return ensureResponseIsSuccessful<TestResult[]>(fetch(`${environment.url}/api/v1/results/all`, {
     headers: getAuthHeaders()
   }));
 }
