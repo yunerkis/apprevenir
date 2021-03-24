@@ -1,13 +1,11 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import { TestService } from '../../services/test/test.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ReportModalComponent } from './report-modal/report-modal.component';
 import { ExportFormat, ExportType, generateExport } from '@services/exports/exportsDataSource';
 import { MatSort } from '@angular/material/sort';
 import { TestAssessmentSeverity, TestResult } from '@typedefs/backend';
-import { getAuthHeaders } from '@services/common';
 import { getAllTestResults } from '@services/test/testsDataSource';
 import { LoaderComponent } from 'src/app/core/loader/loader.component';
 
