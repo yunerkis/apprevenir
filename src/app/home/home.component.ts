@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalHomeQuestionComponent } from '../modals/modal-home-question/modal-home-question.component';
 import { HomeModalComponent } from './home-modal/home-modal.component';
 import { TestService } from '../services/test/test.service';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
 
   tests = [];
   arryTests = [];
-  url = this.testService.url+'/storage';
+  imagesBaseUrl = `${environment.url}/images`;
   SearchForm: FormGroup;
 
   constructor(
