@@ -19,7 +19,7 @@ export class TestComponent implements OnInit {
   addiction = null;
   addiction_id = false;
   addictionDesc = null;
-  imagesBaseUrl = `${environment.url}/images`;
+  imagesBaseUrl = `${environment.url}/storage/images`;
   test = {};
   formGroup: FormGroup;
   answers = [];

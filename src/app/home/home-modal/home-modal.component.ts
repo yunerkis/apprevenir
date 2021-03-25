@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class HomeModalComponent implements OnInit {
 
-  url = environment.url+'/storage';
+  imagesBaseUrl = `${environment.url}/storage/images`;
   addiction: FormGroup;
 
   @ViewChild('close') close: ElementRef<HTMLElement>;

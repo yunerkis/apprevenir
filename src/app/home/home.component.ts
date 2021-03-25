@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
 
   tests = [];
   arryTests = [];
-  imagesBaseUrl = `${environment.url}/images`;
+  imagesBaseUrl = `${environment.url}/storage/images`;
   SearchForm: FormGroup;
 
   constructor(

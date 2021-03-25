@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class InformationModalComponent implements OnInit {
   
-  url = environment.url;
+  imagesBaseUrl = `${environment.url}/storage/images`;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any
