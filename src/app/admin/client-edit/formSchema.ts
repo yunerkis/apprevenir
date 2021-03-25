@@ -32,8 +32,15 @@ export type ClientFormKeys =
   | "schoolGrades"
   | "selectedTests";
 
-export type ClientFormRawValues = Record<Exclude<ClientFormKeys, "selectedTests">, unknown>
-  & { selectedTests: { [key: number]: boolean } };
+type SpecialFormKeys = 
+  | "selectedTests"
+  | "brandImageFiles";
+
+export type ClientFormRawValues = Record<Exclude<ClientFormKeys, SpecialFormKeys>, unknown>
+  & { 
+    selectedTests: { [key: number]: boolean };
+    brandImageFiles: FileList | null
+  };
 
 export function buildClientFormGroup(formBuilder: FormBuilder, isEditing: boolean): FormGroup {
   return formBuilder.group({
@@ -82,16 +89,18 @@ export function loadUserIntoForm(user: User, enabledTestIds: number[], formGroup
   // @ts-expect-error
   formGroup.get('nationalId').setValue(user.profile.client_config?.national_id);
   // @ts-expect-error
-  const brandColorString = user.profile.client_config?.brand_color as string;
-  const colorMatches = brandColorString.match(COLOR_STRING_REGEX);
-  if (colorMatches.length === 4) {
-    const rValue = parseInt(colorMatches[1], 16);
-    const gValue = parseInt(colorMatches[2], 16);
-    const bValue = parseInt(colorMatches[3], 16);
-
-    if (![rValue, gValue, bValue].some(isNaN)) {
-      const colorValue = new Color(rValue, gValue, bValue);
-      formGroup.get('brandColor').setValue(colorValue);
+  const brandColorString = user.profile.client_config?.brand_color;
+  if (typeof brandColorString === "string") {
+    const colorMatches = brandColorString.match(COLOR_STRING_REGEX);
+    if (colorMatches.length === 4) {
+      const rValue = parseInt(colorMatches[1], 16);
+      const gValue = parseInt(colorMatches[2], 16);
+      const bValue = parseInt(colorMatches[3], 16);
+  
+      if (![rValue, gValue, bValue].some(isNaN)) {
+        const colorValue = new Color(rValue, gValue, bValue);
+        formGroup.get('brandColor').setValue(colorValue);
+      }
     }
   }
 
