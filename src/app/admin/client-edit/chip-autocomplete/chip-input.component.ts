@@ -28,8 +28,13 @@ export class ChipInputComponent implements OnInit {
 		return this.allTerms.filter(term => !term.deletedByUser);
 	}
 
+	constructor() {
+		this.loadTermsFromForm = this.loadTermsFromForm.bind(this);
+	}
+
 	ngOnInit(): void {
 		this.loadTermsFromForm();
+		this.formControl.valueChanges.subscribe(this.loadTermsFromForm);
 	}
 
 	get formControl(): AbstractControl {
