@@ -30,6 +30,7 @@ export async function submitClientCreationForm(rawValues: ClientFormRawValues, e
   }
 
   await uploadEnabledTests(rawValues, userId);
+  await uploadLogoIfRequired(rawValues, userId);
 }
 
 async function createOrUpdateUser(rawValues: ClientFormRawValues, editModeEnabled: boolean, currentUserId: number | null): Promise<number> {
@@ -254,4 +255,26 @@ function uploadEnabledTests(rawValues: ClientFormRawValues, userId: number) {
     .filter(key => rawValues.selectedTests[key])
     .map(key => parseInt(key));
   return setEnabledTestIdsForClient(userId, enabledTestIds);
+}
+
+async function uploadLogoIfRequired(rawValues: ClientFormRawValues, userId: number) {
+  if (!rawValues.brandImageFiles || !rawValues.brandImageFiles.length) {
+    return;
+  }
+
+  const imageFile = rawValues.brandImageFiles.item(0);
+  const envelope = new FormData();
+  envelope.append("image", imageFile);
+
+  const uploadResult = await fetch(`${environment.url}/api/v1/clients/${userId}/image`, {
+    headers: {
+      ...getAuthHeaders()
+    },
+    method: "POST",
+    body: envelope
+  });
+
+  if (!uploadResult.ok) {
+    throw new Error("The logo upload was not successful");
+  } 
 }
