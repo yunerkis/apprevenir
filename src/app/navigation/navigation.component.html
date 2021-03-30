@@ -29,7 +29,8 @@
     <mat-drawer #drawer class="example-sidenav" mode="side">
         <div *ngIf="userIsAdmin" class="navigation-list">
             <div class="logo-client">
-                <img alt="Logo" src="../../../assets/bg/COLOR-BORDE.svg" class="logo-client__app" />
+                <img alt="Logo" *ngIf="!logoOverride" src="../../../assets/bg/COLOR-BORDE.svg" class="logo-client__app" />
+                <img alt="Logo" *ngIf="logoOverride" src="{{logoOverride}}" class="logo-client__app" />
             </div>
             <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
                 <!-- This is the tree node template for leaf nodes -->

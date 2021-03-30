@@ -89,6 +89,7 @@ const ADMIN_MENU_ELEMENTS: MenuElement[] = [
 export class NavigationComponent implements OnInit, OnDestroy {
   public userIsAdmin = false;
   public userName = 'Nombre de usuario';
+  public logoOverride = null;
 
   private _transformer = (node: MenuElement, level: number) => {
     return {
@@ -140,6 +141,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   private updateProfileData(profile: IProfileInfo) {
     this.userIsAdmin = profile.isAdmin;
     this.userName = `${profile.firstNames} ${profile.lastNames} ${profile.lastNamesTwo}`;
+    this.logoOverride = profile.referrerConfig?.logoUrl;
   }
 
   logout() {

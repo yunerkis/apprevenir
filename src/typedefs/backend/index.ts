@@ -19,3 +19,4 @@ export { ClientRegistrationRequest } from "./registration/ClientRegistrationRequ
 export { TestResult, TestAssessmentSeverity } from "./tests/TestResult";
 export { TestQuestion } from "./tests/TestQuestion";
 export { TestAnswer } from "./tests/TestAnswer";
+export { ReferrerConfig } from "./userData/ReferrerConfig";

@@ -1,6 +1,6 @@
 import { EventBus } from "@services/messaging/EventBus";
 import { EventMessageWithPayload, KnownMessageKeys } from "@services/messaging/EventMessage";
-import { User } from "@typedefs/backend";
+import { ReferrerConfig, User } from "@typedefs/backend";
 
 export enum Roles {
   Root = "root",
@@ -28,7 +28,11 @@ export interface IProfileInfo {
   role: Roles,
   isAdmin: boolean,
   createdAt: Date,
-  updatedAt: Date | null
+  updatedAt: Date | null,
+  referrerConfig?: {
+    brandColor?: string | null,
+    logoUrl?: string | null
+  }
 }
 
 export function storedAuthTokenIsValid(): boolean {
@@ -99,7 +103,7 @@ function isRoleAdmin(role: unknown) {
   return role === Roles.Admin || role === Roles.Root;
 }
 
-export function storeProfileInfo(profileInfo: any) {
+export function storeProfileInfo(profileInfo: any, referrerConfig?: ReferrerConfig | undefined) {
   if (!profileInfo) {
     throw new Error("Can not store null profile data");
   }
@@ -126,6 +130,13 @@ export function storeProfileInfo(profileInfo: any) {
     createdAt: new Date(profileInfo.created_at),
     updatedAt: profileInfo.updated_at == null ? null : new Date(profileInfo.updated_at)
   };
+
+  if (referrerConfig) {
+    normalizedProfile.referrerConfig = {
+      brandColor: referrerConfig.brand_color,
+      logoUrl: referrerConfig.logo_url
+    };
+  }
 
   storeProfileInLocalStorage(normalizedProfile);
 }

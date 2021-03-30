@@ -29,12 +29,13 @@ export class AuthService {
       res => {
         const accessToken = res["data"].access_token;
         const profileObject = res["data"].profile;
+        const referrerConfig = res["data"].referrer_config;
         const userRole = res["data"].role;
         profileObject.email = credentials["email"]; // Bruh...
         profileObject.role = userRole;
 
         storeAuhToken(accessToken);
-        storeProfileInfo(profileObject);
+        storeProfileInfo(profileObject, referrerConfig);
 
         this.router.navigate(['app/home']); 
       }, error => {
