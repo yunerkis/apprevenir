@@ -139,6 +139,13 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   private updateProfileData(profile: IProfileInfo) {
+    if (!profile) {
+      this.userIsAdmin = false;
+      this.userName = "Nombre de usuario";
+      this.logoOverride = null;
+      return;
+    }
+
     this.userIsAdmin = profile.isAdmin;
     this.userName = `${profile.firstNames} ${profile.lastNames} ${profile.lastNamesTwo}`;
     this.logoOverride = profile.referrerConfig?.logoUrl;

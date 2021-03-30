@@ -143,7 +143,10 @@ export function storeProfileInfo(profileInfo: any, referrerConfig?: ReferrerConf
 
 function storeProfileInLocalStorage(profile: IProfileInfo) {
   localStorage.setItem('profile', JSON.stringify(profile));
+  fireProfileChangedMessage(profile);
+}
 
+function fireProfileChangedMessage(profile: IProfileInfo | null) {
   const message = new ProfileChangedMessage(profile);
   EventBus.instance.publishMessage(message);
 }
@@ -171,11 +174,13 @@ export function getStoredProfileInfo(): IProfileInfo {
 export function clearAuthStore() {
   localStorage.removeItem('token');
   localStorage.removeItem('profile');
+
+  fireProfileChangedMessage(null);
 }
 
-export class ProfileChangedMessage extends EventMessageWithPayload<IProfileInfo> {
+export class ProfileChangedMessage extends EventMessageWithPayload<IProfileInfo | null> {
   public constructor(
-    private readonly profileInfo: IProfileInfo
+    private readonly profileInfo: IProfileInfo | null
   ) { 
     super();
   }
