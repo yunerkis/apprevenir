@@ -12,13 +12,16 @@
         border-radius: 20px 0px 0px 20px;
         width: 100%;
         margin-left: -25px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         height: 100vh;
         z-index: 2;
         overflow-y: scroll;
     }
+
+}
+
+.login__section--margin {
+    width: 550px;
+    margin: 0 auto;
 }
 
 .section-one {

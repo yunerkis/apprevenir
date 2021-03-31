@@ -22,8 +22,25 @@
     color: var(--color-normal-grey);
     font-family: "KanitNormal";
     font-size: 15px;
-    width: 100%;
     text-align: left;
+    width: 100%;
+
+    .mat-button-focus-overlay {
+        background-color: transparent!important;
+    }
+
+    ::ng-deep .mat-button-focus-overlay {
+        display: none;
+    }
+
+    .mat-icon {
+        margin-right: 10px;
+        color: var(--color-primary);
+    }
+    .mat-button-wrapper {
+        display: flex;
+        align-items: center;
+    }
 }
 
 .mat-tree-node {

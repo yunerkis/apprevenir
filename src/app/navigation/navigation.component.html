@@ -40,7 +40,7 @@
                     <mat-icon fontSet="material-icons-outlined" >
                         {{node.icon}}
                     </mat-icon>
-                    {{node.name}}
+                   <span>{{node.name}}</span> 
                   </button>
                 </mat-tree-node>
                 <!-- This is the tree node template for expandable nodes -->
@@ -50,19 +50,19 @@
                     <mat-icon fontSet="material-icons-outlined" >
                         {{node.icon}}
                     </mat-icon>
-                    {{node.name}}
+                    <span>{{node.name}}</span> 
                   </button>
                 </mat-tree-node>
               </mat-tree>
-            <img src="./../../assets/bg/logo-luis-amigo.png" alt="" class="home-logo">
-            <p class="user-bottom">© 2020. Universidad Católica Luis Amigó</p>
+            <img src="./../../assets/bg/logo-luis-amigo.png" alt="" class="home-logo app-p-20">
+            <p class="user-bottom app-p-20">© 2020. Universidad Católica Luis Amigó</p>
         </div>
         <div *ngIf="!userIsAdmin" class="home-list">
-            <a href="" target="_blank" class="user-text">Inicio</a>
-            <a href="https://apprevenir.com/conocenos/" target="_blank" class="user-text">Más sobre Apprevenir</a>
-            <a href="https://apprevenir.com/contactanos/" target="_blank" class="user-text">Contáctanos</a>
-            <img src="./../../assets/bg/logo-luis-amigo.png" alt="" class="home-logo">
-            <p class="user-bottom">© 2020. Universidad Católica Luis Amigó</p>
+            <a href="" target="_blank" class="user-text app-p-20">Inicio</a>
+            <a href="https://apprevenir.com/conocenos/" target="_blank" class="user-text app-p-20">Más sobre Apprevenir</a>
+            <a href="https://apprevenir.com/contactanos/" target="_blank" class="user-text app-p-20">Contáctanos</a>
+            <img src="./../../assets/bg/logo-luis-amigo.png" alt="" class="home-logo app-p-20">
+            <p class="user-bottom app-p-20">© 2020. Universidad Católica Luis Amigó</p>
         </div>
     </mat-drawer>
     <mat-drawer-content>
