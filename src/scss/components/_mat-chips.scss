@@ -25,3 +25,8 @@
         font-size: 13px;
     }
 }
+
+.mat-chip.mat-standard-chip {
+    background-color: var(--color-gray-dark-4) !important;
+    color: var( --color-normal-grey) !important;
+}
