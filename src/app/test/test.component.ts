@@ -121,10 +121,8 @@ export class TestComponent implements OnInit {
     this.addiction = this.route.snapshot.queryParamMap.get("addiction");
 
     this.testService.getTest(id).subscribe(res => {
-
       this.test = res['data'];
-      this.questions =  this.test['questions'];
-      this.test['questions'].forEach((question, i) => {
+      this.questions =  this.test['questions'].map((question, i)=>{
         this.answer = {};
         if (i == 0 && this.test['name'] == 'Drogas') {
           this.answer['addiction'] = ['', Validators.required];
@@ -132,6 +130,12 @@ export class TestComponent implements OnInit {
           this.answer['answer_'+i] = ['', Validators.required];
         }
         this.answers.push(this.formBuilder.group(this.answer));
+        
+        if (this.addiction != null) {
+          question.question = question.question.replace('varI', this.addiction);
+        }
+        
+        return question;
       });
       this.formGroup = this.formBuilder.group({ formArray: this.formBuilder.array(this.answers) });
       this.openDialogConfidential();
