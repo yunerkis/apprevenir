@@ -25,25 +25,38 @@
 								{{ question.question }}
 							</div>
 						</div>
+						<div>
+							<div *ngIf="test['name'] == 'Drogas'">
+								<div *ngIf="question.order == 1">
+								  <div *ngFor="let addiction of test.addictions; let in = index">
+									<label class="test__label" >{{ order[in] }}</label>
+									<mat-checkbox class="example-margin" formControlName="addiction" required value="{{ in }}" 
+									(change)="selectAddiction($event)"
+									>{{ addiction.description }}</mat-checkbox>
+								  </div>
+								</div>
+								
+								<div *ngIf="question.order != 1">
+								  <div *ngFor="let addictionSelect of addictionArray; let inx = index">
+									<div  class="test-form__addiction">
+									  <label class="test__label">{{ order[addictionSelect.order] }}</label>
+									  <div class="test-form__option-answer">{{ addictionSelect.desc }}</div>
+									</div>
+									
+									<mat-form-field class="example-full-width">
+									  <mat-label>Elige una opción</mat-label>
+									  <mat-select formControlName="answer_{{addictionSelect.id}}_{{i}}" required >
+										<mat-option [value]="answer.id"  *ngFor="let answer of question.answers; let in = index" >
+										  {{ answer.answer }}
+										</mat-option>
+									  </mat-select>
+									</mat-form-field>
+								  </div>
+								</div>
+							</div>
+						</div>
 
 						<div class="test__radio">
-							<mat-radio-group formControlName="addiction" required class="test__radio-flex" 
-								*ngIf="question.order == 1 && test['name'] == 'Drogas'" (change)="selectAddiction($event)">
-								<mat-radio-button value="{{ in }}" *ngFor="let addiction of test.addictions; let in = index">
-									<label class="test__label">{{ order[in] }}</label>
-									<div class="test-form__option-answer">{{ addiction.description }}</div>
-								</mat-radio-button>
-							</mat-radio-group>
-							<div *ngIf="question.order != 1 && test['name'] == 'Drogas'" class="test__addiction">
-								<label class="test__label">{{ order[0] }}</label>
-								<div class="test-form__option-answer">{{ addictionDesc }}</div>
-							</div>
-							<mat-select formControlName="answer_{{i}}" required *ngIf="question.order != 1 && test['name'] == 'Drogas'">
-								<mat-option value="">Elige una opción</mat-option>
-								<mat-option [value]="answer.id"  *ngFor="let answer of question.answers; let in = index">
-									{{ answer.answer }}
-								</mat-option>
-							</mat-select>
 							<mat-radio-group formControlName="answer_{{i}}" required class="test__radio-flex" 
 								*ngIf="test['name'] != 'Drogas'">
 								<mat-radio-button value="{{ answer.id }}" *ngFor="let answer of question.answers; let in = index">
@@ -71,11 +84,12 @@
 						<mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
 						Resultado
 					</ng-template>
-					<div class="test__tab">
+					<div class="test__tab" *ngFor="let testResult of testResults; let i = index">
 						<div class="test__type">
-							<mat-icon fontSet="material-icons-outlined" class="test__ico" (click)="openDialogSuppor(resultLevel)">help_outline</mat-icon>
-							<div [innerHTML]="gifLevel[resultLevel]"></div>
-            				<div [style]="colorsLevel[resultLevel]" class="test__result">{{resultLevel}}</div>
+							<mat-icon fontSet="material-icons-outlined" class="test__ico" (click)="openDialogSuppor(testResult.resultLevel)">help_outline</mat-icon>
+							<div [innerHTML]="gifLevel[testResult.resultLevel]"></div>
+            				<div [style]="colorsLevel[testResult.resultLevel]" class="test__result">{{testResult.resultLevel}}</div>
+							<div [style]="colorsLevel[testResult.resultLevel]" class="test__result">{{testResult.addiction}}</div>
 						</div>
 					</div>
 				</mat-tab>
@@ -86,8 +100,9 @@
 						Información
 					</ng-template>
 					<div class="test__tab">
-						<div class="test__type width-100">
-							<iframe width="700px" height="405px" [src]="getVideoIframe(url_video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						<div class="test__type width-100" *ngFor="let testResult of testResults; let i = index">
+							<div [style]="colorsLevel[testResult.resultLevel]" class="test__result">{{testResult.addiction}}</div>
+							<iframe width="700px" height="405px" [src]="getVideoIframe(testResult.url_video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						</div>
 					</div>
 				</mat-tab>
@@ -97,8 +112,9 @@
 						<mat-icon fontSet="material-icons-outlined">support_agent</mat-icon>
 						Ayuda
 					</ng-template>
-					<div class="test__tab">
-						<div class="test__info-text" [innerHTML]="professional_help">
+					<div class="test__tab" *ngFor="let testResult of testResults; let i = index">
+						<div [style]="colorsLevel[testResult.resultLevel]" class="test__result">{{testResult.addiction}}</div>
+						<div class="test__info-text" [innerHTML]="testResult.professional_help">
 						</div>
 					</div>
 				</mat-tab>
@@ -110,9 +126,10 @@
 					</ng-template>
 					<div class="test__tab">
 						<div class="test__info-box">
-							<div class="test__school">
+							<div class="test__school" *ngFor="let testResult of testResults; let i = index">
+								<div [style]="colorsLevel[testResult.resultLevel]" class="test__result">{{testResult.addiction}}</div>
 								<mat-icon fontSet="material-icons-outlined">school</mat-icon>
-								<div [innerHTML]="url_interest" id="gif_level"></div>
+								<div [innerHTML]="testResult.url_interest" id="gif_level"></div>
 							</div>
 						</div>
 					</div>
