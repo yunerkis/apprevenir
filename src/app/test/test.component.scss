@@ -86,6 +86,7 @@
         justify-content: center;
         align-items: center;
 		position: relative;
+		overflow-x: hidden;
     }
 	&__result {
 		font-size: 60px;
@@ -99,6 +100,7 @@
 		display: flex;
     	align-items: center;
 		justify-content: flex-start;
+		flex-wrap: wrap;
 		.mat-icon {
 			margin-bottom: 0;
 			margin-right: 10px;
@@ -134,7 +136,6 @@
 		.test-form__option-answer {
 			margin-top: 5px;
 		}
-
 		margin-bottom: 20px;
 	}
 }
@@ -147,3 +148,64 @@
 	margin-top: 3rem;
 }
 
+.check-div {
+	color: var(--color-normal-grey);
+    font-family: "FiratRegular";
+    font-size: 16px;
+}
+
+.drugs-left {
+	margin-left: 35px;
+}
+
+.test-form__addiction {
+	display: flex;
+	align-items: baseline;
+}
+
+.test-form__option-answer {
+	color: var(--color-normal-grey);
+    font-family: "FiratRegular";
+    font-size: 16px;
+}
+
+//Styles for the results 
+
+.test-result {
+	font-size: 60px;
+	font-family: 'KanitMedium';
+	line-height: 50px;
+}
+
+.test-tab-video {
+	height: 573px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.test-result-video {
+	font-size: 40px;
+    font-family: "KanitMedium";
+    margin: 20px;
+}
+
+.test-tab-info {
+	height: 573px;
+}
+
+.test-result-info {
+	font-size: 25px;
+    font-family: "KanitMedium";
+    margin: 10px 0;
+}
+.test-result-link {
+	font-size: 25px;
+    font-family: "KanitMedium";
+    margin: 10px 0;
+}
+
+.test-result-box {
+	display: flex;
+    align-items: center;
+}

@@ -25,14 +25,15 @@
 								{{ question.question }}
 							</div>
 						</div>
-						<div>
-							<div *ngIf="test['name'] == 'Drogas'">
+						<div class="app-m-top-2">
+							<div *ngIf="test['name'] == 'Drogas'" id="drugs-test">
 								<div *ngIf="question.order == 1">
-								  <div *ngFor="let addiction of test.addictions; let in = index">
-									<label class="test__label" >{{ order[in] }}</label>
-									<mat-checkbox class="example-margin" formControlName="addiction" required value="{{ in }}" 
-									(change)="selectAddiction($event)"
-									>{{ addiction.description }}</mat-checkbox>
+								  <div *ngFor="let addiction of test.addictions; let in = index" class="drugs-left">
+									<mat-checkbox disableRipple="true" color="primary" formControlName="addiction" required value="{{ in }}" 
+									(change)="selectAddiction($event)">
+										<label class="test__label" >{{ order[in] }}</label>
+										<div class="check-div">{{ addiction.description }}</div>
+									</mat-checkbox>
 								  </div>
 								</div>
 								
@@ -88,8 +89,8 @@
 						<div class="test__type">
 							<mat-icon fontSet="material-icons-outlined" class="test__ico" (click)="openDialogSuppor(testResult.resultLevel)">help_outline</mat-icon>
 							<div [innerHTML]="gifLevel[testResult.resultLevel]"></div>
-            				<div [style]="colorsLevel[testResult.resultLevel]" class="test__result">{{testResult.resultLevel}}</div>
-							<div [style]="colorsLevel[testResult.resultLevel]" class="test__result">{{testResult.addiction}}</div>
+            				<div [style]="colorsLevel[testResult.resultLevel]" class="test-result">{{testResult.resultLevel}}</div>
+							<div [style]="colorsLevel[testResult.resultLevel]" class="test-result">{{testResult.addiction}}</div>
 						</div>
 					</div>
 				</mat-tab>
@@ -99,9 +100,9 @@
 						<mat-icon fontSet="material-icons-outlined">play_circle_outline</mat-icon>
 						Información
 					</ng-template>
-					<div class="test__tab">
+					<div class="test-tab-video">
 						<div class="test__type width-100" *ngFor="let testResult of testResults; let i = index">
-							<div [style]="colorsLevel[testResult.resultLevel]" class="test__result">{{testResult.addiction}}</div>
+							<div [style]="colorsLevel[testResult.resultLevel]" class="test-result-video">{{testResult.addiction}}</div>
 							<iframe width="700px" height="405px" [src]="getVideoIframe(testResult.url_video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						</div>
 					</div>
@@ -112,10 +113,9 @@
 						<mat-icon fontSet="material-icons-outlined">support_agent</mat-icon>
 						Ayuda
 					</ng-template>
-					<div class="test__tab" *ngFor="let testResult of testResults; let i = index">
-						<div [style]="colorsLevel[testResult.resultLevel]" class="test__result">{{testResult.addiction}}</div>
-						<div class="test__info-text" [innerHTML]="testResult.professional_help">
-						</div>
+					<div class="test-tab-info" *ngFor="let testResult of testResults; let i = index">
+						<div [style]="colorsLevel[testResult.resultLevel]" class="test-result-info">{{testResult.addiction}}</div>
+						<div class="test__info-text" [innerHTML]="testResult.professional_help"></div>
 					</div>
 				</mat-tab>
 
@@ -127,9 +127,11 @@
 					<div class="test__tab">
 						<div class="test__info-box">
 							<div class="test__school" *ngFor="let testResult of testResults; let i = index">
-								<div [style]="colorsLevel[testResult.resultLevel]" class="test__result">{{testResult.addiction}}</div>
-								<mat-icon fontSet="material-icons-outlined">school</mat-icon>
-								<div [innerHTML]="testResult.url_interest" id="gif_level"></div>
+								<div [style]="colorsLevel[testResult.resultLevel]" class="test-result-link">{{testResult.addiction}}</div>
+								<div class="test-result-box">
+									<mat-icon fontSet="material-icons-outlined">school</mat-icon>
+									<div [innerHTML]="testResult.url_interest" id="gif_level"></div>
+								</div>
 							</div>
 						</div>
 					</div>
