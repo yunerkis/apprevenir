@@ -24,12 +24,15 @@
 }
 
 @mixin assessmentChip {
-    color: #fff;
-    padding-left: 15px;
-    padding-right: 15px;
+    display: flex;
+    align-items: center;
+    height: 20px;
     border-radius: 10px;
-    padding-top: 1px;
-    padding-bottom: 1px;
+    text-align: center;
+    justify-content: center;
+    color: var(--color-white);
+    margin-right: 10px;
+    text-transform: uppercase;
 }
 
 .assessmentChipSevere {

@@ -101,13 +101,11 @@
           Nivel
         </th>
         <td mat-cell *matCellDef="let element">
-          <mat-chip-list>
-            <mat-chip [className]="getTestChipClass(element.resultLevel)">{{
+            <div [className]="getTestChipClass(element.resultLevel)">{{
               element.resultLevel
-            }}</mat-chip>
-          </mat-chip-list>
-        </td></ng-container
-      >
+            }}</div>
+        </td>
+        </ng-container>
 
       <ng-container matColumnDef="phone">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
@@ -129,6 +127,7 @@
         </th>
         <td mat-cell *matCellDef="let element">
           <mat-icon
+            class="app-cursor"
             fontSet="material-icons-outlined"
             (click)="openDialogTestModalReport(element)"
             >live_help</mat-icon

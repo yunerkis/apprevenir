@@ -24,3 +24,7 @@ table {
     height: 600px;
     overflow: auto;
   }
+
+  tr.mat-row, tr.mat-footer-row {
+    height: 60px !important;
+}
