@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: 'http://appprevenir-demo.westus.cloudapp.azure.com',
+  url: 'https://appprevenir-demo.westus.cloudapp.azure.com',
 };
