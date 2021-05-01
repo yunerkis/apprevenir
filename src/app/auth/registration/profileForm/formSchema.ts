@@ -34,6 +34,7 @@ export function buildPersonalInfoFormGroup(formBuilder: FormBuilder): FormGroup 
     birthDate: ['', Validators.compose([Validators.required, dateValidator])],
     gender: ['', Validators.required],
     maritalStatus: ['', Validators.required],
+    userProfile: [''],
     educationLevel: ['', Validators.required]
   };
 

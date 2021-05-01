@@ -12,6 +12,7 @@ export interface UserProfile {
   is_student: number, // It really is a boolean, BRUH...
   gender_id: number | null,
   civil_status_id: number | null,
+  system: string | null,
   country_id: number | null,
   state_id: number | null,
   city_id: number | null,

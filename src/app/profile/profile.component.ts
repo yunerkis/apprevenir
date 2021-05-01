@@ -26,6 +26,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class ProfileComponent implements OnInit, OnDestroy {
   firstNames = "Nombres";
   lastNames = "Apellidos";
+  gender = 0;
   
   color = {
     'Severo': '#FF4E60',
@@ -69,6 +70,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userIsAdmin = profile.isAdmin;
     this.firstNames = profile.firstNames;
     this.lastNames = `${profile.lastNames} ${profile.lastNamesTwo}`;
+    console.log(profile.genderId)
+    this.gender = profile.genderId;
+
   }
   
   openDialogProfile(test) {

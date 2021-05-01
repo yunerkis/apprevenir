@@ -4,6 +4,7 @@ export type PersonalInfoFormKeys =
   | "lastNameTwo"
   | "status"
   | "maritalStatus"
+  | "userProfile"
   | "phoneNumber"
   | "emailAddress"
   | "password"

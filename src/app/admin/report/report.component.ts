@@ -54,6 +54,7 @@ export class ReportComponent implements AfterViewInit {
   }
 
   buildTestResultRows(testResults: TestResult[]): TestResultRow[] {
+    console.log(testResults)
     return testResults.map(result => ({
       id: result.id,
       city: "", // TODO!
@@ -64,7 +65,8 @@ export class ReportComponent implements AfterViewInit {
       userId: result.user.id,
       resultLevel: result.resultLevel,
       testName: result.testName,
-      userName: `${result.user.profile.first_names} ${result.user.profile.last_names} ${result.user.profile.last_names_two}`
+      userName: `${result.user.profile.first_names} ${result.user.profile.last_names} ${result.user.profile.last_names_two}`,
+      answers: result.answers
     }));
   }
 
@@ -122,4 +124,5 @@ export interface TestResultRow {
   resultLevel: TestAssessmentSeverity;
   phone: string;
   email: string;
+  answers: any;
 }

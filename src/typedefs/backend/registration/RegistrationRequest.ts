@@ -6,6 +6,7 @@ export interface RegistrationRequest {
   city_id: string,
   civil_status_id: string,
   client: "persona natural",
+  userProfile: string,
   client_config: UserClientConfig,
   client_type: ClientTypes,
   country_id: string,

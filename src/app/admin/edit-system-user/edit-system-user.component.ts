@@ -13,6 +13,7 @@ type UserRow = {
   firstNames: string;
   lastNames: string;
   email: string,
+  system: string,
   statusLabel: string;
 }
 type UserTableColumnLabels = keyof UserRow | "actions";
@@ -31,6 +32,7 @@ export class EditSystemUserComponent implements AfterViewInit {
     'firstNames',
     'lastNames',
     'email',
+    'system',
     'statusLabel',
     'actions'
   ];
@@ -61,6 +63,7 @@ export class EditSystemUserComponent implements AfterViewInit {
       firstNames: user.profile.first_names,
       lastNames: user.profile.last_names,
       email: user.email,
+      system: user.system,
       statusLabel: user.status == 1 ? "Activo" : "Inactivo"
     }));
 

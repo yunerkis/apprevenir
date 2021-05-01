@@ -8,6 +8,7 @@ export interface User<TClientType extends ClientTypes = ClientTypes.NaturalPerso
   email_verified_at: string,
   client: TClientType,
   status: number,
+  system: string | null,
   created_at: string,
   updated_at: string,
   deleted_at: string | null,

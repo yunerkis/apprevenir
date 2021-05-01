@@ -66,14 +66,14 @@
       
       <div>
           <mat-form-field class="width-100">
-              <mat-label>Estado Civil</mat-label>
-              <mat-select formControlName="maritalStatus">
-                <mat-option *ngFor="let status of maritalStatusValues" [value]="status.key">
+              <mat-label>Perfil de usuario</mat-label>
+              <mat-select formControlName="userProfile" required>
+                <mat-option *ngFor="let status of usersProfiles" [value]="status.label">
                   {{status.label}}
                 </mat-option>
               </mat-select>
               <mat-error>
-                Por favor elige tu estado civil
+                Por favor elige tu Perfil de usuario
               </mat-error>
             </mat-form-field>
       </div>

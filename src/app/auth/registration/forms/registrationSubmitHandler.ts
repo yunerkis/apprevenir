@@ -8,13 +8,14 @@ import { getUserData } from "@services/user/usersDataSource";
 import { ensureResponseIsSuccessful } from "@services/common";
 
 export async function submitRegistrationForms(
+  userIdOverride: string,
   isEditingProfile: boolean,
   adminModeEnabled: boolean,
   ...forms: FormGroup[]
 ): Promise<void> {
   const rawFormData: RawFormData = forms.reduce((data, form) => Object.assign(data, form.value), {});
   const birthdayValue = dayjs(rawFormData.birthDate).format("YYYY-MM-DD");
-
+  
   const registrationPayload: RegistrationRequest = {
     birthday: birthdayValue,
     country_id: rawFormData.country as string,
@@ -33,6 +34,7 @@ export async function submitRegistrationForms(
     password: rawFormData.password as string,
     password_confirmation: rawFormData.passwordConfirmation as string,
     phone: rawFormData.phoneNumber as string,
+    userProfile: rawFormData.userProfile as string,
     reference: rawFormData.referralHierarchy1 as string,
     client_config: {
       client_type: rawFormData.referralSource as ClientTypes,
@@ -56,7 +58,7 @@ export async function submitRegistrationForms(
   };
 
   if (isEditingProfile) {
-    const currentProfile = getStoredProfileInfo();
+    const currentProfile = userIdOverride ? {id: userIdOverride} : getStoredProfileInfo();
     url = `${environment.url}/api/v1/users/${currentProfile.id}`;
     method = "PUT";
     headers = {
@@ -65,7 +67,8 @@ export async function submitRegistrationForms(
     };
   }
 
-  await ensureResponseIsSuccessful(fetch(url, {
+  await ensureResponseIsSuccessful(
+    fetch(url, {
     body: JSON.stringify(registrationPayload),
     method,
     headers

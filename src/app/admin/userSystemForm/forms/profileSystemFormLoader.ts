@@ -19,7 +19,6 @@ export async function loadProfileFormData(userIdOveride: string | null = null): 
   const userResponse = await getUserData(userId);
   const userProfile = userResponse.profile;
  
-
   return {
     id: userId,
     personalInfo: {
@@ -28,6 +27,7 @@ export async function loadProfileFormData(userIdOveride: string | null = null): 
       lastNameTwo: userProfile.last_names_two,
       status: userResponse.status?.toString(),
       maritalStatus: userProfile.civil_status_id?.toString(),
+      userProfile: userResponse.system,
       phoneNumber: userProfile.phone,
       emailAddress: userResponse.email,
     },

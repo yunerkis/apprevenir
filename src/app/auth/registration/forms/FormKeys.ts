@@ -15,6 +15,7 @@ export type PersonalInfoFormKeys =
   | "birthDate"
   | "gender"
   | "maritalStatus"
+  | "userProfile"
   | "educationLevel";
 
 export type LocationFormKeys =

@@ -10,4 +10,5 @@ export interface RegistrationSystemRequest {
   password: string,
   password_confirmation: string,
   phone: string,
+  userProfile: string,
 }

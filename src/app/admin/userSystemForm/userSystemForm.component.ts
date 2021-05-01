@@ -1,13 +1,15 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MaritalStatusValues } from "../../auth/registration/constants/maritalStatusValues";
-import { RegistrationResult, submitRegistrationForms } from './forms/registrationSubmitHandler';
+import { UsersProfiles } from "../../auth/registration/constants/UsersProfiles";
+import { submitRegistrationForms } from './forms/registrationSubmitHandler';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { buildPersonalInfoForm } from './formUserSchema';
 import { loadProfileFormData } from './forms/profileSystemFormLoader';
 import { LoaderComponent } from 'src/app/core/loader/loader.component';
 import { getStoredProfileInfo } from "@services/auth/authStore";
+import { showErrorMessage } from '@services/common';
 
 @Component({
     selector: 'user-system-form',
@@ -25,7 +27,7 @@ export class UserSystemFormComponent implements OnInit {
 
     personalInfoForm: FormGroup;
 
-    maritalStatusValues = MaritalStatusValues;
+    usersProfiles = UsersProfiles
     hiddenStatus = false;
 
     constructor(
@@ -60,7 +62,7 @@ export class UserSystemFormComponent implements OnInit {
     }
 
     public async onSubmitClicked() {
-
+      
         this.personalInfoForm.get('status').markAsDirty();
 
         const allForms = [
@@ -80,47 +82,39 @@ export class UserSystemFormComponent implements OnInit {
         }
         
         try {
-            const result = await submitRegistrationForms(this.profileUpdateModeEnabled, this.adminModeEnabled, ...allForms);
-            this.handleRegistrationResult(result);
+            const result = await submitRegistrationForms(this.userIdOverride, this.profileUpdateModeEnabled, this.adminModeEnabled, ...allForms);
+            this.handleRegistrationResult();
         } catch (error) {
             console.error("Error while trying to submit the registration data", error);
-            this.handleRegistrationResult({ wasSuccessful: false, errorMessages: [] });
+            await showErrorMessage(error);
         } 
     }
 
-    async handleRegistrationResult(result: RegistrationResult) {
-        if (result.wasSuccessful) {
-          let successTitle = "Usuario creado";
-          let successMessage = "El usuario ha sido creado correctamente";
+    async handleRegistrationResult() {
 
-          if (this.profileUpdateModeEnabled) {
-            successTitle = "Perfil Actualizado";
-            successMessage = "Tus datos han sido actualizados correctamente";
-          }
-    
-          if (this.adminModeEnabled) {
-            if (this.profileUpdateModeEnabled) {
-              successTitle = "Perfil Actualizado";
-              successMessage = "Los datos del usuario han sido actualizados";
-            } else {
-              successTitle = "Usuario creado";
-              successMessage = "El usuario ha sido creado correctamente";
-            }
-          }
-          
-          await Swal.fire(successTitle, successMessage, "success");
+      let successTitle = "Usuario creado";
+      let successMessage = "El usuario ha sido creado correctamente";
 
-          this._router.navigate(['app/admin/edit-system-user']); 
-    
-          return;
+      if (this.profileUpdateModeEnabled) {
+        successTitle = "Perfil Actualizado";
+        successMessage = "Tus datos han sido actualizados correctamente";
+      }
+
+      if (this.adminModeEnabled) {
+        if (this.profileUpdateModeEnabled) {
+          successTitle = "Perfil Actualizado";
+          successMessage = "Los datos del usuario han sido actualizados";
+        } else {
+          successTitle = "Usuario creado";
+          successMessage = "El usuario ha sido creado correctamente";
         }
-    
-        let errorMessage = "No fue posible contactar el servidor. Por favor revisa tu conexión a internet e inténtalo de nuevo";
-        if (result.errorMessages.length) {
-          errorMessage = "Por favor revisa los datos ingresados e inténtalo de nuevo: " + result.errorMessages.join(", ");
-        }
-    
-        Swal.fire("Error", errorMessage, "error");
+      }
+      
+      await Swal.fire(successTitle, successMessage, "success");
+
+      this._router.navigate(['app/admin/edit-system-user']); 
+
+      return;
     }
 
     async loadProfileFormDataIfNeeded() {

@@ -139,7 +139,7 @@ export class ProfileFormComponent implements OnInit, AfterViewInit {
     
     await this.loader.showLoadingIndicator(async () => {
       try {
-        const result = await submitRegistrationForms(this.profileUpdateModeEnabled, this.adminModeEnabled, ...allForms);
+        const result = await submitRegistrationForms(this.userIdOverride, this.profileUpdateModeEnabled, this.adminModeEnabled, ...allForms);
         this.handleRegistrationResult();
       } catch (error) {
         console.error("Error while trying to submit the registration data", error);

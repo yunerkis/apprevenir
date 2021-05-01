@@ -1,24 +1,22 @@
 import { FormGroup } from "@angular/forms";
-import { RegistrationSystemRequest, BackendResponse } from "@typedefs/backend";
+import { RegistrationSystemRequest} from "@typedefs/backend";
 import { RawFormData } from "./FormKeys";
 import { environment } from "@environments/environment";
 import { getAuthToken, getStoredProfileInfo, updateStoredProfile } from "@services/auth/authStore";
 import { getUserData } from "@services/user/usersDataSource";
-
-export interface RegistrationResult {
-  wasSuccessful: boolean,
-  errorMessages: string[]
-}
+import { ensureResponseIsSuccessful } from "@services/common";
 
 export async function submitRegistrationForms(
+  userIdOverride: string,
   isEditingProfile: boolean,
   adminModeEnabled: boolean,
   ...forms: FormGroup[]
-): Promise<RegistrationResult> {
+): Promise<void> {
   const rawFormData: RawFormData = forms.reduce((data, form) => Object.assign(data, form.value), {});
- 
+  
   const registrationPayload: RegistrationSystemRequest = {
     civil_status_id: rawFormData.maritalStatus as string,
+    userProfile: rawFormData.userProfile as string,
     client: "persona natural",
     email: rawFormData.emailAddress as string,
     first_name_two: rawFormData.lastName as string,
@@ -39,33 +37,21 @@ export async function submitRegistrationForms(
   };
 
   if (isEditingProfile) {
-    const currentProfile = getStoredProfileInfo();
+    const currentProfile = userIdOverride ? {id: userIdOverride} : getStoredProfileInfo();
     url = `${environment.url}/api/v1/users/${currentProfile.id}`;
     method = "PUT";
   }
 
-  const response = await fetch(url, {
+  await ensureResponseIsSuccessful(
+    fetch(url, {
     body: JSON.stringify(registrationPayload),
     method,
     headers
-  });
+  }));
 
-  const resultObject: RegistrationResult = { wasSuccessful: true, errorMessages: [] };
-  const responsePayload = await response.json() as BackendResponse<{}>;
-  
-  if (!responsePayload.success) {
-    resultObject.wasSuccessful = false;
-    if (responsePayload.errors) {
-      const errors = responsePayload.errors;
-      resultObject.errorMessages = Object.keys(errors).reduce((messages, key) => [...messages, ...errors[key]], []);
-    }
-  } else {
-    if (isEditingProfile && !adminModeEnabled) {
-      const currentProfile = getStoredProfileInfo();
-      const profileResult = await getUserData(currentProfile.id);
-      updateStoredProfile(profileResult);
-    }
+  if (isEditingProfile && !adminModeEnabled) {
+    const currentProfile = getStoredProfileInfo();
+    const profileResult = await getUserData(currentProfile.id);
+    updateStoredProfile(profileResult);
   }
-
-  return resultObject;
 }
