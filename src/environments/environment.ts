@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   url: 'http://apprevenir-back.test',
+  //url: 'http://localhost:8000',
 };
 
 /*
