@@ -48,36 +48,49 @@
       matSortDisableClear
       matSortDirection="desc"
     >
+    <!--Id Usuario-->
       <ng-container matColumnDef="idUser">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
           Id Usuario
         </th>
         <td mat-cell *matCellDef="let element">{{ element.userId }}</td>
       </ng-container>
+      <!--Id Test-->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
           Id
         </th>
         <td mat-cell *matCellDef="let element">{{ element.id }}</td>
       </ng-container>
+      <!--Tipo-->
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Tipo
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+      <!--Test-->
       <ng-container matColumnDef="test">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
           Test
         </th>
         <td mat-cell *matCellDef="let element">{{ element.testName }}</td>
       </ng-container>
+      <!--Fecha-->
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
           Fecha
         </th>
         <td mat-cell *matCellDef="let element">{{ element.date }}</td>
       </ng-container>
+      <!--Hora-->
       <ng-container matColumnDef="time">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
           Hora
         </th>
         <td mat-cell *matCellDef="let element">{{ element.time }}</td>
       </ng-container>
+      <!--Usuario-->
       <ng-container matColumnDef="user">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
           Usuario
@@ -86,6 +99,55 @@
 					{{ element.userName }}
         </td>
       </ng-container>
+      <!--Tipo de Usuario-->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Tipo de Usuario
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+      <!--Nivel-->
+      <ng-container matColumnDef="level">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Nivel
+        </th>
+        <td mat-cell *matCellDef="let element">
+            <div [className]="getTestChipClass(element.resultLevel)">{{
+              element.resultLevel
+            }}</div>
+        </td>
+      </ng-container>
+      <!--Telefono-->
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Teléfono
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.phone }}
+        </td>
+      </ng-container>
+      <!--Correo Electronico-->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Correo Electronico
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+      <!--Fecha Nacimiento-->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Fecha Nacimiento
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+      </ng-container>
+      <!--Nivel Escolaridad-->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Nivel Escolaridad
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+      <!--Ciudad-->
       <ng-container matColumnDef="city">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
           Ciudad
@@ -96,31 +158,100 @@
           }}</span>
         </td>
       </ng-container>
-      <ng-container matColumnDef="level">
+      <!--Lugar-->
+      <ng-container matColumnDef="city">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Nivel
+          Lugar
         </th>
         <td mat-cell *matCellDef="let element">
-            <div [className]="getTestChipClass(element.resultLevel)">{{
-              element.resultLevel
-            }}</div>
+          <span>{{
+            element.city
+          }}</span>
         </td>
-        </ng-container>
-
-      <ng-container matColumnDef="phone">
+      </ng-container>
+      <!--Casco Urbano-->
+      <ng-container matColumnDef="city">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Teléfono
+          Casco Urbano
         </th>
         <td mat-cell *matCellDef="let element">
-          {{ element.phone }}
+          <span>{{
+            element.city
+          }}</span>
         </td>
       </ng-container>
-      <ng-container matColumnDef="email">
+      <!--Corregimiento-->
+      <ng-container matColumnDef="city">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Email
+          Corregimiento
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+        <td mat-cell *matCellDef="let element">
+          <span>{{
+            element.city
+          }}</span>
+        </td>
       </ng-container>
+      <!--Vereda-->
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Vereda
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <span>{{
+            element.city
+          }}</span>
+        </td>
+      </ng-container>
+      <!--Estudia-->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Estudia
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+      <!--Universidad-->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Universidad
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+      <!--Programa-->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Programa
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+      <!--Modalidad-->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Modalidad
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+      <!--Semestre-->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Semestre
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+      <!--Genero-->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Género
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+      <!--Estado Civil-->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Estado Civil
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+      <!--Modal-->
       <ng-container matColumnDef="answer">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
           Ver respuestas
