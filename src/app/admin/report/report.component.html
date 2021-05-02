@@ -1,6 +1,6 @@
+
 <div class="test-admin">
-	<app-loader #loader></app-loader>
-  <div class="test-admin__box" [hidden]="loader.loadingData">
+  <div class="test-admin__box">
     <h1 class="test-admin__title app-m-top">Test Informe</h1>
     <button
       mat-mini-fab
@@ -10,264 +10,237 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <div class="test-admin__card" [hidden]="loader.loadingData">
-    <div class="test-admin__box">
-      <div class="home__search">
-        <div class="inputContainer-search">
-          <img
-            alt="PersonIcon"
-            src="../../../assets/icons/search_baseline.svg"
-            class="inputContainer-search__icon"
-          />
-          <input
-            class="inputContainer-search__box"
-            type="text"
-            placeholder="Palabra clave"
-						[(ngModel)]="dataSource.filter"
-          />
+  <div class="test-admin__card">
+    <app-loader #loader></app-loader>
+    <div [hidden]="loader.loadingData">
+      <div class="test-admin__box" >
+        <div class="home__search">
+          <div class="inputContainer-search">
+            <img
+              alt="PersonIcon"
+              src="../../../assets/icons/search_baseline.svg"
+              class="inputContainer-search__icon"
+            />
+            <input
+              class="inputContainer-search__box"
+              type="text"
+              placeholder="Palabra clave"
+              [(ngModel)]="dataSource.filter"
+            />
+          </div>
+        </div>
+        <div align="end" class="btn-cancel">
+          <button
+            class="btn btn-file app-m-right"
+            (click)="onExcelExportRequested()"
+          >
+            <mat-icon class="icon-file">description</mat-icon>Excel
+          </button>
+          <button class="btn btn-file" (click)="onPDFExportRequested()">
+            <mat-icon class="icon-file">picture_as_pdf</mat-icon>PDF
+          </button>
         </div>
       </div>
-      <div align="end" class="btn-cancel">
-        <button
-          class="btn btn-file app-m-right"
-          (click)="onExcelExportRequested()"
-        >
-          <mat-icon class="icon-file">description</mat-icon>Excel
-        </button>
-        <button class="btn btn-file" (click)="onPDFExportRequested()">
-          <mat-icon class="icon-file">picture_as_pdf</mat-icon>PDF
-        </button>
-      </div>
+  
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        matSortActive="position"
+        matSortDisableClear
+        matSortDirection="desc"
+        [hidden]="loader.loadingData"
+      >
+        <!--Id Usuario-->
+        <ng-container matColumnDef="idUser">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Id Usuario
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.userId }}</td>
+        </ng-container>
+        <!--Id Test-->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Id
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+        <!--Test-->
+        <ng-container matColumnDef="test">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Test
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.testName }}</td>
+        </ng-container>
+        <!--Fecha-->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Fecha
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+        </ng-container>
+        <!--Hora-->
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Hora
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.time }}</td>
+        </ng-container>
+        <!--Usuario-->
+        <ng-container matColumnDef="user">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Usuario
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.userName }}
+          </td>
+        </ng-container>
+        <!--Nivel-->
+        <ng-container matColumnDef="level">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Nivel
+          </th>
+          <td mat-cell *matCellDef="let element">
+              <div [className]="getTestChipClass(element.resultLevel)">{{
+                element.resultLevel
+              }}</div>
+          </td>
+        </ng-container>
+        <!--Telefono-->
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Teléfono
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.phone }}
+          </td>
+        </ng-container>
+        <!--Correo Electronico-->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Correo Electronico
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+        </ng-container>
+        <!--Fecha Nacimiento-->
+        <ng-container matColumnDef="birthdate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Fecha Nacimiento
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.birthdate }}</td>
+        </ng-container>
+        <!--Nivel Escolaridad-->
+        <ng-container matColumnDef="educationalLevel">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Nivel Escolaridad
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.educationalLevel }}</td>
+        </ng-container>
+        <!--Ciudad-->
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Ciudad
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <span>{{
+              element.city
+            }}</span>
+          </td>
+        </ng-container>
+        <!--Casco-->
+        <ng-container matColumnDef="zone">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Casco
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <span>{{
+              element.zone
+            }}</span>
+          </td>
+        </ng-container>
+        <!--Comuna/Corregimiento-->
+        <ng-container matColumnDef="optionA">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Comuna/Corregimiento
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <span>{{
+              element.optionA
+            }}</span>
+          </td>
+        </ng-container>
+        <!--Barrio/Vereda-->
+        <ng-container matColumnDef="optionB">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Barrio/Vereda
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <span>{{
+              element.optionB
+            }}</span>
+          </td>
+        </ng-container>
+        <!--Universidad-->
+        <ng-container matColumnDef="university">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Universidad
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.university }}</td>
+        </ng-container>
+        <!--Programa-->
+        <ng-container matColumnDef="program">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Programa
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.program }}</td>
+        </ng-container>
+        <!--Modalidad-->
+        <ng-container matColumnDef="modality">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Modalidad
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.modality }}</td>
+        </ng-container>
+        <!--Semestre-->
+        <ng-container matColumnDef="semester">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Semestre
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.semester }}</td>
+        </ng-container>
+        <!--Genero-->
+        <ng-container matColumnDef="gender">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Género
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.gender }}</td>
+        </ng-container>
+        <!--Estado Civil-->
+        <ng-container matColumnDef="civilStatus">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Estado Civil
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.civilStatus }}</td>
+        </ng-container>
+        <!--Modal-->
+        <ng-container matColumnDef="answer">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            Ver respuestas
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon
+              class="app-cursor"
+              fontSet="material-icons-outlined"
+              (click)="openDialogTestModalReport(element)"
+              >live_help</mat-icon
+            >
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator [length]="resultsLength" [pageSize]="30"></mat-paginator>
     </div>
-
-    <table
-      mat-table
-      [dataSource]="dataSource"
-      matSort
-      matSortActive="position"
-      matSortDisableClear
-      matSortDirection="desc"
-    >
-    <!--Id Usuario-->
-      <ng-container matColumnDef="idUser">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Id Usuario
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.userId }}</td>
-      </ng-container>
-      <!--Id Test-->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Id
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
-      <!--Tipo-->
-      <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Tipo
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
-      <!--Test-->
-      <ng-container matColumnDef="test">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Test
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.testName }}</td>
-      </ng-container>
-      <!--Fecha-->
-      <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Fecha
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.date }}</td>
-      </ng-container>
-      <!--Hora-->
-      <ng-container matColumnDef="time">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Hora
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.time }}</td>
-      </ng-container>
-      <!--Usuario-->
-      <ng-container matColumnDef="user">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Usuario
-        </th>
-        <td mat-cell *matCellDef="let element">
-					{{ element.userName }}
-        </td>
-      </ng-container>
-      <!--Tipo de Usuario-->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Tipo de Usuario
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
-      <!--Nivel-->
-      <ng-container matColumnDef="level">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Nivel
-        </th>
-        <td mat-cell *matCellDef="let element">
-            <div [className]="getTestChipClass(element.resultLevel)">{{
-              element.resultLevel
-            }}</div>
-        </td>
-      </ng-container>
-      <!--Telefono-->
-      <ng-container matColumnDef="phone">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Teléfono
-        </th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.phone }}
-        </td>
-      </ng-container>
-      <!--Correo Electronico-->
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Correo Electronico
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
-      </ng-container>
-      <!--Fecha Nacimiento-->
-      <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Fecha Nacimiento
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.date }}</td>
-      </ng-container>
-      <!--Nivel Escolaridad-->
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Nivel Escolaridad
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
-      </ng-container>
-      <!--Ciudad-->
-      <ng-container matColumnDef="city">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Ciudad
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <span>{{
-            element.city
-          }}</span>
-        </td>
-      </ng-container>
-      <!--Lugar-->
-      <ng-container matColumnDef="city">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Lugar
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <span>{{
-            element.city
-          }}</span>
-        </td>
-      </ng-container>
-      <!--Casco Urbano-->
-      <ng-container matColumnDef="city">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Casco Urbano
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <span>{{
-            element.city
-          }}</span>
-        </td>
-      </ng-container>
-      <!--Corregimiento-->
-      <ng-container matColumnDef="city">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Corregimiento
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <span>{{
-            element.city
-          }}</span>
-        </td>
-      </ng-container>
-      <!--Vereda-->
-      <ng-container matColumnDef="city">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Vereda
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <span>{{
-            element.city
-          }}</span>
-        </td>
-      </ng-container>
-      <!--Estudia-->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Estudia
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
-      <!--Universidad-->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Universidad
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
-      <!--Programa-->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Programa
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
-      <!--Modalidad-->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Modalidad
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
-      <!--Semestre-->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Semestre
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
-      <!--Genero-->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Género
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
-      <!--Estado Civil-->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Estado Civil
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
-      <!--Modal-->
-      <ng-container matColumnDef="answer">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Ver respuestas
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <mat-icon
-            class="app-cursor"
-            fontSet="material-icons-outlined"
-            (click)="openDialogTestModalReport(element)"
-            >live_help</mat-icon
-          >
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-    <mat-paginator [length]="resultsLength" [pageSize]="30"></mat-paginator>
+    
   </div>
 </div>

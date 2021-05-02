@@ -27,9 +27,35 @@ export class ReportComponent implements AfterViewInit {
     'level',
     'phone',
     'email',
+    'zone',
+    'optionA',
+    'optionB',
+    'university',
+    'program',
+    'modality',
+    'semester',
+    'birthdate',
+    'gender',
+    'educationalLevel',
+    'civilStatus',
     'answer',
   ];
   public dataSource = new MatTableDataSource<TestResultRow>([]);
+  civilStatus = {
+    1: "Soltero/a",
+    2 : "Casado/a",
+    3 : "Viudo/a",
+    4 : "Divorciado/a"
+  };
+
+  educational = {
+   1: "Primaria",
+   2 : "Bachillerato",
+   3: "Universidad",
+   4: "Posgrado",
+   5: "Ninguno"
+  };
+  
 
   constructor (
     public dialog: MatDialog
@@ -54,14 +80,25 @@ export class ReportComponent implements AfterViewInit {
   }
 
   buildTestResultRows(testResults: TestResult[]): TestResultRow[] {
-    console.log(testResults)
+    
     return testResults.map(result => ({
       id: result.id,
-      city: "", // TODO!
+      city: result.city, // TODO!
       date: result.date,
       time: result.time,
       email: result.user.email,
+      birthdate: result.user.profile.birthday,
+      gender: result.user.profile.gender_id == 1 ? 'Femenino' : 'Masculino',
+      civilStatus: this.civilStatus[result.user.profile.civil_status_id],
+      educationalLevel: this.educational[result.user.profile.education_level_id],
+      zone: result.zone.casco,
+      optionA: result.zone.option_a,
+      optionB: result.zone.option_b,
       phone: result.user.profile.phone,
+      university: result.university.university,
+      program: result.university.program,
+      modality: result.university.modality,
+      semester: result.university.semester,
       userId: result.user.id,
       resultLevel: result.resultLevel,
       testName: result.testName,

@@ -41,11 +41,14 @@ async function createOrUpdateUser(rawValues: ClientFormRawValues, editModeEnable
   const userRequestData: ClientRegistrationRequest = {
     client: rawValues.clientType as ClientTypes,
     first_names: rawValues.names as string,
+    password: rawValues.password as string,
+    password_confirmation: rawValues.passwordConfirmation as string,
     phone: rawValues.phone as string,
     email: rawValues.email as string,
     country_id: rawValues.country as number,
     state_id: rawValues.state as number,
     city_id: rawValues.city as number,
+    status: parseInt(rawValues.status as string),
     client_config: {
       national_id: rawValues.nationalId as string,
       // @ts-expect-error

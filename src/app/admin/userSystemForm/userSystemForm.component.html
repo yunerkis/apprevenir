@@ -64,7 +64,7 @@
           </mat-error>
       </mat-form-field>
       
-      <div>
+      <div *ngIf="!hiddenStatus">
           <mat-form-field class="width-100">
               <mat-label>Perfil de usuario</mat-label>
               <mat-select formControlName="userProfile" required>

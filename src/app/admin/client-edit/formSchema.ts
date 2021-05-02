@@ -1,4 +1,4 @@
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators, ValidationErrors } from "@angular/forms";
 import { getEmailFieldDefinition } from "@services/forms/emailAddress";
 import { ClientTypes, CompanyUser, EducationalInstitutionUser, EducationBureauUser, TerritorialEntityUser, Test, UniversityUser, User } from "@typedefs/backend";
 import { UserInputTerm } from "./models/UserInputTerm";
@@ -14,6 +14,9 @@ export type ClientFormKeys =
   | "phone"
   | "nationalId"
   | "email"
+  | "password"
+  | "passwordConfirmation"
+  | "status"
   | "brandColor"
   | "brandImageFiles"
   | "country"
@@ -43,12 +46,18 @@ export type ClientFormRawValues = Record<Exclude<ClientFormKeys, SpecialFormKeys
   };
 
 export function buildClientFormGroup(formBuilder: FormBuilder, isEditing: boolean): FormGroup {
+
+  let passwordValidators: ValidatorFn[] = [];
+
   return formBuilder.group({
     clientType: ['', Validators.required],
     names: ['', Validators.required],
     phone: ['', Validators.required],
     nationalId: ['', Validators.required],
     email: getEmailFieldDefinition(isEditing),
+    status: ['', Validators.required],
+    password: ['', Validators.compose([...passwordValidators, Validators.minLength(8), Validators.maxLength(16)])],
+    passwordConfirmation: ['', Validators.compose(passwordValidators)],
     brandColor: ['', validateColor],
     brandImageFiles: [{ value: null, disabled: true }, generateBrandImageFileValidator(isEditing)],
     country: [ { value: '', disabled: true }, Validators.required],
@@ -66,7 +75,12 @@ export function buildClientFormGroup(formBuilder: FormBuilder, isEditing: boolea
     semesters: [[]],
     schoolGrades: [[]],
     selectedTests: [{}, validateSelectedTests]
-  });
+  }, {
+    validators: [
+      buildPasswordChangeValidator(isEditing), 
+      passwordConfirmationValidator
+    ]
+});
 }
 
 export function loadUserIntoForm(user: User, enabledTestIds: number[], formGroup: FormGroup) {
@@ -80,6 +94,7 @@ export function loadUserIntoForm(user: User, enabledTestIds: number[], formGroup
 
   formGroup.get('clientType').setValue(user.client);
   formGroup.get('email').setValue(user.email);
+  formGroup.get('status').setValue(user.status?.toString());
   formGroup.get('names').setValue(user.profile.first_names),
   formGroup.get('phone').setValue(user.profile.phone);
   formGroup.get('country').setValue(user.profile.country_id, { emitEvent: false });
@@ -251,4 +266,33 @@ const validateColor: ValidatorFn = (control) => {
   }
 
   return null;
+}
+
+function passwordConfirmationValidator(group: FormGroup): ValidationErrors | null {
+  const passwordControl = group.get("password");
+  const confirmationControl = group.get("passwordConfirmation");
+
+  if (passwordControl?.value !== confirmationControl?.value) {
+    confirmationControl?.setErrors({ doesNotMatchPassword: true });
+    return null;
+  }
+
+  confirmationControl?.setErrors(null);
+  return null;
+}
+
+function buildPasswordChangeValidator(isEditingProfile: boolean): (group: FormGroup) => ValidationErrors | null {
+  if (!isEditingProfile) {
+    return () => null;
+  }
+
+  return (group: FormGroup) => {
+    const passwordControl = group.get("password");
+    const confirmationControl = group.get("passwordConfirmation");
+
+    passwordControl.setErrors(null);
+    confirmationControl.setErrors(null);
+
+    return null;
+  };
 }

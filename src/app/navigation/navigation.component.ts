@@ -43,7 +43,7 @@ const ADMIN_MENU_ELEMENTS: MenuElement[] = [
     ],
   },
   {
-    name: 'Informes',
+    name: 'Test informe',
     icon: 'content_paste',
     route: 'admin/report',
   },
@@ -76,8 +76,8 @@ const ADMIN_MENU_ELEMENTS: MenuElement[] = [
     ],
   },
   {
-    name: 'Apprevenir.com',
-    icon: 'refresh',
+    name: 'Hacer test',
+    icon: 'live_help',
   },
 ];
 

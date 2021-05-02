@@ -28,6 +28,7 @@ import { getUserData } from '@services/user/usersDataSource';
 export class EditClientComponent implements AfterViewInit {
   public color: ThemePalette = 'primary';
   public touchUi = false;
+  hiddenStatus = false;
 
   public zoneTableColumns: string[] = [
     'name', 
@@ -138,6 +139,16 @@ export class EditClientComponent implements AfterViewInit {
   get userMustCreateARuralZone(): boolean {
     return this.clientForm?.get("ruralZones")?.hasError("required") || false;
   }
+
+  get statusSelectionIsInvalid() {
+    if (!this.clientForm) {
+      return false;
+    }
+    
+    const control = this.clientForm.get('status');
+    
+    return control.dirty && control.hasError('required');
+}
 
   async ngAfterViewInit() {
     this.allChipInputs = [
@@ -309,6 +320,7 @@ export class EditClientComponent implements AfterViewInit {
   async onSubmitClicked() {
     this.runValidationsOnChipInputs();
     this.clientForm.markAllAsTouched();
+    this.clientForm.get('status').markAsDirty();
 
     if (!this.clientForm.valid) {
       return;

@@ -78,6 +78,36 @@
 					</mat-error>
 				</mat-form-field>
 
+				<div class="registration__box">
+					<mat-form-field class="width-100">
+						<mat-label>Contraseña</mat-label>
+						<input type="password" matInput required formControlName="password">
+						<mat-error>
+						La contraseña debe tener entre 8 y 30 caracteres
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field class="width-100">
+						<mat-label>Confirmación de contraseña</mat-label>
+						<input type="password" matInput required formControlName="passwordConfirmation">
+						<mat-error>
+						La confirmación debe ser igual a la contraseña
+						</mat-error>
+					</mat-form-field>
+				</div>
+				
+				<div class="registration__gender" *ngIf="!hiddenStatus">Estado</div>
+				<mat-radio-group aria-label="Select an option" required formControlName="status" *ngIf="!hiddenStatus">
+					<mat-radio-button value="1" class="app-m-right">Activo</mat-radio-button>
+					<mat-radio-button value="0">Inactivo</mat-radio-button>
+				</mat-radio-group>
+				<mat-error 
+				class="mat-error" 
+				style="font-size: 75%;"
+				*ngIf="statusSelectionIsInvalid"
+				>
+				Por favor elige un estado
+				</mat-error>
+
 				<div class="field-icons">
 					<mat-form-field>
 						<mat-label>Logo (JPG o PNG - 200x55px)</mat-label>
