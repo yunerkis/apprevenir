@@ -29,6 +29,7 @@ export interface TestResult extends TimestampedObject {
   resultLevel: TestAssessmentSeverity,
   user: User,
   answers: TestAnswer[],
+  questions: [],
   addiction: string | null,
   test: Test,
   information_level: {

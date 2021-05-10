@@ -130,10 +130,10 @@ export class TestComponent implements OnInit {
           this.answer['addiction'] = ['', Validators.required];
         } else if (this.test['name'] == 'Drogas') {
           this.test['addictions'].map((addiction) => {
-            this.answer['answer_'+addiction.id+'_'+i] = ['', Validators.required];
+            this.answer['answer_'+addiction.id+'_'+question.id] = ['', Validators.required];
           });
         } else {
-          this.answer['answer_'+i] = ['', Validators.required];
+          this.answer['answer_'+question.id] = ['', Validators.required];
         }
         
         this.answers.push(this.formBuilder.group(this.answer));
@@ -161,8 +161,15 @@ export class TestComponent implements OnInit {
       this.addictionArray.forEach((item, i) => {
         let objAnswersAddiction = [];
         arrayAnswers.forEach((elem, inx) => {
-          if (inx !== 0) {
-            objAnswersAddiction.push(elem[key+item.id+'_'+inx]);
+          for (const [key, value] of Object.entries(elem)) {
+            if (inx !== 0) {
+              let cadena =  key.split('_');
+              let id;
+              if (cadena.length == 3) {
+                id = cadena[2];
+              }
+              objAnswersAddiction.push([value, id]);
+            }
           }
         });
         objAnswers.push({
@@ -170,9 +177,17 @@ export class TestComponent implements OnInit {
           'answers': objAnswersAddiction
         });
       });
+      console.log(objAnswers);
     } else {
       arrayAnswers.forEach((e, i) => {
-        objAnswers.push(e[key+i]);
+        for (const [key, value] of Object.entries(e)) {
+          let cadena =  key.split('_');
+          let id;
+          if (cadena.length == 2) {
+            id = cadena[1];
+          } 
+          objAnswers.push([value, id]);
+        }
       });
     }
 
@@ -234,10 +249,10 @@ export class TestComponent implements OnInit {
         this.test['addictions'].map((addiction) => {
           this.addictionArray.map((addiction2, inx)=> {
             if (addiction2.id == addiction.id) {
-              this.formGroup.controls['formArray']['controls'][i]['controls']['answer_'+addiction.id+'_'+i].setValidators([Validators.required]);
+              this.formGroup.controls['formArray']['controls'][i]['controls']['answer_'+addiction.id+'_'+question.id].setValidators([Validators.required]);
             } else {
-              this.formGroup.controls['formArray']['controls'][i]['controls']['answer_'+addiction.id+'_'+i].clearValidators();
-              this.formGroup.controls['formArray']['controls'][i]['controls']['answer_'+addiction.id+'_'+i].updateValueAndValidity();
+              this.formGroup.controls['formArray']['controls'][i]['controls']['answer_'+addiction.id+'_'+question.id].clearValidators();
+              this.formGroup.controls['formArray']['controls'][i]['controls']['answer_'+addiction.id+'_'+question.id].updateValueAndValidity();
             }
           });
         });

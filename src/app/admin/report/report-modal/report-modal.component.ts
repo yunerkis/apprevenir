@@ -27,6 +27,11 @@ export class ReportModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.data['answers'].forEach((e, i) => {
+      e['question'] = this.data['questions'][i];
+    });
+
     this.dataSource = this.data['answers'];
   }
 
