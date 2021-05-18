@@ -26,6 +26,17 @@
     padding: 0 30px;
     background-color: #009E9E !important;
 }
+.swal2-styled.swal2-cancel {
+    border-radius: 22px !important;
+    border-style: none;
+    cursor: pointer;
+    font-size: 16px;
+    height: 44px;
+    outline: none;
+    text-decoration: none;
+    font-family: 'kanitRegular';
+    padding: 0 30px;
+}
 
 .swal2-styled:focus {
     box-shadow: none !important;
