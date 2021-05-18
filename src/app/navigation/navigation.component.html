@@ -1,7 +1,7 @@
 <!--Navbar-->
 <mat-toolbar >
     <mat-icon (click)="drawer.toggle()" class="burger app-cursor">menu</mat-icon>
-    <img alt="Logo" src="../../../assets/bg/COLOR-BORDE.svg" class="logo-app" />
+    <img alt="Logo" src="../../../assets/logo/COLOR-CONTORNO.svg" class="logo-app" />
     <span class="example-spacer"></span>
     <div [matMenuTriggerFor]="menu" class="menu-drop">
         <img src="../../../assets/icons/accountcircle_outline.svg" alt=""> 
@@ -29,7 +29,7 @@
     <mat-drawer #drawer class="example-sidenav" mode="side">
         <div *ngIf="userIsAdmin" class="navigation-list">
             <div class="logo-client">
-                <img alt="Logo" *ngIf="!logoOverride" src="../../../assets/bg/COLOR-BORDE.svg" class="logo-client__app" />
+                <img alt="Logo" *ngIf="!logoOverride" src="../../../assets/logo/COLOR-CONTORNO.svg" class="logo-client__app" />
                 <img alt="Logo" *ngIf="logoOverride" src="{{logoOverride}}" class="logo-client__app" />
             </div>
             <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">

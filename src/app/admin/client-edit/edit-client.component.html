@@ -5,7 +5,7 @@
 		<app-loader #loader></app-loader>
 		<div class="admin__box" [hidden]="loader.loadingData">
 			<form [formGroup]="clientForm">
-				<div class="admin__sub-title app-m-top">Información General</div>
+				<div class="admin__sub-title app-m-top-3">Información General</div>
 				<mat-form-field class="width-100">
 					<mat-label>Tipo de cliente</mat-label>
 					<mat-select formControlName="clientType" (selectionChange)="onClientTypeChanged()">

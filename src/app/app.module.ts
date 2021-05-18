@@ -42,6 +42,7 @@ import { PolicyModalComponent } from './auth/policy-modal/policy-modal.component
 import { ChipInputComponent } from './admin/client-edit/chip-autocomplete/chip-input.component';
 import { ReportModalComponent } from './admin/report/report-modal/report-modal.component';
 import { EditSystemUserFormComponent } from './admin/edit-system-user/form/edit-system-user-form.component';
+import { RestorePasswordComponent } from './auth/restore-password/restore-password.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { EditSystemUserFormComponent } from './admin/edit-system-user/form/edit-
     EditSystemUserFormComponent,
     ReportModalComponent,
     EditSystemUserFormComponent,
+    RestorePasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -19,6 +19,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BackendError, showErrorMessage } from '@services/common';
 import Swal from 'sweetalert2';
 import { getUserData } from '@services/user/usersDataSource';
+import { UserInputTerm } from "./models/UserInputTerm";
 
 @Component({
   selector: 'edit-client',
@@ -289,6 +290,30 @@ export class EditClientComponent implements AfterViewInit {
 
   onClientTypeChanged() {
     this.allChipInputs.forEach(input => input.clearErrorState());
+    if (!this.editModeIsEnabled) {
+      if(this.clientIsEducationalInstitution) {
+        const grades: UserInputTerm[] = [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11"
+        ].map((gradeName)=> ({
+          cameFromServer: false,
+          deletedByUser: false,
+          id: null,
+          label: gradeName
+          })
+        );
+        this.clientForm.get("schoolGrades").setValue(grades);
+      }
+    }
   }
 
   runValidationsOnChipInputs() {

@@ -23,6 +23,7 @@ import { AdminGuardService } from '../app/services/auth/admin-guard.service';
 import { EditFinalUserForm } from './admin/edit-final-user/form/edit-final-user-form.component';
 import { NotFoundComponent } from './navigation/not-found/not-found.component';
 import { EditSystemUserFormComponent } from './admin/edit-system-user/form/edit-system-user-form.component';
+import { RestorePasswordComponent } from './auth/restore-password/restore-password.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent, canActivate: [AnonGuardService] },
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
   { path: 'recovery', component: RecoveryComponent, canActivate: [AnonGuardService] },
   { path: 'registry', component: RegistrationComponent, canActivate: [AnonGuardService] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
+  { path: 'recovery-password', component: RestorePasswordComponent},
   { path: 'app', component: NavigationComponent,
     children:[
       { path: 'home', component: HomeComponent },
