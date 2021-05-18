@@ -123,6 +123,10 @@ export class TestComponent implements OnInit {
 
     this.testService.getTest(id).subscribe(res => {
       this.test = res['data'];
+      this.test['addictions'].sort((a,b) => {
+        var sortingArr = ["Tabaco", "Bebidas alcohólicas", "Cannabis", "Cocaina", "Anfetaminas", "Inhalantes", "Tranquilizantes", "Alucinogenos", "Opiaceos"];
+        return sortingArr.indexOf(a.name) - sortingArr.indexOf(b.name);
+      });
       this.questions =  this.test['questions'].map((question, i)=>{
         this.answer = {};
 
