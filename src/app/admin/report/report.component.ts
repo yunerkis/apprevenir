@@ -101,7 +101,7 @@ export class ReportComponent implements AfterViewInit {
       semester: result.university.semester,
       userId: result.user.id,
       resultLevel: result.resultLevel,
-      testName: result.testName,
+      testName: result.addiction?.['name'] == undefined ? result.testName : result.testName +' - '+result.addiction?.['name'],
       userName: `${result.user.profile.first_names} ${result.user.profile.last_names} ${result.user.profile.last_names_two}`,
       answers: result.answers,
       questions: result.questions

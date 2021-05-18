@@ -70,7 +70,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userIsAdmin = profile.isAdmin;
     this.firstNames = profile.firstNames;
     this.lastNames = `${profile.lastNames} ${profile.lastNamesTwo}`;
-    console.log(profile.genderId)
     this.gender = profile.genderId;
 
   }
