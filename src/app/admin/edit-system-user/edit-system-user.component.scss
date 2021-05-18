@@ -8,7 +8,6 @@
         font-size: 24px;
     }
     &__card {
-        height: 766px;
         background: #FFFFFF 0% 0% no-repeat padding-box;
         box-shadow: 0px 3px 6px #26A79E26;
         overflow: auto;
@@ -22,3 +21,13 @@
         align-items: center;
     }
 }
+
+/* Structure */
+.example-table-container {
+    position: relative;
+    height: 700px;
+    overflow: auto;
+    table {
+        width: 100%;
+    }
+  }
