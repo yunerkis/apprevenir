@@ -51,6 +51,45 @@ export class AuthService {
       });
   }
 
+  recovery(email) {
+    
+    return this.http.post(`${this.url}/api/v1/reset-password`, email).subscribe(
+      res => {
+        Swal.fire('Email enviado', 'Por favor revisar su correo electrónico', "success");
+        this.router.navigate(['/']); 
+      },
+      error => {
+        const errorMessage = 
+          error.error?.data || 
+          "No fue posible contactar al servidor. Por favor revisa tu conexión a internet e inténtalo de nuevo";
+
+        Swal.fire(
+          'Error',
+          errorMessage,
+          'error'
+        );
+      });
+  }
+
+  recoveryPassword(password) {
+    return this.http.put(`${this.url}/api/v1/reset-password`, password).subscribe(
+      res => {
+        Swal.fire('Cambio de contraseña exitosa', 'Por favor revisar su correo electrónico', "success");
+        this.router.navigate(['/']); 
+      },
+      error => {
+        const errorMessage = 
+          error.error?.data || 
+          "No fue posible contactar al servidor. Por favor revisa tu conexión a internet e inténtalo de nuevo";
+
+        Swal.fire(
+          'Error',
+          errorMessage,
+          'error'
+        );
+      });
+  }
+
   logout() {
     clearAuthStore();
     this.router.navigate(['/']);

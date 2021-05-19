@@ -31,7 +31,7 @@ const appRoutes: Routes = [
   { path: 'recovery', component: RecoveryComponent, canActivate: [AnonGuardService] },
   { path: 'registry', component: RegistrationComponent, canActivate: [AnonGuardService] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
-  { path: 'recovery-password', component: RestorePasswordComponent},
+  { path: 'recovery-password/:token', component: RestorePasswordComponent},
   { path: 'app', component: NavigationComponent,
     children:[
       { path: 'home', component: HomeComponent },
