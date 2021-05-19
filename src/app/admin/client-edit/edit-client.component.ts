@@ -291,8 +291,11 @@ export class EditClientComponent implements AfterViewInit {
   onClientTypeChanged() {
     this.allChipInputs.forEach(input => input.clearErrorState());
     if (!this.editModeIsEnabled) {
+      let chipLabels : string[] = []
+      let chipsFormKey : string = ""
       if(this.clientIsEducationalInstitution) {
-        const grades: UserInputTerm[] = [
+        chipsFormKey = "schoolGrades"
+        chipLabels = [
           "1",
           "2",
           "3",
@@ -304,14 +307,42 @@ export class EditClientComponent implements AfterViewInit {
           "9",
           "10",
           "11"
-        ].map((gradeName)=> ({
+        ]
+      }
+      if (this.clientIsUniversity) {
+        chipsFormKey = "semesters"
+        chipLabels = [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20",
+        ]
+      }
+      if (chipLabels.length) {
+        const terms = chipLabels.map((chipLabel)=> ({
           cameFromServer: false,
           deletedByUser: false,
           id: null,
-          label: gradeName
+          label: chipLabel
           })
         );
-        this.clientForm.get("schoolGrades").setValue(grades);
+        this.clientForm.get(chipsFormKey).setValue(terms);
       }
     }
   }

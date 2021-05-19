@@ -9,43 +9,50 @@ import { BehaviorSubject} from 'rxjs';
   providedIn: 'root'
 })
 export class TestService {
-
+  
   url = environment.url;
-  token = localStorage.getItem('token');
-  profile = JSON.parse(localStorage.getItem('profile'));
   testResult = new BehaviorSubject({});
-  headers = new HttpHeaders({
-    'Authorization': 'Bearer ' + this.token
-  })
-
+  
   constructor(
     private router: Router,
     private http: HttpClient,
   ) { }
 
+  
   getTestsList() {
-
-    return this.http.get(`${this.url}/api/v1/tests`, {headers: this.headers});
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    })
+    return this.http.get(`${this.url}/api/v1/tests`, {headers: headers});
   }
 
   getTest(id) {
-   
-    return this.http.get(`${this.url}/api/v1/tests/${id}`, {headers: this.headers});
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    })
+    return this.http.get(`${this.url}/api/v1/tests/${id}`, {headers: headers});
   }
 
   storeAnswer(answer) {
-
-    return this.http.post(`${this.url}/api/v1/users/answer`, answer, {headers: this.headers});
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    })
+    return this.http.post(`${this.url}/api/v1/users/answer`, answer, {headers: headers});
   }
 
   myResults() {
-        
-    return this.http.get(`${this.url}/api/v1/users/results/${this.profile.id}`, {headers: this.headers}); 
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    })
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    return this.http.get(`${this.url}/api/v1/users/results/${profile.id}`, {headers: headers}); 
   }
 
   getAllResutls() {
-        
-    return this.http.get(`${this.url}/api/v1/results/all`, {headers: this.headers}); 
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }) 
+    return this.http.get(`${this.url}/api/v1/results/all`, {headers: headers}); 
   }
 
   image(filename) {
