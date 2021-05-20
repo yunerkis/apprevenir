@@ -74,6 +74,8 @@ export class ClientConfigComponent {
       this.rootReferralHierarchy = await buildRootHierarchy(
         formData.personalInfo.referralSource
       );
+      return
     }
+    await this.onReferralSourceChanged()
   }
 }

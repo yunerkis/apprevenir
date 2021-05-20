@@ -54,10 +54,10 @@
         >
           <!--Id Usuario-->
           <ng-container matColumnDef="idUser">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear class="padding-left-table">
               Id Usuario
             </th>
-            <td mat-cell *matCellDef="let element">{{ element.userId }}</td>
+            <td mat-cell *matCellDef="let element" class="padding-left-table">{{ element.userId }}</td>
           </ng-container>
           <!--Id Test-->
           <ng-container matColumnDef="id">
