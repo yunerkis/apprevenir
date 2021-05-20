@@ -9,20 +9,20 @@
 		<div class="section-two">
 			<div class="section-two__title">Recuperar contraseña</div>
 			<div class="section-two__text">¿Perdiste tu contraseña? Por favor, introduce tu o correo electrónico y recibirás allí las instrucciones.</div>
-			<form class="example-form">
+			<form class="example-form" [formGroup]="emailForm">
 				<mat-form-field class="example-full-width">
 					<mat-label>Email</mat-label>
-					<input type="email" matInput>
-					<mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-						Please enter a valid email address
+					<input type="email" matInput formControlName="email">
+					<mat-error *ngIf="emailForm.get('email').hasError('email') && !emailForm.get('email').hasError('required')">
+						Por favor ingresar un correo electrónico válido
 					</mat-error>
-					<mat-error *ngIf="emailFormControl.hasError('required')">
-						Email is <strong>required</strong>
+					<mat-error *ngIf="emailForm.get('email').hasError('required')">
+						El correo electrónico es <strong>necesario</strong>
 					</mat-error>
 					<img src="./../../../assets/icons/email_outline.svg" alt="" matSuffix>
 				</mat-form-field>
 				<div>
-					<button class="btn btn-primary width-100" routerLink="/">Enviar</button>
+					<button class="btn btn-primary width-100" (click)="onSubmit()">Enviar</button>
 					<button class="btn btn-secondary app-m-top width-100" routerLink="/">Cancelar</button>
 				</div>
 			</form>
