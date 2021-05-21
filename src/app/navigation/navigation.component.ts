@@ -146,8 +146,14 @@ export class NavigationComponent implements OnInit, OnDestroy {
       return;
     }
 
+    const name = [
+      profile.firstNames,
+      profile.lastNames,
+      profile.lastNamesTwo
+    ].filter(nameFragment => !!nameFragment).join(" ");
+
     this.userIsAdmin = profile.isAdmin;
-    this.userName = `${profile.firstNames || ""} ${profile.lastNames || ""} ${profile.lastNamesTwo || ""}`;
+    this.userName = name;
     this.logoOverride = profile.referrerConfig?.logoUrl;
   }
 
