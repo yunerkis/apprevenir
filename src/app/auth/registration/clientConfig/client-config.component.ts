@@ -33,17 +33,19 @@ export class ClientConfigComponent {
     return !!this.selectedReferralSource && this.selectedReferralSource !== ClientTypes.NaturalPerson;
   }
 
-  public async onReferralSourceChanged() {
+  public async onReferralSourceChanged(resetValues = true) {
     this.rootReferralHierarchy = null;
     this.referralConfigDS = null;
     this.referralConfigAttributes = null;
     
-    [1, 2, 3, 4, 5].forEach(
-      index => {
-        const hierarchyKey = 'referralHierarchy' + index;
-        this.personalInfoFormGroup.get(hierarchyKey).setValue('');
-      }
-    );
+    if (resetValues) {
+      [1, 2, 3, 4, 5].forEach(
+        index => {
+          const hierarchyKey = 'referralHierarchy' + index;
+          this.personalInfoFormGroup.get(hierarchyKey).setValue('');
+        }
+      );
+    }
 
     if (!this.referralHierarchyMustBeShown) {
       return;
@@ -76,6 +78,8 @@ export class ClientConfigComponent {
       );
       return
     }
-    await this.onReferralSourceChanged()
+
+    await this.onReferralSourceChanged(false);
+    this.onReferralConfigRootChanged();
   }
 }
