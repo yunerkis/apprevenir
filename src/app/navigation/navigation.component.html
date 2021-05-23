@@ -58,6 +58,10 @@
             <p class="user-bottom app-p-20">© 2020. Universidad Católica Luis Amigó</p>
         </div>
         <div *ngIf="!userIsAdmin" class="home-list">
+            <div class="logo-client">
+                <img alt="Logo" *ngIf="!logoOverride" src="../../../assets/logo/COLOR-CONTORNO.svg" class="logo-client__app" />
+                <img alt="Logo" *ngIf="logoOverride" src="{{logoOverride}}" class="logo-client__app" />
+            </div>
             <a href="" target="_blank" class="user-text app-p-20">Inicio</a>
             <a href="https://apprevenir.com/conocenos/" target="_blank" class="user-text app-p-20">Más sobre Apprevenir</a>
             <a href="https://apprevenir.com/contactanos/" target="_blank" class="user-text app-p-20">Contáctanos</a>
