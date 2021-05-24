@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
 
   updateProfileData(profile: IProfileInfo | null) {
     const newPrimaryColor = profile?.referrerConfig?.brandColor || this.defaultBrandColor;
+    console.log("updstingPrimaryColor", newPrimaryColor);
     document.documentElement.style.setProperty('--color-primary', newPrimaryColor);
   }
 }
