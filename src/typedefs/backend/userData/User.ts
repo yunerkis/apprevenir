@@ -3,7 +3,7 @@ import { UserProfile } from "./UserProfile";
 
 export interface User<TClientType extends ClientTypes = ClientTypes.NaturalPerson> {
   id: number,
-  reference: number | null,
+  reference: any,
   email: string,
   email_verified_at: string,
   client: TClientType,

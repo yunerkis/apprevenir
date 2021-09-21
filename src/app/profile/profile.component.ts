@@ -7,6 +7,7 @@ import { KnownMessageKeys } from '@services/messaging/EventMessage';
 import { Subscription } from 'rxjs';
 import { TestService } from '../services/test/test.service';
 import { ProfileModalComponent } from './profile-modal/profile-modal.component';
+import { TestAssessmentSeverity } from '@typedefs/backend';
 
 export interface PeriodicElement {
   name: string;
@@ -27,12 +28,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   firstNames = "Nombres";
   lastNames = "Apellidos";
   gender = 0;
-  
-  color = {
-    'Severo': '#FF4E60',
-    'Moderado': '#FFA14E',
-    'Leve': '#20E57E'
-  };
 
   public userIsAdmin = false;
 
@@ -85,15 +80,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
   }
 
-  setStyle(color) {
-    return {
-      'background-color': this.color[color],
-      'color': '#fff',
-      'padding-left': '15px',
-      'padding-right': '15px',
-      'border-radius': '10px',
-      'padding-top': '1px',
-      'padding-bottom': '1px',
-    }
+  getTestChipClass(assessmentLevel: TestAssessmentSeverity): string {
+    const chipClassNames: { [key in TestAssessmentSeverity]: string } = {
+      [TestAssessmentSeverity.Minor]: "assessmentChipMinor",
+      [TestAssessmentSeverity.Moderate]: "assessmentChipModerate",
+      [TestAssessmentSeverity.Severe]: "assessmentChipSevere",
+      [TestAssessmentSeverity.AbsenceAnxiety]: "assessmentChipAbsenceAnxiety",
+      [TestAssessmentSeverity.AbsenceDepression]: "assessmentChipAbsenceDepression",
+      [TestAssessmentSeverity.PresenceDepression]: "assessmentChipPresenceDepression",
+      [TestAssessmentSeverity.PresenseAnxiety]: "assessmentChipPresenceAnxiety"
+    };
+
+    return chipClassNames[assessmentLevel];
   }
 }

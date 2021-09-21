@@ -30,6 +30,7 @@ export interface IProfileInfo {
   isAdmin: boolean,
   createdAt: Date,
   updatedAt: Date | null,
+  image: string | null,
   referrerConfig?: {
     brandColor?: string | null,
     logoUrl?: string | null
@@ -129,6 +130,7 @@ export function storeProfileInfo(profileInfo: any, referrerConfig?: ReferrerConf
     clientConfig: profileInfo.client_config, // TODO: Normalize this...
     role: profileInfo.role as Roles,
     isAdmin: isRoleAdmin(profileInfo.role),
+    image: profileInfo.image,
     createdAt: new Date(profileInfo.created_at),
     updatedAt: profileInfo.updated_at == null ? null : new Date(profileInfo.updated_at)
   };

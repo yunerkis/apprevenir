@@ -58,7 +58,23 @@
             <p class="user-bottom app-p-20">© 2020. Universidad Católica Luis Amigó</p>
         </div>
         <div *ngIf="!userIsAdmin" class="home-list">
+            <div class="logo-client">
+                <img alt="Logo" *ngIf="!logoOverride" src="../../../assets/logo/COLOR-CONTORNO.svg" class="logo-client__app" />
+                <img alt="Logo" *ngIf="logoOverride" src="{{imagesBaseUrl}}/{{logoOverride}}" class="logo-client__app" />
+            </div>
             <a href="" target="_blank" class="user-text app-p-20">Inicio</a>
+            <button *ngIf="role == 'client' && config != null" class="btn-list" mat-button routerLink="client/edit-final-user" routerLinkActive="router-link-active" >
+                <mat-icon fontSet="material-icons-outlined" >
+                    account_box
+                </mat-icon>
+                <span>Usuarios finales</span> 
+            </button>
+            <button *ngIf="role == 'client' && config != null" class="btn-list" mat-button routerLink="client/report" routerLinkActive="router-link-active" >
+                <mat-icon fontSet="material-icons-outlined" >
+                    content_paste
+                </mat-icon>
+                <span>Test informe</span> 
+            </button>
             <a href="https://apprevenir.com/conocenos/" target="_blank" class="user-text app-p-20">Más sobre Apprevenir</a>
             <a href="https://apprevenir.com/contactanos/" target="_blank" class="user-text app-p-20">Contáctanos</a>
             <img src="./../../assets/bg/logo-luis-amigo.png" alt="" class="home-logo app-p-20">

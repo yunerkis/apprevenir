@@ -1,4 +1,5 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
+import { environment } from '@environments/environment';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   MatTreeFlatDataSource,
@@ -27,7 +28,7 @@ interface MenuNode {
   icon?: string;
 }
 
-const ADMIN_MENU_ELEMENTS: MenuElement[] = [
+const ROOT_MENU_ELEMENTS: MenuElement[] = [
   {
     name: 'Usuarios finales',
     icon: 'account_box',
@@ -81,6 +82,32 @@ const ADMIN_MENU_ELEMENTS: MenuElement[] = [
   },
 ];
 
+const ADMIN_MENU_ELEMENTS: MenuElement[] = [
+  {
+    name: 'Usuarios finales',
+    icon: 'account_box',
+    children: [
+      {
+        name: 'Crear usuario final',
+        route: 'admin',
+      },
+      {
+        name: 'Edición de usuario final',
+        route: 'admin/edit-final-user',
+      },
+    ],
+  },
+  {
+    name: 'Test informe',
+    icon: 'content_paste',
+    route: 'admin/report',
+  },
+  {
+    name: 'Hacer test',
+    icon: 'live_help',
+  },
+];
+
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -90,6 +117,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
   public userIsAdmin = false;
   public userName = 'Nombre de usuario';
   public logoOverride = null;
+  public role = getStoredProfileInfo().role;
+  public config = getStoredProfileInfo().clientConfig;
+  public lastNames = '';
+  public imagesBaseUrl = `${environment.url}/storage/images`;
 
   private _transformer = (node: MenuElement, level: number) => {
     return {
@@ -116,7 +147,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   hasChild = (_: number, node: MenuNode) => node.expandable;
 
   constructor(private authService: AuthService) {
-    this.dataSource.data = ADMIN_MENU_ELEMENTS;
+    this.dataSource.data = this.role === 'root' ? ROOT_MENU_ELEMENTS : ADMIN_MENU_ELEMENTS;
     this.updateProfileData = this.updateProfileData.bind(this);
   }
 
@@ -146,9 +177,15 @@ export class NavigationComponent implements OnInit, OnDestroy {
       return;
     }
 
+    if (profile.lastNames != null) {
+
+      this.lastNames = `${profile.lastNames} ${profile.lastNamesTwo}`;
+    }
+   
     this.userIsAdmin = profile.isAdmin;
-    this.userName = `${profile.firstNames} ${profile.lastNames} ${profile.lastNamesTwo}`;
-    this.logoOverride = profile.referrerConfig?.logoUrl;
+    this.userName = `${profile.firstNames} ${this.lastNames}`;
+    this.logoOverride = profile.image;
+   
   }
 
   logout() {

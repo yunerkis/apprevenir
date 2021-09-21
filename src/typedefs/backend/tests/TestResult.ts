@@ -21,6 +21,8 @@ export interface TestResult extends TimestampedObject {
   addiction_id: number | null,
   zone: any,
   university: any,
+  company: any,
+  institution: any,
   city: string,
   date: string,
   time: string,

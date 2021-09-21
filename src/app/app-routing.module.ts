@@ -20,6 +20,7 @@ import { ClientsListComponent } from './admin/clients-list/clients-list.componen
 import { AuthGuardService } from '../app/services/auth/auth-guard.service';
 import { AnonGuardService } from '../app/services/auth/anon-guard.service';
 import { AdminGuardService } from '../app/services/auth/admin-guard.service';
+
 import { EditFinalUserForm } from './admin/edit-final-user/form/edit-final-user-form.component';
 import { NotFoundComponent } from './navigation/not-found/not-found.component';
 import { EditSystemUserFormComponent } from './admin/edit-system-user/form/edit-system-user-form.component';
@@ -49,6 +50,13 @@ const appRoutes: Routes = [
           { path: 'clients', component: ClientsListComponent },
           { path: 'clients/new', component: EditClientComponent },
           { path: 'clients/:id', component: EditClientComponent }
+        ]
+      },
+      { 
+        path: 'client', 
+        children: [
+          { path: 'report', component: ReportComponent },
+          { path: 'edit-final-user', component: EditFinalUserComponent },
         ]
       }
     ],

@@ -102,3 +102,51 @@ table {
     margin: 0 auto !important;
     padding-top: 25px;
 }
+
+@mixin assessmentChip {
+    display: flex;
+    align-items: center;
+    height: 20px;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    color: var(--color-white);
+    margin-right: 10px;
+    width: 160px;
+    text-transform: uppercase;
+}
+
+.assessmentChipSevere {
+    @include assessmentChip;
+    background-color: #FF4E60;
+}
+
+.assessmentChipModerate {
+    @include assessmentChip;
+    background-color: #FFA14E;
+}
+
+.assessmentChipMinor {
+    @include assessmentChip;
+    background-color: #20E57E;
+}
+
+.assessmentChipAbsenceAnxiety {
+    @include assessmentChip;
+    background-color: #20E57E;
+}
+
+.assessmentChipAbsenceDepression {
+    @include assessmentChip;
+    background-color: #20E57E;
+}
+
+.assessmentChipPresenceAnxiety {
+    @include assessmentChip;
+    background-color: #FF4E60;
+}
+
+.assessmentChipPresenceDepression {
+    @include assessmentChip;
+    background-color: #FF4E60;
+}

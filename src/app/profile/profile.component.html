@@ -38,7 +38,7 @@
                 </ng-container>
                 <ng-container matColumnDef="Nivel">
                 <th mat-header-cell *matHeaderCellDef>Nivel</th>
-                <td mat-cell *matCellDef="let element"><span class="span-uppercase" [ngStyle]=setStyle(element.resultLevel)>{{ element.resultLevel }}</span></td>
+                <td mat-cell *matCellDef="let element"><span class="span-uppercase" [className]="getTestChipClass(element.resultLevel)">{{ element.resultLevel }}</span></td>
                 </ng-container>
               
                 <!-- Symbol Column -->
