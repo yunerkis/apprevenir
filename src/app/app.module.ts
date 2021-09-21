@@ -43,6 +43,7 @@ import { ChipInputComponent } from './admin/client-edit/chip-autocomplete/chip-i
 import { ReportModalComponent } from './admin/report/report-modal/report-modal.component';
 import { EditSystemUserFormComponent } from './admin/edit-system-user/form/edit-system-user-form.component';
 import { RestorePasswordComponent } from './auth/restore-password/restore-password.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { RestorePasswordComponent } from './auth/restore-password/restore-passwo
     NgxMatColorPickerModule
   ],
   providers: [
-    { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
+    { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS },
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })

@@ -172,7 +172,9 @@ export class TestComponent implements OnInit {
               if (cadena.length == 3) {
                 id = cadena[2];
               }
-              objAnswersAddiction.push([value, id]);
+              if (item.id == parseInt(cadena[1])) {
+                objAnswersAddiction.push([value, id]);
+              }
             }
           }
         });
@@ -181,7 +183,6 @@ export class TestComponent implements OnInit {
           'answers': objAnswersAddiction
         });
       });
-      console.log(objAnswers);
     } else {
       arrayAnswers.forEach((e, i) => {
         for (const [key, value] of Object.entries(e)) {

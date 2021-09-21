@@ -177,15 +177,15 @@ export class NavigationComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (profile.lastNames != null) {
+    const name = [
+      profile.firstNames,
+      profile.lastNames,
+      profile.lastNamesTwo
+    ].filter(nameFragment => !!nameFragment).join(" ");
 
-      this.lastNames = `${profile.lastNames} ${profile.lastNamesTwo}`;
-    }
-   
     this.userIsAdmin = profile.isAdmin;
-    this.userName = `${profile.firstNames} ${this.lastNames}`;
-    this.logoOverride = profile.image;
-   
+    this.userName = name;
+    this.logoOverride = profile.image;;
   }
 
   logout() {

@@ -30,6 +30,8 @@
     color: var(--color-white);
     margin-right: 10px;
     text-transform: uppercase;
+    padding: 0px 10px;
+    width: 66px;
 }
 
 .assessmentChipSevere {
@@ -77,6 +79,20 @@
         .mat-table thead, .mat-table tbody, .mat-table tfoot, mat-header-row, mat-row, mat-footer-row, [mat-header-row], [mat-row], [mat-footer-row], .mat-table-sticky {
             background: #F0F5F580;
         }
+        .mat-header-cell, .mat-footer-cell, .mat-cell {
+            box-sizing: border-box; 
+            white-space: nowrap;
+            padding: 0 10px;
+        }
     }
   }
+
+  //First and last child table padding
+.padding-left-table {
+    padding-left: 25px !important;
+}
+.padding-right-table {
+    padding-right: 25px !important;
+}
+
   

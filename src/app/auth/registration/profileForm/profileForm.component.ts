@@ -183,6 +183,10 @@ export class ProfileFormComponent implements OnInit, AfterViewInit {
     }
 
     const currentFormData = await loadProfileFormData(this.userIdOverride);
+    this.personalInfoFormGroup.patchValue(currentFormData.personalInfo);
+    this.locationFormGroup.patchValue(currentFormData.location);
+    this.loginFormGroup.patchValue(currentFormData.login);
+    
     await this.clientConfigurator.ingestFormData(currentFormData);
 
     if (typeof currentFormData.location.country === "number") {
@@ -193,8 +197,5 @@ export class ProfileFormComponent implements OnInit, AfterViewInit {
       this.cities = await getCities(currentFormData.location.state);
     }
 
-    this.personalInfoFormGroup.patchValue(currentFormData.personalInfo);
-    this.locationFormGroup.patchValue(currentFormData.location);
-    this.loginFormGroup.patchValue(currentFormData.login);
   }
 }

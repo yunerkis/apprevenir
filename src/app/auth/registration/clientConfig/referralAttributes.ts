@@ -84,7 +84,7 @@ function buildEducationBureauConfigDS(clients: EducationBureauUser[]): ReferralC
 
 function buildEducationalInstitutionConfigDS(clients: EducationalInstitutionUser[]): ReferralConfigDataSource {
   return {
-    label: "Secretaría de Educación",
+    label: "Institución Educativa",
     formKey: "referralHierarchy1",
     options: clients.map(client => ({
       key: client.id.toString(),
