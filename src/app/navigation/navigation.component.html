@@ -60,11 +60,7 @@
         <div *ngIf="!userIsAdmin" class="home-list">
             <div class="logo-client">
                 <img alt="Logo" *ngIf="!logoOverride" src="../../../assets/logo/COLOR-CONTORNO.svg" class="logo-client__app" />
-<<<<<<< HEAD
                 <img alt="Logo" *ngIf="logoOverride" src="{{imagesBaseUrl}}/{{logoOverride}}" class="logo-client__app" />
-=======
-                <img alt="Logo" *ngIf="logoOverride" src="{{logoOverride}}" class="logo-client__app" />
->>>>>>> 2e2664c8a2727a58b8e4b3e29a676fdb980c0a44
             </div>
             <a href="" target="_blank" class="user-text app-p-20">Inicio</a>
             <button *ngIf="role == 'client' && config != null" class="btn-list" mat-button routerLink="client/edit-final-user" routerLinkActive="router-link-active" >
