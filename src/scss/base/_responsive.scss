@@ -4,4 +4,87 @@
 
 @media (max-width:768px) {}
 
-@media only screen and (max-width: 600px) {}
+@media only screen and (max-width: 600px) {
+    .login__section-one {
+        display: none;
+    }
+    .login__section-two {
+        margin-left: 0 !important;
+    }
+    .login__section--margin {
+        width: 100% !important;
+    }
+    .home__search {
+        width: 100% !important;
+    }
+    .logo-app {
+        display: none;
+    }
+    .test__info {
+        width: 100% !important;
+    }
+    .test__box,
+    .test__profile,
+    .section-two {
+        width: auto !important;
+    }
+
+    .test__text {
+        font-size: 20px!important;
+        margin-left: 10px !important;
+    }
+    .test__box {
+        padding: 30px 10px !important;
+    }
+    .test__person {
+        width: 200px !important;
+    }
+    .test__title,
+    .test__icon {
+        margin-left: 10px !important;
+    }
+    .mat-tree {
+        height: 500px !important;
+    }
+    .modal-home .test__person {
+        right: -6% !important;
+        top: 2rem !important;
+    }
+    .modal-home__site {
+        padding: 40px 0px 0 20px!important;
+    }
+    .modal-home__text {
+        font-size: 20px!important;
+    }
+    .inputContainer-search {
+        width: 160px !important;
+        margin-right: 15px;
+    }
+    .test-admin {
+        margin: 5rem 2rem !important;
+    }
+    .admin {
+        margin: 5rem 1rem!important;
+        width: auto !important;
+        margin-top: 8rem;
+    }
+    .test-admin {
+        width: auto !important;
+    }
+    .admin__card {
+        padding: 10px;
+    }
+    .section-two {
+        margin-top: 0px !important;
+    }
+    .admin__box {
+        width: auto !important;
+    }
+    .admin__tests-container {
+        display: flex!important;
+        flex-direction: column!important;
+    }
+    .app-m-top-3 {
+        margin-top: 0!important;
+    }
+}

@@ -52,6 +52,7 @@
 .assessmentChipAbsenceAnxiety {
     @include assessmentChip;
     background-color: #20E57E;
+    width: 160px !important;
 }
 
 .assessmentChipAbsenceDepression {
