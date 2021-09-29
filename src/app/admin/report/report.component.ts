@@ -16,15 +16,15 @@ import { LoaderComponent } from 'src/app/core/loader/loader.component';
 })
 export class ReportComponent implements AfterViewInit {
   public resultsLength = 0;
-  public displayedColumns: string[] = [
-    'idUser', 
+  public displayedColumns: TestResultColumnLabels[] = [
+    'userId', 
     'id', 
-    'test', 
+    'testName', 
     'date', 
     'time', 
-    'user', 
+    'userName', 
     'city',
-    'level',
+    'resultLevel',
     'phone',
     'email',
     'zone',
@@ -44,7 +44,7 @@ export class ReportComponent implements AfterViewInit {
     'gender',
     'educationalLevel',
     'civilStatus',
-    'answer',
+    'answers',
   ];
   public dataSource = new MatTableDataSource<TestResultRow>([]);
   civilStatus = {
@@ -65,7 +65,9 @@ export class ReportComponent implements AfterViewInit {
 
   constructor (
     public dialog: MatDialog
-  ) {}
+  ) {
+    this.dataSource.filterPredicate = this.filterTestRows;
+  }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -74,7 +76,6 @@ export class ReportComponent implements AfterViewInit {
   async ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.dataSource.filterPredicate = this.filterTestRows;
     
     await this.loader.showLoadingIndicator(async () => {
       const testResults = await getAllTestResults();
@@ -158,12 +159,32 @@ export class ReportComponent implements AfterViewInit {
       row.testName,
       row.city,
       row.resultLevel,
-      row.email
-    ].some(label => label.includes(filterText));
+      row.email, 
+      row.date,
+      row.time,
+      row.birthdate,
+      row.gender,
+      row.civilStatus,
+      row.educationalLevel,
+      row.zone,
+      row.optionA,
+      row.optionB,
+      row.phone,
+      row.university,
+      row.program,
+      row.modality,
+      row.semester,
+      row.institution,
+      row.grade,
+      row.company,
+      row.location,
+      row.area,
+      row.schedul,
+    ].some(label => label?.toUpperCase()?.includes(filterText));
   }
 }
 
-export interface TestResultRow {
+type TestResultRow = {
   userId: number;
   id: number;
   testName: string;
@@ -175,4 +196,23 @@ export interface TestResultRow {
   phone: string;
   email: string;
   answers: any;
+  birthdate: any;
+  gender: any;
+  civilStatus: any;
+  educationalLevel: any;
+  zone: any;
+  optionA: any;
+  optionB: any;
+  university: any;
+  program: any;
+  modality: any;
+  semester: any;
+  institution: any;
+  grade: any;
+  company: any;
+  location: any;
+  area: any;
+  schedul: any;
 }
+
+type TestResultColumnLabels = keyof TestResultRow | "actions";
