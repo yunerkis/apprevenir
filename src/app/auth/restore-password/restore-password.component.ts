@@ -40,7 +40,7 @@ export class RestorePasswordComponent implements OnInit {
     let password = {
       'password': this.passwordForm.value.password,
       'password_confirmation': this.passwordForm.value.passwordConfirmation,
-      'token': window.location.href.split('/')[4],
+      'token': window.location.href.split('/')[5],
     }
     
     this.authService.recoveryPassword(password);
