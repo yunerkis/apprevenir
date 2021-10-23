@@ -57,6 +57,7 @@ const appRoutes: Routes = [
         children: [
           { path: 'report', component: ReportComponent },
           { path: 'edit-final-user', component: EditFinalUserComponent },
+          { path: "edit-final-user/:userId", component: EditFinalUserForm },
         ]
       }
     ],
